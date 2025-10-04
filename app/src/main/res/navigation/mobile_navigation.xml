@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.matrixlab.ui.home.TelaInicialFragment"
+        android:label="Tela Inicial"
+        tools:layout="@layout/fragment_tela__inicial" />
+    <fragment
+        android:id="@+id/nav_info"
+        android:name="com.example.matrixlab.ui.info.InfoFragment"
+        android:label="Informações"
+        tools:layout="@layout/fragment_info" />
+
+    <fragment
+        android:id="@+id/nav_tutorial"
+        android:name="com.example.matrixlab.ui.tutorial.TutorialFragment"
+        android:label="Tutorial"
+        tools:layout="@layout/fragment_tutorial" />
+    <fragment
+        android:id="@+id/nav_BancoQuestoes"
+        android:name="com.example.matrixlab.ui.transform.BancoQuestoesFragment"
+        android:label="@string/menu_bancoquestoes"
+        tools:layout="@layout/fragment_bancoquestoes" />
+
+    <fragment
+        android:id="@+id/nav_Estudo"
+        android:name="com.example.matrixlab.ui.reflow.EstudoFragment"
+        android:label="@string/menu_estudo"
+        tools:layout="@layout/fragment_estudo" />
+
+    <fragment
+        android:id="@+id/nav_Simulador"
+        android:name="com.example.matrixlab.ui.slideshow.SimuladorFragment"
+        android:label="@string/menu_simulador"
+        tools:layout="@layout/fragment_simulador" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.example.matrixlab.ui.settings.SettingsFragment"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
