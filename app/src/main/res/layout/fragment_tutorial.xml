@@ -12,19 +12,125 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tutorial Rápido"
-            android:textSize="22sp"
+            android:text="Guia Prático Ilustrativo"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1. Clique em 'Começar' para abrir o simulador.
-2. Escolha o tipo de operação com matrizes (soma, multiplicação, determinante etc).
-3. Insira os valores nas matrizes.
-4. Clique em 'Calcular' para ver o resultado.
-5. Explore diferentes exemplos para praticar!"
-            android:textSize="16sp"/>
+            android:text="O MatrixLab aborda duas vertentes principais:"
+            android:textSize="18sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• Álgebra Linear\n• Álgebra Vetorial"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Início e Rota de Estudos"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ao clicar em 'Começar', você será direcionado(a) ao campo de Estudos, que é o coração do aprendizado no aplicativo."
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No **Estudos**, você encontrará vários fragmentos dedicados à aprendizagem progressiva, incluindo:"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="• Leitura Didática do Material\n• Mini Exercícios de Fixação\n• Exemplos Práticos das Duas Vertentes"
+            android:textSize="16sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="24dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Explorando as Ferramentas"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Utilize a barra de navegação inferior para alternar rapidamente entre as funcionalidades do MatrixLab:"
+            android:textSize="16sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[Simulador - Barra Direita]"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visualize formas geométricas e estruturas vetoriais em 3D. Funciona como uma ferramenta GeoGebra integrada para dar vida aos conceitos abstratos."
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="[Banco de Questões - Barra Esquerda]"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Acesse uma variedade de questões para testar seus conhecimentos e fixar o aprendizado em ambas as categorias (Linear e Vetorial)."
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apoio Institucional"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:src="@drawable/logo_ifpb_campina_grande"
+            android:contentDescription="Logotipo do IFPB - Campus Campina Grande"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitCenter"
+            android:layout_marginBottom="24dp"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pronto para começar? Navegue até o campo **Estudos** e inicie sua jornada na Álgebra Aplicada!"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:layout_marginBottom="16dp"/>
+
     </LinearLayout>
 </ScrollView>

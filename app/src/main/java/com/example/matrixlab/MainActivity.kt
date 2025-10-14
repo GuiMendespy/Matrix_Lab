@@ -12,6 +12,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.AppCompatActivity
+import com.example.matrixlab.R
 import com.example.matrixlab.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -33,33 +34,36 @@ class MainActivity : AppCompatActivity() {
                 .setAnchorView(R.id.fab).show()
         }
 
-        // configuração da navegação
+        // --- Configuração da Navegação ---
+
         // Pega o NavHostFragment (container que vai carregar os fragments).
         val navHostFragment =
             (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_main) as NavHostFragment?)!!
         // Obtém o NavController, que é quem controla a navegação.
         val navController = navHostFragment.navController
 
-        // menu lateral esquerdo, com destinos principais em transform, reflow, slideshow e setting
+        // 1. Configuração do Menu Lateral (Drawer) e da AppBar (Toolbar)
+        // Esta é a ÚNICA vez que o AppBarConfiguration deve ser usado com setupActionBarWithNavController.
         binding.navView?.let {
+            // Define TODOS os destinos de nível superior.
             appBarConfiguration = AppBarConfiguration(
                 setOf(
                     R.id.nav_BancoQuestoes, R.id.nav_Estudo, R.id.nav_Simulador, R.id.nav_settings
                 ),
-                binding.drawerLayout
+                binding.drawerLayout // <-- Vincula ao DrawerLayout
             )
+            // Configura a ActionBar para mostrar o botão Hamburger/Voltar.
             setupActionBarWithNavController(navController, appBarConfiguration)
+            // Vincula o menu lateral ao NavController.
             it.setupWithNavController(navController)
         }
-        // menu inferior com destinos principais em transform, reflow, slideshow
-        binding.appBarMain.contentMain.bottomNavView?.let {
-            appBarConfiguration = AppBarConfiguration(
-                setOf(
-                    R.id.nav_BancoQuestoes, R.id.nav_Estudo, R.id.nav_Simulador
-                )
-            )
-            setupActionBarWithNavController(navController, appBarConfiguration)
-            it.setupWithNavController(navController)
+
+        // 2. Configuração da Barra de Navegação Inferior (BottomNavView)
+        // O Kotlin agora verifica se contentMain existe E se bottomNavView existe
+        // 🔑 CORREÇÃO: Adicionar ?. ao contentMain
+        binding.appBarMain.contentMain?.bottomNavView?.let { bottomNavView ->
+            // Apenas vincula o BottomNavView ao NavController.
+            bottomNavView.setupWithNavController(navController)
         }
     }
 
@@ -83,6 +87,7 @@ class MainActivity : AppCompatActivity() {
             R.id.nav_settings -> {
                 val navController = findNavController(R.id.nav_host_fragment_content_main)
                 navController.navigate(R.id.nav_settings)
+                return true
             }
         }
         return super.onOptionsItemSelected(item)

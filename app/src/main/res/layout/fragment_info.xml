@@ -1,31 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="16dp">
-
-<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sobre o MatrixLab"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="12dp"/>
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="O MatrixLab é um simulador educacional desenvolvido para auxiliar no aprendizado de matrizes.
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sobre o MatrixLab"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
 
-- Desenvolvedor: Guilherme J. M. Jerônimo
-- Objetivo: Tornar o estudo de operações com matrizes mais interativo
-- Como usar: Clique em 'Começar', escolha a operação desejada e explore!"
-        android:textSize="16sp"/>
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Iniciativa Educacional"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Este aplicativo é um projeto nascido na disciplina de:\n\n"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Álgebra Linear Aplicada à Computação"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Instituição"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Instituto Federal da Paraíba (IFPB) - Campus Campina Grande"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Curso: Engenharia de Computação"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Professora Orientadora: Dr. Kissia Carvalho"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Desenvolvedores"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guilherme José Mendes Jerônimo"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="João Gabriel Tavares de Vasconcelos Souza"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mariane Nunes de Oliveira"
+            android:textSize="16sp"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Apoio Institucional"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:src="@drawable/logo_ifpb_campina_grande"
+            android:contentDescription="Logotipo do IFPB - Campus Campina Grande"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
 </ScrollView>
