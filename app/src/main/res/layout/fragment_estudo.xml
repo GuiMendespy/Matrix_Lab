@@ -1,22 +1,504 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.reflow.EstudoFragment">
 
-    <TextView
-        android:id="@+id/text_estudo"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/text_estudo_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Conteúdos de Estudos"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_alg_vetorial_principal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Álgebra Vetorial ➕"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_alg_vetorial_conteudo"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#EFEFEF"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/btn_estagio_vetorial_1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="1º ESTÁGIO ➕"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/layout_topicos_vetorial_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="#DDDDDD">
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_1_1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.1 Definição de vetor e operações vetoriais básicas"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_1_2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.2 Dependência e Independência linear"
+                    android:textColor="@color/black" />
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_1_3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.3 Sistemas de coordenadas no espaço"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_1_4"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.4 Norma de um vetor, ângulo entre vetores e produto interno"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+                <Button
+                    android:id="@+id/btn_topico_vetorial_1_5"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.5 Produto vetorial "
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+                <Button
+                    android:id="@+id/btn_topico_vetorial_1_6"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.6 Produto misto"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+
+            </LinearLayout>
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            <Button
+                android:id="@+id/btn_estagio_vetorial_2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="2º ESTÁGIO ➕"
+                android:textColor="@color/black" />
+            <LinearLayout
+                android:id="@+id/layout_topicos_vetorial_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="#DDDDDD">
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_2_1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.1 Retas"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_2_2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.2 Planos"
+                    android:textColor="@color/black" />
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_2_3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.3 Posições relativas, interseções e ângulos"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_2_4"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.4 Distâncias"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            </LinearLayout>
+
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            <Button
+                android:id="@+id/btn_estagio_vetorial_3"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="3º ESTÁGIO ➕"
+                android:textColor="@color/black" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+            <LinearLayout
+                android:id="@+id/layout_topicos_vetorial_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="#DDDDDD">
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_3_1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.1 Circunferências"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_3_2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.2 Elipses"
+                    android:textColor="@color/black" />
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_3_3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.3 Hipérboles"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_vetorial_3_4"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.4 Parábolas"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+                <Button
+                    android:id="@+id/btn_topico_vetorial_3_5"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.4 Quádricas"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="16dp" />
+
+        <Button
+            android:id="@+id/btn_alg_linear_principal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Álgebra Linear ➕"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_alg_linear_conteudo"
+            android:layout_width="match_parent" android:layout_height="wrap_content" android:background="#EFEFEF"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/btn_estagio_linear_1"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="1º ESTÁGIO ➕"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:id="@+id/layout_topicos_linear_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="#DDDDDD">
+
+                <Button
+                    android:id="@+id/btn_topico_linear_1_1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.1 Espaços vetoriais"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_1_2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.2 Subespaços Vetoriais"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_1_3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.3 Combinação Linear, dependênia e independência linear"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_1_4"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="1.4 Bases e dimensão"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            </LinearLayout>
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            <Button
+                android:id="@+id/btn_estagio_linear_2"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="2º ESTÁGIO ➕"
+                android:textColor="@color/black" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            <LinearLayout
+                android:id="@+id/layout_topicos_linear_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="#DDDDDD">
+
+                <Button
+                    android:id="@+id/btn_topico_linear_2_1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.1 Transformações Lineares"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_2_2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.2 Núcleo e imagem de uma transformação linear"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_2_3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.3 Transformação inversa"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_2_4"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.4 Isomorfismos "
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_2_5"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.5 Matriz de uma transformação linear "
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+                <Button
+                    android:id="@+id/btn_topico_linear_2_6"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="2.6 Matriz de mudança de base"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/btn_estagio_linear_3"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start|center_vertical"
+                android:text="3º ESTÁGIO ➕"
+                android:textColor="@color/black" />
+            <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+            <LinearLayout
+                android:id="@+id/layout_topicos_linear_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="#DDDDDD">
+
+                <Button
+                    android:id="@+id/btn_topico_linear_3_1"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.1 Autovalor e Autovetor"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_3_2"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.2 Polinômio característico"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_3_3"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.3 Diagonalização de operadores"
+                    android:textColor="@color/black" />
+
+                <Button
+                    android:id="@+id/btn_topico_linear_3_4"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start|center_vertical"
+                    android:text="3.4 Polinômio minimal"
+                    android:textColor="@color/black" />
+
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <View android:layout_width="match_parent" android:layout_height="200dp" /> <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="70dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/logo_ifpb_campina_grande" />
+
+    </LinearLayout>
+</ScrollView>

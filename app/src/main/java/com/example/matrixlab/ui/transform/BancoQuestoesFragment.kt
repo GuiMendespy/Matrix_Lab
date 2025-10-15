@@ -44,10 +44,7 @@ class BancoQuestoesFragment : Fragment() {
         _binding = FragmentBancoquestoesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textBancoquestoes
-        bancoQuestoesViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        
         return root
     }
 

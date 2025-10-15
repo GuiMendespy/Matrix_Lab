@@ -22,7 +22,6 @@
         android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:padding="24dp"
@@ -88,5 +87,18 @@
             android:src="@drawable/logo_ifpb_campina_grande" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView_contador_acessos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="Acessos do Usuário: 0"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
