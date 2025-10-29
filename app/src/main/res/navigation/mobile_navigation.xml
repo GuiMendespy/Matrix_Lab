@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/nav_Simulador"
-        android:name="com.example.matrixlab.ui.slideshow.SimuladorFragment"
+        android:name="com.example.matrixlab.ui.slideshow.SimulatorFragment"
         android:label="@string/menu_simulador"
         tools:layout="@layout/fragment_simulador" />
 

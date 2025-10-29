@@ -87,13 +87,13 @@ class TelaInicialFragment : Fragment() {
 
         btnInfo.setOnClickListener {
             telaInicialViewModel.onInfoClicked()
-            setMainElementsVisibility(true)
+            setMainElementsVisibility(false)
             findNavController().navigate(R.id.nav_info)
         }
 
         btnTutorial.setOnClickListener {
             telaInicialViewModel.onTutorialClicked()
-            setMainElementsVisibility(true)
+            setMainElementsVisibility(false)
             findNavController().navigate(R.id.nav_tutorial)
         }
 

@@ -17,7 +17,6 @@ import com.example.matrixlab.databinding.FragmentBancoquestoesBinding
 import com.example.matrixlab.databinding.FragmentEstudoBinding
 import com.example.matrixlab.databinding.ItemTransformBinding
 import com.example.matrixlab.ui.reflow.EstudoViewModel
-import com.example.matrixlab.ui.slideshow.SimuladorViewModel
 
 /**
  * Fragment that demonstrates a responsive layout pattern where the format of the content
@@ -38,8 +37,6 @@ class BancoQuestoesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val bancoQuestoesViewModel =
-            ViewModelProvider(this).get(SimuladorViewModel::class.java)
 
         _binding = FragmentBancoquestoesBinding.inflate(inflater, container, false)
         val root: View = binding.root
