@@ -200,32 +200,32 @@ class EstudoFragment : Fragment() {
             layoutTopicosLinear1.visibility =
                 if (subSection == ExpandedSubSection.LINEAR_ESTAGIO_1) View.VISIBLE else View.GONE
             btnEstagioLinear1.text =
-                if (subSection == ExpandedSubSection.LINEAR_ESTAGIO_1) "1º ESTÁGIO ➖" else "1º ESTÁGIO ➕"
+                if (subSection == ExpandedSubSection.LINEAR_ESTAGIO_1) "1º MÓDULO ➖" else "1º MÓDULO ➕"
 
             // Lógica para 2º ESTÁGIO LINEAR
             val isLinear2Open = subSection == ExpandedSubSection.LINEAR_ESTAGIO_2
             layoutTopicosLinear2.visibility = if (isLinear2Open) View.VISIBLE else View.GONE
-            btnEstagioLinear2.text = if (isLinear2Open) "2º ESTÁGIO ➖" else "2º ESTÁGIO ➕"
+            btnEstagioLinear2.text = if (isLinear2Open) "2º MÓDULO ➖" else "2º MÓDULO ➕"
 
             // Lógica para 3º ESTÁGIO LINEAR
             val isLinear3Open = subSection == ExpandedSubSection.LINEAR_ESTAGIO_3
             layoutTopicosLinear3.visibility = if (isLinear3Open) View.VISIBLE else View.GONE
-            btnEstagioLinear3.text = if (isLinear3Open) "3º ESTÁGIO ➖" else "3º ESTÁGIO ➕"
+            btnEstagioLinear3.text = if (isLinear3Open) "3º MÓDULO ➖" else "3º MÓDULO ➕"
 
             // Lógica para 1º ESTÁGIO VETORIAL
             val isVetorial1Open = subSection == ExpandedSubSection.VETORIAL_ESTAGIO_1
             layoutTopicosVetorial1.visibility = if (isVetorial1Open) View.VISIBLE else View.GONE
-            btnEstagioVetorial1.text = if (isVetorial1Open) "1º ESTÁGIO ➖" else "1º ESTÁGIO ➕"
+            btnEstagioVetorial1.text = if (isVetorial1Open) "1º MÓDULO ➖" else "1º MÓDULO ➕"
 
             // Lógica para 2º ESTÁGIO VETORIAL
             val isVetorial2Open = subSection == ExpandedSubSection.VETORIAL_ESTAGIO_2
             layoutTopicosVetorial2.visibility = if (isVetorial2Open) View.VISIBLE else View.GONE
-            btnEstagioVetorial2.text = if (isVetorial2Open) "2º ESTÁGIO ➖" else "2º ESTÁGIO ➕"
+            btnEstagioVetorial2.text = if (isVetorial2Open) "2º MÓDULO ➖" else "2º MÓDULO ➕"
 
             // Lógica para 3º ESTÁGIO VETORIAL
             val isVetorial3Open = subSection == ExpandedSubSection.VETORIAL_ESTAGIO_3
             layoutTopicosVetorial3.visibility = if (isVetorial3Open) View.VISIBLE else View.GONE
-            btnEstagioVetorial3.text = if (isVetorial3Open) "3º ESTÁGIO ➖" else "3º ESTÁGIO ➕"
+            btnEstagioVetorial3.text = if (isVetorial3Open) "3º MÓDULO ➖" else "3º MÓDULO ➕"
         }
     }
 }

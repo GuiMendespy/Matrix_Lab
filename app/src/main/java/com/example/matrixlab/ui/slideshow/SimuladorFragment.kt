@@ -23,18 +23,14 @@ import com.example.matrixlab.render.SimpleGLSurfaceView
 class SimulatorFragment : Fragment() {
     private val viewModel: SimuladorViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 val lightColors = lightColorScheme(
                     primary = Color(0xFF1565C0),
                     onPrimary = Color.White,
                     secondary = Color(0xFF64B5F6),
-                    background = Color(0xFFFFFFFF), // Fundo branco principal
+                    background = Color(0xFFFFFFFF),
                     surface = Color(0xFFFFFFFF),
                     onBackground = Color.Black,
                     onSurface = Color.Black
@@ -43,17 +39,15 @@ class SimulatorFragment : Fragment() {
                 MaterialTheme(colorScheme = lightColors) {
                     val vector by viewModel.vector.collectAsState()
 
-                    // --- BOX PRINCIPAL (estrutura externa) ---
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 5.dp, vertical = 60.dp)
+                            .padding(top = 16.dp, start = 5.dp, end = 5.dp, bottom = 42.dp)
                     ) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            // --- TÍTULO ---
                             Text(
                                 text = "Simulador Linear 3D",
                                 style = MaterialTheme.typography.titleLarge,
@@ -62,125 +56,61 @@ class SimulatorFragment : Fragment() {
                                 modifier = Modifier.fillMaxWidth()
                             )
 
-                            Spacer(Modifier.height(16.dp))
+                            Spacer(Modifier.height(4.dp))
 
-                            // --- PAINEL PRINCIPAL (fundo branco) ---
                             Surface(
                                 modifier = Modifier.weight(1f),
                                 shape = MaterialTheme.shapes.medium,
                                 color = MaterialTheme.colorScheme.background
                             ) {
-                                // --- BOX INTERNO DO SIMULADOR ---
                                 Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(16.dp),
+                                    modifier = Modifier.fillMaxSize().padding(16.dp),
                                     contentAlignment = Alignment.TopCenter
                                 ) {
-                                    // --- SURFACE INTERNA (painel do simulador) ---
                                     Surface(
                                         shape = RoundedCornerShape(16.dp),
-                                        color = Color(0xFFF5F5F5), // fundo cinza claro
+                                        color = Color(0xFFF5F5F5),
                                         tonalElevation = 4.dp,
                                         shadowElevation = 8.dp,
                                         border = BorderStroke(1.dp, Color(0xFFE0E0E0)),
                                         modifier = Modifier.fillMaxSize()
                                     ) {
+                                        var inputText by remember { mutableStateOf("") }
+
                                         Column(
-                                            modifier = Modifier
-                                                .fillMaxSize()
-                                                .padding(16.dp),
+                                            modifier = Modifier.fillMaxSize().padding(16.dp),
                                             horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
-                                            // --- ÁREA OPENGL ---
+                                            // Single AndroidView that holds GLSurface + Overlay internally
                                             AndroidView(
                                                 factory = { ctx ->
                                                     SimpleGLSurfaceView(ctx).apply {
-                                                        setZOrderOnTop(true) // necessário para transparência
-                                                        setBackgroundColor(0f, 0f, 0f, 0f) // transparente inicialmente
+                                                        setBackgroundColor(0f, 0f, 0f, 0f) // keep transparent
                                                         setVector(vector.x, vector.y, vector.z)
                                                     }
                                                 },
-                                                update = { glView ->
-                                                    glView.setVector(vector.x, vector.y, vector.z)
-                                                    // Aqui você pode mudar a cor do simulador sem afetar o resto
-                                                    glView.setBackgroundColor(1f, 1f, 1f, 1f) // fundo branco só dentro do simulador
+                                                update = { view ->
+                                                    val values = inputText.split(",").mapNotNull { it.trim().toFloatOrNull() }
+                                                    if (values.size == 3) {
+                                                        view.setVector(values[0], values[1], values[2])
+                                                    } else {
+                                                        // keep model vector from viewModel if needed
+                                                        view.setVector(vector.x, vector.y, vector.z)
+                                                    }
                                                 },
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .weight(1f)
-                                            )
-
-
-                                            Spacer(Modifier.height(16.dp))
-
-                                            // --- TEXTO DOS VALORES ---
-                                            Text(
-                                                "X = %.2f | Y = %.2f | Z = %.2f".format(
-                                                    vector.x,
-                                                    vector.y,
-                                                    vector.z
-                                                ),
-                                                color = MaterialTheme.colorScheme.onBackground
+                                                modifier = Modifier.fillMaxWidth().weight(1f)
                                             )
 
                                             Spacer(Modifier.height(8.dp))
 
-                                            // --- SLIDERS ---
-                                            Text("Eixo X", color = MaterialTheme.colorScheme.onBackground)
-                                            Slider(
-                                                value = vector.x,
-                                                onValueChange = { newX ->
-                                                    viewModel.updateVector(newX, vector.y, vector.z)
-                                                },
-                                                valueRange = -5f..5f
-                                            )
-
-                                            Text("Eixo Y", color = MaterialTheme.colorScheme.onBackground)
-                                            Slider(
-                                                value = vector.y,
-                                                onValueChange = { newY ->
-                                                    viewModel.updateVector(vector.x, newY, vector.z)
-                                                },
-                                                valueRange = -5f..5f
-                                            )
-
-                                            Text("Eixo Z", color = MaterialTheme.colorScheme.onBackground)
-                                            Slider(
-                                                value = vector.z,
-                                                onValueChange = { newZ ->
-                                                    viewModel.updateVector(vector.x, vector.y, newZ)
-                                                },
-                                                valueRange = -5f..5f
-                                            )
-
-                                            Spacer(Modifier.height(16.dp))
-
-                                            // --- BOTÕES ---
-                                            Row(
+                                            OutlinedTextField(
+                                                value = inputText,
+                                                onValueChange = { inputText = it },
+                                                label = { Text("Digite o vetor (x, y, z)") },
+                                                placeholder = { Text("Ex: 1, 2, 3") },
                                                 modifier = Modifier.fillMaxWidth(),
-                                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                            ) {
-                                                Button(
-                                                    onClick = { viewModel.updateVector(1f, 1f, 1f) },
-                                                    modifier = Modifier.weight(1f)
-                                                ) {
-                                                    Text("Resetar")
-                                                }
-
-                                                Button(
-                                                    onClick = {
-                                                        viewModel.updateVector(
-                                                            vector.x * 1.2f,
-                                                            vector.y * 1.2f,
-                                                            vector.z * 1.2f
-                                                        )
-                                                    },
-                                                    modifier = Modifier.weight(1f)
-                                                ) {
-                                                    Text("Aplicar Escala")
-                                                }
-                                            }
+                                                singleLine = true
+                                            )
                                         }
                                     }
                                 }

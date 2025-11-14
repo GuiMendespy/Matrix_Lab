@@ -46,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:text="1º ESTÁGIO ➕"
+                android:text="1º MÓDULO ➕"
                 android:textColor="@color/black" />
 
             <LinearLayout
@@ -132,7 +132,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:text="2º ESTÁGIO ➕"
+                android:text="2º MÓDULO ➕"
                 android:textColor="@color/black" />
             <LinearLayout
                 android:id="@+id/layout_topicos_vetorial_2"
@@ -197,7 +197,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:text="3º ESTÁGIO ➕"
+                android:text="3º MÓDULO ➕"
                 android:textColor="@color/black" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
             <LinearLayout
@@ -291,7 +291,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:text="1º ESTÁGIO ➕"
+                android:text="1º MÓDULO ➕"
                 android:textColor="@color/black" />
 
             <LinearLayout
@@ -353,7 +353,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:text="2º ESTÁGIO ➕"
+                android:text="2º MÓDULO ➕"
                 android:textColor="@color/black" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
 
@@ -435,7 +435,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start|center_vertical"
-                android:text="3º ESTÁGIO ➕"
+                android:text="3º MÓDULO ➕"
                 android:textColor="@color/black" />
             <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
             <LinearLayout
