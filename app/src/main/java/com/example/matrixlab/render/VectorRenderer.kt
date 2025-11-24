@@ -12,25 +12,26 @@ import java.util.Locale
 import android.os.SystemClock
 import android.os.Handler
 import android.os.Looper
-import com.google.ar.sceneform.lullmodel.Vec2
 
 private const val TAG = "VectorRenderer"
 
 class VectorRenderer : GLSurfaceView.Renderer {
 
+    // --- matrices ---
     private val projMatrix = FloatArray(16)
     private val viewMatrix = FloatArray(16)
     private val mvpMatrix = FloatArray(16)
 
+    // --- GL program handles ---
     private var program = 0
     private var positionHandle = -1
     private var colorHandle = -1
     private var mvpHandle = -1
 
-    // state
+    // --- state (public API modifies these) ---
     private var currentVector = Vec3(1f, 1f, 0f)
-    private var angleX = 0f
-    private var angleY = 0f
+    private var angleX = 0f   // azimuth (degrees)
+    private var angleY = 20f  // elevation (degrees)
     private var zoomScale = 1.0f
     private val minZoom = 0.25f
     private val maxZoom = 4.0f
@@ -38,22 +39,28 @@ class VectorRenderer : GLSurfaceView.Renderer {
     private var viewWidth = 1
     private var viewHeight = 1
 
-    // clear color stored until GL thread runs
-    @Volatile private var pendingClearColor = floatArrayOf(1f, 1f, 1f, 1f) // default transparent
-
-    // callback to update overlay (on UI thread)
+    // overlay labels callback
     var onLabelsUpdated: ((List<OverlayView.TickLabel>) -> Unit)? = null
-
-    // small debounce for labels publish (avoid flooding UI thread)
-    private var lastLabelsPost = 0L
-    private val labelsPostIntervalMs = 50L // publish at most every 50ms
     private val uiHandler = Handler(Looper.getMainLooper())
+    private var lastLabelsPost = 0L
+    private val labelsPostIntervalMs = 50L
+
+    // constants
+    private val AXIS_LENGTH = 100f        // long axes to mimic GeoGebra behavior
+    private val BASE_RADIUS = 6f          // camera base radius
+    private val FOV = 45f
+    private val NEAR = 0.1f
+    private val FAR = 200f
+
+    // temp
+    @Volatile private var pendingClearColor = floatArrayOf(1f, 1f, 1f, 1f)
 
     // PUBLIC API
     fun setVector(v: Vec3) { currentVector = v }
     fun applyRotation(dx: Float, dy: Float) {
-        angleX += dx * 0.5f
-        angleY += dy * 0.5f
+        // change azimuth/elevation (invert dx/dy if you prefer)
+        angleX = (angleX + dx * 0.5f) % 360f
+        angleY = (angleY + dy * 0.5f).coerceIn(-89f, 89f)
     }
     fun applyPinchScale(scaleFactor: Float) {
         if (scaleFactor.isFinite() && scaleFactor > 0f) {
@@ -61,11 +68,7 @@ class VectorRenderer : GLSurfaceView.Renderer {
         }
     }
     fun setClearColor(r: Float, g: Float, b: Float, a: Float) {
-        // store and apply on GL thread in onDrawFrame
-        pendingClearColor[0] = r
-        pendingClearColor[1] = g
-        pendingClearColor[2] = b
-        pendingClearColor[3] = a
+        pendingClearColor[0] = r; pendingClearColor[1] = g; pendingClearColor[2] = b; pendingClearColor[3] = a
     }
 
     override fun onSurfaceCreated(gl: GL10?, config: EGLConfig?) {
@@ -81,19 +84,19 @@ class VectorRenderer : GLSurfaceView.Renderer {
                 void main() {
                     gl_Position = uMVPMatrix * vPosition;
                 }
-            """
+            """.trimIndent()
             val fs = """
                 precision mediump float;
                 uniform vec4 vColor;
                 void main() {
                     gl_FragColor = vColor;
                 }
-            """
+            """.trimIndent()
+
             val vsId = loadShader(GLES20.GL_VERTEX_SHADER, vs)
             val fsId = loadShader(GLES20.GL_FRAGMENT_SHADER, fs)
-
             if (vsId == 0 || fsId == 0) {
-                Log.e(TAG, "Shader creation failed: vsId=$vsId fsId=$fsId")
+                Log.e(TAG, "Shader creation failed")
                 program = 0
                 return
             }
@@ -104,7 +107,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
                 GLES20.glLinkProgram(it)
             }
 
-            // check link status
             val linkStatus = IntArray(1)
             GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS, linkStatus, 0)
             if (linkStatus[0] == 0) {
@@ -113,7 +115,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
                 GLES20.glDeleteProgram(program)
                 program = 0
             } else {
-                // get handles once program is valid
                 positionHandle = GLES20.glGetAttribLocation(program, "vPosition")
                 colorHandle = GLES20.glGetUniformLocation(program, "vColor")
                 mvpHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix")
@@ -125,132 +126,146 @@ class VectorRenderer : GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
-        viewWidth = width
-        viewHeight = height
+        viewWidth = width; viewHeight = height
         GLES20.glViewport(0, 0, width, height)
     }
 
     override fun onDrawFrame(gl: GL10?) {
         try {
-            // apply pending clear color on GL thread
             GLES20.glClearColor(1f,1f,1f,1f)
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
+            if (program == 0) return
 
-            if (program == 0) {
-                // nothing to draw if shaders failed
-                return
-            }
-
-            // projection orthographic scaled by zoomScale
+            // --- projection: perspective ---
             val ratio = if (viewHeight != 0) viewWidth.toFloat() / viewHeight.toFloat() else 1f
-            val base = 2.2f
-            val halfW = ratio * base * zoomScale
-            val halfH = base * zoomScale
-            Matrix.orthoM(projMatrix, 0, -halfW, halfW, -halfH, halfH, -20f, 20f)
+            Matrix.perspectiveM(projMatrix, 0, FOV, ratio, NEAR, FAR)
 
-            // cavalier shear
-            val l = 0.5f
-            val theta = Math.toRadians(45.0).toFloat()
-            val a = l * cos(theta)
-            val b = l * sin(theta)
-            val shear = FloatArray(16) { 0f }.also {
-                it[0] = 1f; it[5] = 1f; it[10] = 1f; it[15] = 1f
-                it[8] = a; it[9] = b
-            }
-            val tmp = FloatArray(16)
-            Matrix.multiplyMM(tmp, 0, shear, 0, projMatrix, 0)
-            System.arraycopy(tmp, 0, projMatrix, 0, 16)
+            // --- camera: orbital based on angleX/angleY and zoomScale ---
+            val radius = BASE_RADIUS / zoomScale
+            val azi = Math.toRadians(angleX.toDouble())
+            val elev = Math.toRadians(angleY.toDouble())
+            val camX = (radius * cos(elev) * sin(azi)).toFloat()
+            val camY = (radius * sin(elev)).toFloat()
+            val camZ = (radius * cos(elev) * cos(azi)).toFloat()
 
-            // view rotates by angleX/Y (clamp big values to avoid overflow)
-            val safeAngleX = angleX % 360f
-            val safeAngleY = angleY % 360f
-            Matrix.setIdentityM(viewMatrix, 0)
-            Matrix.rotateM(viewMatrix, 0, safeAngleY, 1f, 0f, 0f)
-            Matrix.rotateM(viewMatrix, 0, safeAngleX, 0f, 1f, 0f)
+            Matrix.setLookAtM(
+                viewMatrix, 0,
+                camX, camY, camZ,    // eye
+                0f, 0f, 0f,          // center
+                0f, 1f, 0f           // up
+            )
 
             Matrix.multiplyMM(mvpMatrix, 0, projMatrix, 0, viewMatrix, 0)
 
             // draw scene
+            drawGrid(size = 20f, spacing = computeNiceSpacingForGrid(radius))
             drawAxes()
-            val labels = computeTickLabels()
+            val labels = computeTickLabels(camX, camY, camZ)
             val now = SystemClock.uptimeMillis()
             if (labels.isNotEmpty() && now - lastLabelsPost >= labelsPostIntervalMs) {
                 lastLabelsPost = now
                 uiHandler.post {
-                    try {
-                        onLabelsUpdated?.invoke(labels)
-                    } catch (ex: Throwable) {
-                        Log.e(TAG, "onLabelsUpdated handler exception", ex)
-                    }
+                    try { onLabelsUpdated?.invoke(labels) } catch (ex: Throwable) { Log.e(TAG, "onLabelsUpdated exception", ex) }
                 }
             }
-            drawTicks()
-            drawVector(currentVector)
+            // <-- fix: drawTicks must accept cam coords (signature changed) -->
+            drawTicks(camX, camY, camZ)
+            drawVector(currentVector, camX, camY, camZ)
         } catch (ex: Throwable) {
-            // catch-all to avoid GL thread crash -> log and swallow
             Log.e(TAG, "Exception in onDrawFrame", ex)
         }
     }
 
-    // ---------- helpers (unchanged, but defensive) ----------
+    // ---------------- scene primitives ----------------
+
     private fun drawAxes() {
         try {
-            drawLine(Vec3(-2f,0f,0f), Vec3(2f,0f,0f), floatArrayOf(1f,0f,0f,1f))
-            drawArrowHead(Vec3(2f,0f,0f), Vec3(1f,0f,0f), 0.06f, floatArrayOf(1f,0f,0f,1f))
-            drawLetterY(Vec3(2.1f,0f,0f))
+            // tamanho “visual” fixo
+            val axisLen = 10f * zoomScale
 
-            drawLine(Vec3(0f,-2f,0f), Vec3(0f,2f,0f), floatArrayOf(0f,1f,0f,1f))
-            drawArrowHead(Vec3(0f,2f,0f), Vec3(0f,1f,0f), 0.06f, floatArrayOf(0f,1f,0f,1f))
-            drawLetterZ(Vec3(0f,2.1f,0f))
+            // X
+            drawLine(Vec3(-axisLen, 0f, 0f), Vec3(axisLen, 0f, 0f), floatArrayOf(0f, 1f, 0f, 1f))
+            drawArrowHead(Vec3(axisLen, 0f, 0f), Vec3(axisLen - 0.3f * zoomScale, 0f, 0f), 0.06f * zoomScale, floatArrayOf(0f, 1f, 0f, 1f))
+            // FIX: use drawLetterAtEnd which projects world -> screen and selects size
+            drawLetterAtEnd(Vec3(axisLen + 0.1f * zoomScale, 0f, 0f), "X")
 
-            drawLine(Vec3(0f,0f,-2f), Vec3(0f,0f,2f), floatArrayOf(0f,0f,1f,1f))
-            drawArrowHead(Vec3(0f,0f,2f), Vec3(0f,0f,1f), 0.06f, floatArrayOf(0f,0f,1f,1f))
-            drawLetterX(Vec3(0f,0f,2.1f))
+            // Y
+            drawLine(Vec3(0f, -axisLen, 0f), Vec3(0f, axisLen, 0f), floatArrayOf(0f, 0f, 1f, 1f))
+            drawArrowHead(Vec3(0f, axisLen, 0f), Vec3(0f, axisLen - 0.3f * zoomScale, 0f), 0.06f * zoomScale, floatArrayOf(0f, 0f, 1f, 1f))
+            drawLetterAtEnd(Vec3(0f, axisLen + 0.1f * zoomScale, 0f), "Y")
+
+            // Z
+            drawLine(Vec3(0f, 0f, -axisLen), Vec3(0f, 0f, axisLen), floatArrayOf( 1f, 0f, 0f, 1f))
+            drawArrowHead(Vec3(0f, 0f, axisLen), Vec3(0f, 0f, axisLen - 0.3f * zoomScale), 0.06f * zoomScale, floatArrayOf(1f, 0f, 0f, 1f))
+            drawLetterAtEnd(Vec3(0f, 0f, axisLen + 0.1f * zoomScale), "Z")
         } catch (ex: Throwable) {
             Log.e(TAG, "drawAxes exception", ex)
         }
     }
 
-    private fun computeTickLabels(): List<OverlayView.TickLabel> {
+
+    private fun drawGrid(size: Float, spacing: Float) {
+        try {
+            val col = floatArrayOf(0.85f, 0.85f, 0.85f, 1f)
+            val half = size
+            var x = -half
+            while (x <= half + 0.0001f) {
+                drawLine(Vec3(x, 0f, -half), Vec3(x, 0f, half), col)
+                x += spacing
+            }
+            var z = -half
+            while (z <= half + 0.0001f) {
+                drawLine(Vec3(-half, 0f, z), Vec3(half, 0f, z), col)
+                z += spacing
+            }
+        } catch (ex: Throwable) {
+            Log.e(TAG, "drawGrid exception", ex)
+        }
+    }
+
+    // ---------------- ticks & labels ----------------
+
+    /**
+     * Compute labels for overlay (normalized 0..1 coordinates).
+     * ticks spaced in world by physSpacing but label values computed depending on camera distance.
+     */
+    private fun computeTickLabels(camX: Float, camY: Float, camZ: Float): List<OverlayView.TickLabel> {
         val out = mutableListOf<OverlayView.TickLabel>()
         try {
-            val baseSpacing = 0.25f
-            val spacing = (baseSpacing * zoomScale).coerceAtLeast(0.05f)
-            val range = 2.0f
-            val steps = (range / spacing).toInt()
-            val tickOffsetY = -0.12f
+            val physSpacing = 0.25f * zoomScale
+            val axisLen = 10f * zoomScale
+            val steps = (axisLen / physSpacing).toInt()
 
-            val ndc = FloatArray(4)
+            val tickValueStep = physSpacing / zoomScale
+
             for (i in -steps..steps) {
                 if (i == 0) continue
-                val pos = i * spacing
-                val valStr = String.format(Locale.US, "%.1f", pos)
+                val pos = i * physSpacing
 
-                // X label position
-                val pos3 = floatArrayOf(pos, tickOffsetY, 0f, 1f)
-                Matrix.multiplyMV(ndc, 0, mvpMatrix, 0, pos3, 0)
-                if (ndc[3] != 0f) {
-                    val nx = (ndc[0] / ndc[3]) * 0.5f + 0.5f
-                    val ny = (ndc[1] / ndc[3]) * 0.5f + 0.5f
-                    if (nx.isFinite() && ny.isFinite()) out.add(OverlayView.TickLabel(nx to ny, valStr))
+                // X axis label pos (slightly offset in Y in world to avoid overlap with axis)
+                val worldX = Vec3(pos, -physSpacing * 0.45f, 0f)
+                val scrX = projectWorldToScreen(worldX)
+                if (scrX.isOnScreen(viewWidth, viewHeight)) {
+                    // the visible numeric value is symbolic: physSpacing / zoomScale * i
+                    val value = i * (physSpacing / zoomScale)
+                    val valStr = niceValueString(value)
+                    out.add(OverlayView.TickLabel(scrX.toNxNy(viewWidth, viewHeight), valStr))
                 }
 
-                // Y label
-                val pos3y = floatArrayOf(0.12f, pos, 0f, 1f)
-                Matrix.multiplyMV(ndc, 0, mvpMatrix, 0, pos3y, 0)
-                if (ndc[3] != 0f) {
-                    val nx = (ndc[0] / ndc[3]) * 0.5f + 0.5f
-                    val ny = (ndc[1] / ndc[3]) * 0.5f + 0.5f
-                    if (nx.isFinite() && ny.isFinite()) out.add(OverlayView.TickLabel(nx to ny, valStr))
+                // Y axis label
+                val worldY = Vec3(physSpacing * 0.45f, pos, 0f)
+                val scrY = projectWorldToScreen(worldY)
+                if (scrY.isOnScreen(viewWidth, viewHeight)) {
+                    val value = i * (physSpacing / zoomScale)
+                    out.add(OverlayView.TickLabel(scrY.toNxNy(viewWidth, viewHeight), niceValueString(value)))
                 }
 
-                // Z label
-                val pos3z = floatArrayOf(0.06f, 0f, pos, 1f)
-                Matrix.multiplyMV(ndc, 0, mvpMatrix, 0, pos3z, 0)
-                if (ndc[3] != 0f) {
-                    val nx = (ndc[0] / ndc[3]) * 0.5f + 0.5f
-                    val ny = (ndc[1] / ndc[3]) * 0.5f + 0.5f
-                    if (nx.isFinite() && ny.isFinite()) out.add(OverlayView.TickLabel(nx to ny, valStr))
+                // Z axis label
+                val worldZ = Vec3(0f, -physSpacing * 0.45f, pos)
+                val scrZ = projectWorldToScreen(worldZ)
+                if (scrZ.isOnScreen(viewWidth, viewHeight)) {
+                    val value = i * (physSpacing / zoomScale)
+                    out.add(OverlayView.TickLabel(scrZ.toNxNy(viewWidth, viewHeight), niceValueString(value)))
                 }
             }
         } catch (ex: Throwable) {
@@ -259,61 +274,63 @@ class VectorRenderer : GLSurfaceView.Renderer {
         return out
     }
 
-    private fun drawTicks() {
-        try {
-            // espaçamento fixo (independe de zoom)
-            val spacing = 0.25f
+    // <-- FIX: signature updated to accept camera coords (was parameterless) -->
+    private fun drawTicks(camX: Float, camY: Float, camZ: Float) {
+        val spacing = 0.25f * zoomScale      // espaçamento visual fixo
+        val tickSize = 0.02f * zoomScale     // tamanho fixo
 
-            // tamanho do traço fixo (independe de zoom)
-            val tickHalf = 0.02f
+        val axisLen = 2f * zoomScale
+        val steps = (axisLen / spacing).toInt()
 
-            val range = 2.0f
-            val steps = (range / spacing).toInt()
+        for (i in -steps..steps) {
+            if (i == 0) continue
 
-            for (i in -steps..steps) {
-                val pos = i * spacing
-                if (i == 0) continue
+            val pos = i * spacing
 
-                // Eixo X (ticks paralelos ao Y)
-                drawLine(
-                    Vec3(pos, -tickHalf, 0f),
-                    Vec3(pos, tickHalf, 0f),
-                    floatArrayOf(0f, 0f, 0f, 1f)
-                )
+            // X
+            drawLine(
+                Vec3(pos, -tickSize, 0f),
+                Vec3(pos, tickSize, 0f),
+                floatArrayOf(0f,0f,0f,1f)
+            )
 
-                // Eixo Y (ticks paralelos ao X)
-                drawLine(
-                    Vec3(-tickHalf, pos, 0f),
-                    Vec3(tickHalf, pos, 0f),
-                    floatArrayOf(0f, 0f, 0f, 1f)
-                )
+            // Y
+            drawLine(
+                Vec3(-tickSize, pos, 0f),
+                Vec3(tickSize, pos, 0f),
+                floatArrayOf(0f,0f,0f,1f)
+            )
 
-                // Eixo Z (ticks paralelos ao Y)
-                drawLine(
-                    Vec3(0f, -tickHalf, pos),
-                    Vec3(0f, tickHalf, pos),
-                    floatArrayOf(0f, 0f, 0f, 1f)
-                )
-            }
-        } catch (ex: Throwable) {
-            Log.e(TAG, "drawTicks exception", ex)
+            // Z
+            drawLine(
+                Vec3(0f, -tickSize, pos),
+                Vec3(0f, tickSize, pos),
+                floatArrayOf(0f,0f,0f,1f)
+            )
         }
     }
 
 
-    private fun drawVector(v: Vec3) {
+    // ---------------- vector ----------------
+
+    private fun drawVector(v: Vec3, camX: Float, camY: Float, camZ: Float) {
         try {
-            drawLine(Vec3(0f,0f,0f), v, floatArrayOf(0f,0f,0f,1f))
-            drawArrowHead(v, Vec3(0f,0f,0f), 0.08f / zoomScale, floatArrayOf(0f,0f,0f,1f))
+            val black = floatArrayOf(0f, 0f, 0f, 1f)
+            drawLine(Vec3(0f, 0f, 0f), v, black)
+            // arrow head size proportional to distance (so it reads well)
+            val camDist = sqrt(camX*camX + camY*camY + camZ*camZ)
+            drawArrowHead(v, Vec3(0f,0f,0f), 0.2f * (camDist / BASE_RADIUS), black)
         } catch (ex: Throwable) {
             Log.e(TAG, "drawVector exception", ex)
         }
     }
 
+    // ---------------- low level drawing ----------------
+
     private fun drawLine(start: Vec3, end: Vec3, color: FloatArray) {
         if (program == 0) return
         try {
-            val vertices = floatArrayOf(start.x,start.y,start.z,end.x,end.y,end.z)
+            val vertices = floatArrayOf(start.x, start.y, start.z, end.x, end.y, end.z)
             val fb = makeBuffer(vertices)
             GLES20.glUseProgram(program)
             bindHandles(color, fb)
@@ -331,10 +348,11 @@ class VectorRenderer : GLSurfaceView.Renderer {
             val dir = Vec3(tip.x - baseDir.x, tip.y - baseDir.y, tip.z - baseDir.z)
             val len = sqrt(dir.x*dir.x + dir.y*dir.y + dir.z*dir.z).coerceAtLeast(1e-6f)
             val nx = dir.x/len; val ny = dir.y/len; val nz = dir.z/len
+            val sideA = 0.5f * size
             val vertices = floatArrayOf(
                 tip.x, tip.y, tip.z,
-                tip.x - nx*size - ny*size*0.5f, tip.y - ny*size + nx*size*0.5f, tip.z - nz*size,
-                tip.x - nx*size + ny*size*0.5f, tip.y - ny*size - nx*size*0.5f, tip.z - nz*size
+                tip.x - nx*size - ny*sideA, tip.y - ny*size + nx*sideA, tip.z - nz*size,
+                tip.x - nx*size + ny*sideA, tip.y - ny*size - nx*sideA, tip.z - nz*size
             )
             val fb = makeBuffer(vertices)
             GLES20.glUseProgram(program)
@@ -346,133 +364,100 @@ class VectorRenderer : GLSurfaceView.Renderer {
         }
     }
 
-    private fun cavaleira(v: Vec3): Vec3 {
-        return Vec3(
-            v.y, // novo X vem do antigo Y
-            v.z, // novo Y vem do antigo Z
-            v.x  // novo Z vem do antigo X
-        )
-    }
-    // pequeno tipo 2D (coloque dentro da classe VectorRenderer)
-    private data class Vec2(val x: Float, val y: Float)
+    // ---------------- labels & helpers ----------------
 
-    /**
-     * Projetar coordenada 3D (world) -> coordenada de tela (pixels).
-     * Retorna Pair(px, py) onde px ∈ [0..viewWidth], py ∈ [0..viewHeight] (0 = topo).
-     */
-    private fun projectWorldToScreen(p: Vec3): Vec2 {
-        val tmp = FloatArray(4) { 0f }
-        val inVec = floatArrayOf(p.x, p.y, p.z, 1f)
-        Matrix.multiplyMV(tmp, 0, mvpMatrix, 0, inVec, 0)
-
-        if (tmp[3] == 0f) return Vec2(-10000f, -10000f) // fora
-        val ndcX = tmp[0] / tmp[3]   // -1..1
-        val ndcY = tmp[1] / tmp[3]   // -1..1
-
-        val sx = (ndcX * 0.5f + 0.5f) * viewWidth.toFloat()
-        val sy = (1f - (ndcY * 0.5f + 0.5f)) * viewHeight.toFloat() // converte Y para origem no topo
-
-        return Vec2(sx, sy)
+    private fun drawLetterAtEnd(worldPos: Vec3, letter: String) {
+        // project to screen and draw using raw lines (simple X/Y/Z glyphs)
+        val screen = projectWorldToScreen(worldPos)
+        if (!screen.isFinite()) return
+        // choose pixel size depending on distance (bigger when camera far)
+        val sizePx = (12f * (1f / zoomScale)).coerceIn(8f, 36f)
+        when (letter) {
+            "X" -> drawLetterX(screen, sizePx)
+            "Y" -> drawLetterY(screen, sizePx)
+            "Z" -> drawLetterZ(screen, sizePx)
+        }
     }
 
-    /**
-     * Desenha uma linha 2D em coordenadas de tela (pixels). Convertido para clip-space e desenhado
-     * com o mesmo shader (mas usando matriz identidade para MVP).
-     *
-     * px,py são pixels (origin top-left). z fixado em 0.
-     */
-    private fun drawRawLine(px1: Float, py1: Float, px2: Float, py2: Float, color: FloatArray) {
-        if (program == 0) return
-        // converte pixels -> ndc/clip coords (-1..1)
-        val cx1 = (px1 / viewWidth.toFloat()) * 2f - 1f
-        val cy1 = 1f - (py1 / viewHeight.toFloat()) * 2f
-        val cx2 = (px2 / viewWidth.toFloat()) * 2f - 1f
-        val cy2 = 1f - (py2 / viewHeight.toFloat()) * 2f
-
-        val vertices = floatArrayOf(cx1, cy1, 0f, cx2, cy2, 0f)
-        val fb = makeBuffer(vertices)
-
-        GLES20.glUseProgram(program)
-
-        // pega handles (não usar bindHandles porque ele usa mvpMatrix)
-        positionHandle = GLES20.glGetAttribLocation(program, "vPosition")
-        colorHandle = GLES20.glGetUniformLocation(program, "vColor")
-        mvpHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix")
-
-        GLES20.glEnableVertexAttribArray(positionHandle)
-        GLES20.glVertexAttribPointer(positionHandle, 3, GLES20.GL_FLOAT, false, 0, fb)
-        GLES20.glUniform4fv(colorHandle, 1, color, 0)
-
-        // coloca matriz identidade como MVP (porque já estamos em clip space)
-        val identity = FloatArray(16)
-        Matrix.setIdentityM(identity, 0)
-        GLES20.glUniformMatrix4fv(mvpHandle, 1, false, identity, 0)
-
-        GLES20.glLineWidth(2f)
-        GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2)
-
-        GLES20.glDisableVertexAttribArray(positionHandle)
-    }
-    private fun drawLetterX(pos: Vec3) {
-        // projetar posição do rótulo (pequena distância do eixo)
-        val screen = projectWorldToScreen(pos)
-        if (!screen.x.isFinite() || !screen.y.isFinite()) return
-
-        val sPx = 12f // tamanho em pixels (ajuste aqui para diminuir/aumentar)
+    // simple 2D letter drawing in screen pixels (uses drawRawLine)
+    private fun drawLetterX(screen: Vec2, sPx: Float) {
         val p1 = Vec2(screen.x - sPx, screen.y - sPx)
         val p2 = Vec2(screen.x + sPx, screen.y + sPx)
         val p3 = Vec2(screen.x - sPx, screen.y + sPx)
         val p4 = Vec2(screen.x + sPx, screen.y - sPx)
-
-        // cor azul (ou mude para a cor que quiser)
-        val color = floatArrayOf(0f, 0f, 1f, 1f)
+        val color = floatArrayOf(0f, 1f, 0f, 1f)
         drawRawLine(p1, p2, color)
         drawRawLine(p3, p4, color)
     }
 
-    private fun drawLetterY(pos: Vec3) {
-        val screen = projectWorldToScreen(pos)
-        if (!screen.x.isFinite() || !screen.y.isFinite()) return
-
-        val sPx = 12f
+    private fun drawLetterY(screen: Vec2, sPx: Float) {
         val topLeft = Vec2(screen.x - sPx, screen.y - sPx)
         val topRight = Vec2(screen.x + sPx, screen.y - sPx)
         val center = Vec2(screen.x, screen.y)
         val bottom = Vec2(screen.x, screen.y + sPx)
-
-        val color = floatArrayOf(1f, 0f, 0f, 1f)
+        val color = floatArrayOf(0f, 0f, 1f, 1f)
         drawRawLine(topLeft, center, color)
         drawRawLine(topRight, center, color)
         drawRawLine(center, bottom, color)
     }
 
-    private fun drawLetterZ(pos: Vec3) {
-        val screen = projectWorldToScreen(pos)
-        if (!screen.x.isFinite() || !screen.y.isFinite()) return
-
-        val sPx = 12f
-        val pTopLeft = Vec2(screen.x - sPx, screen.y - sPx)
-        val pTopRight = Vec2(screen.x + sPx, screen.y - sPx)
-        val pBotLeft = Vec2(screen.x - sPx, screen.y + sPx)
-        val pBotRight = Vec2(screen.x + sPx, screen.y + sPx)
-
-        val color = floatArrayOf(0f, 1f, 0f, 1f)
-        drawRawLine(pTopLeft, pTopRight, color)
-        drawRawLine(pTopRight, pBotLeft, color)
-        drawRawLine(pBotLeft, pBotRight, color)
+    private fun drawLetterZ(screen: Vec2, sPx: Float) {
+        val topLeft = Vec2(screen.x - sPx, screen.y - sPx)
+        val topRight = Vec2(screen.x + sPx, screen.y - sPx)
+        val botLeft = Vec2(screen.x - sPx, screen.y + sPx)
+        val botRight = Vec2(screen.x + sPx, screen.y + sPx)
+        val color = floatArrayOf(1f, 0f, 0f, 1f)
+        drawRawLine(topLeft, topRight, color)
+        drawRawLine(topRight, botLeft, color)
+        drawRawLine(botLeft, botRight, color)
     }
 
-
     /**
-     * Versão helper: recebe dois pontos de tela (Vec2) e desenha.
+     * Draw a 2D line in screen (pixels). px,py origin top-left.
      */
+    private fun drawRawLine(px1: Float, py1: Float, px2: Float, py2: Float, color: FloatArray) {
+        if (program == 0) return
+        val cx1 = (px1 / viewWidth.toFloat()) * 2f - 1f
+        val cy1 = 1f - (py1 / viewHeight.toFloat()) * 2f
+        val cx2 = (px2 / viewWidth.toFloat()) * 2f - 1f
+        val cy2 = 1f - (py2 / viewHeight.toFloat()) * 2f
+        val vertices = floatArrayOf(cx1, cy1, 0f, cx2, cy2, 0f)
+        val fb = makeBuffer(vertices)
+        GLES20.glUseProgram(program)
+        // get handles
+        positionHandle = GLES20.glGetAttribLocation(program, "vPosition")
+        colorHandle = GLES20.glGetUniformLocation(program, "vColor")
+        mvpHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix")
+        GLES20.glEnableVertexAttribArray(positionHandle)
+        GLES20.glVertexAttribPointer(positionHandle, 3, GLES20.GL_FLOAT, false, 0, fb)
+        GLES20.glUniform4fv(colorHandle, 1, color, 0)
+        val identity = FloatArray(16); Matrix.setIdentityM(identity, 0)
+        GLES20.glUniformMatrix4fv(mvpHandle, 1, false, identity, 0)
+        GLES20.glLineWidth(2f)
+        GLES20.glDrawArrays(GLES20.GL_LINES, 0, 2)
+        GLES20.glDisableVertexAttribArray(positionHandle)
+    }
+
     private fun drawRawLine(p1: Vec2, p2: Vec2, color: FloatArray) {
         drawRawLine(p1.x, p1.y, p2.x, p2.y, color)
     }
 
+    // ---------------- projection helpers ----------------
 
+    private fun projectWorldToScreen(p: Vec3): Vec2 {
+        val tmp = FloatArray(4)
+        val inVec = floatArrayOf(p.x, p.y, p.z, 1f)
+        Matrix.multiplyMV(tmp, 0, mvpMatrix, 0, inVec, 0)
+        if (tmp[3] == 0f) return Vec2(Float.NaN, Float.NaN)
+        val ndcX = tmp[0] / tmp[3]
+        val ndcY = tmp[1] / tmp[3]
+        val sx = (ndcX * 0.5f + 0.5f) * viewWidth.toFloat()
+        val sy = (1f - (ndcY * 0.5f + 0.5f)) * viewHeight.toFloat()
+        return Vec2(sx, sy)
+    }
 
-    // shaders helpers
+    // ---------------- misc helpers ----------------
+
     private fun bindHandles(color: FloatArray, vertexBuffer: java.nio.FloatBuffer) {
         if (program == 0) return
         positionHandle = GLES20.glGetAttribLocation(program, "vPosition")
@@ -498,14 +483,72 @@ class VectorRenderer : GLSurfaceView.Renderer {
         val shader = GLES20.glCreateShader(type)
         GLES20.glShaderSource(shader, code)
         GLES20.glCompileShader(shader)
-        // check compile status
         val compiled = IntArray(1)
         GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compiled, 0)
         if (compiled[0] == 0) {
-            Log.e(TAG, "Shader compile failed: " + GLES20.glGetShaderInfoLog(shader))
+            Log.e(TAG, "Shader compile failed: ${GLES20.glGetShaderInfoLog(shader)}")
             GLES20.glDeleteShader(shader)
             return 0
         }
         return shader
+    }
+
+    // ---------------- tick spacing logic (nice 1-2-5 steps) ----------------
+
+    /**
+     * Choose a "nice" spacing for ticks based on camera distance.
+     * Using the sequence: 1,2,5 * 10^k
+     */
+    private fun computeNiceSpacingForTicks(camX: Float, camY: Float, camZ: Float): Float {
+        val camDist = sqrt(camX*camX + camY*camY + camZ*camZ)
+        // desired spacing target: proportional to camDist
+        val desired = camDist * 0.12f   // tweak constant to taste
+        return niceNumber(desired)
+    }
+
+    // grid spacing a bit coarser
+    private fun computeNiceSpacingForGrid(camRadius: Float): Float {
+        val desired = camRadius * 0.5f
+        return niceNumber(desired).coerceAtLeast(0.5f)
+    }
+
+    private fun niceNumber(value: Float): Float {
+        if (!value.isFinite() || value <= 0f) return 0.1f
+        val exp = floor(log10(value.toDouble())).toInt()
+        val base = 10.0.pow(exp.toDouble()).toFloat()
+        val frac = value / base
+        val niceFrac = when {
+            frac < 1.5f -> 1f
+            frac < 3.5f -> 2f
+            frac < 7.5f -> 5f
+            else -> 10f
+        }
+        return niceFrac * base
+    }
+
+    // format label text sensibly (avoid many decimals)
+    private fun niceValueString(v: Float): String {
+        val av = abs(v)
+        return when {
+            av >= 1000f -> String.format(Locale.US, "%.0f", v)
+            av >= 1f -> String.format(Locale.US, "%.2f", v).trimEnd('0').trimEnd('.')
+            av >= 0.01f -> String.format(Locale.US, "%.3f", v).trimEnd('0').trimEnd('.')
+            else -> String.format(Locale.US, "%.4f", v).trimEnd('0').trimEnd('.')
+        }
+    }
+
+    // ---------------- small helper types & extensions ----------------
+
+    private data class Vec2(val x: Float, val y: Float) {
+        fun isOnScreen(w: Int, h: Int): Boolean {
+            if (!x.isFinite() || !y.isFinite()) return false
+            return x >= 0f && x <= w && y >= 0f && y <= h
+        }
+        fun toNxNy(w: Int, h: Int): Pair<Float, Float> {
+            val nx = (x / w.toFloat()).coerceIn(0f, 1f)
+            val ny = 1f - (y / h.toFloat()).coerceIn(0f, 1f) // convert to overlay convention
+            return Pair(nx, ny)
+        }
+        fun isFinite(): Boolean = x.isFinite() && y.isFinite()
     }
 }

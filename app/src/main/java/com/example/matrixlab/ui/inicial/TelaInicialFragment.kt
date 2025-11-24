@@ -13,20 +13,13 @@ import com.example.matrixlab.R
 import com.example.matrixlab.MainActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.matrixlab.ui.inicial.TelaInicialViewModel
-import com.example.matrixlab.data.UserRepository // Importação necessária
 
 class TelaInicialFragment : Fragment() {
 
-    // 🔑 1. Instanciação MVVM com Factory
-    // O Repositório é criado usando o contexto do aplicativo
-    private val userRepository: UserRepository by lazy {
-        UserRepository(requireContext().applicationContext)
-    }
+
 
     // Conecta o ViewModel, passando o Repositório via Factory
-    private val telaInicialViewModel: TelaInicialViewModel by viewModels {
-        TelaInicialViewModel.Factory(userRepository)
-    }
+    private val telaInicialViewModel: TelaInicialViewModel by viewModels()
 
     // Função auxiliar para controlar a visibilidade (mantida)
     private fun setMainElementsVisibility(isVisible: Boolean) {
@@ -61,16 +54,11 @@ class TelaInicialFragment : Fragment() {
         val btnInfo = view.findViewById<Button>(R.id.btnInfo)
         val btnTutorial = view.findViewById<Button>(R.id.btnTutorial)
 
-        // 🔑 NOVO ELEMENTO: TextView para o contador
-        // Você deve adicionar o ID 'textView_contador_acessos' no seu XML (próximo passo)
-        val textViewContador = view.findViewById<TextView>(R.id.textView_contador_acessos)
+
 
         // --- 3. LINKS DO VIEWS MODEL -> FRAGMENT (Persistência) ---
 
-        // Observa o contador e atualiza a UI
-        telaInicialViewModel.accessCount.observe(viewLifecycleOwner) { count ->
-            textViewContador.text = "Acessos do Usuário: $count"
-        }
+
 
         // Observa o LiveData de texto (para o título)
         telaInicialViewModel.mensagemBoasVindas.observe(viewLifecycleOwner) { mensagem ->

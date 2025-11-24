@@ -85,14 +85,24 @@ class SimulatorFragment : Fragment() {
                                             AndroidView(
                                                 factory = { ctx ->
                                                     SimpleGLSurfaceView(ctx).apply {
-                                                        setBackgroundColor(0f, 0f, 0f, 0f) // keep transparent
+                                                        setBackgroundColor(
+                                                            0f,
+                                                            0f,
+                                                            0f,
+                                                            0f
+                                                        ) // keep transparent
                                                         setVector(vector.x, vector.y, vector.z)
                                                     }
                                                 },
                                                 update = { view ->
-                                                    val values = inputText.split(",").mapNotNull { it.trim().toFloatOrNull() }
+                                                    val values = inputText.split(",")
+                                                        .mapNotNull { it.trim().toFloatOrNull() }
                                                     if (values.size == 3) {
-                                                        view.setVector(values[0], values[1], values[2])
+                                                        view.setVector(
+                                                            values[0],
+                                                            values[1],
+                                                            values[2]
+                                                        )
                                                     } else {
                                                         // keep model vector from viewModel if needed
                                                         view.setVector(vector.x, vector.y, vector.z)
