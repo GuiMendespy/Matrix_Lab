@@ -66,6 +66,12 @@ class SimpleGLSurfaceView(context: Context) : FrameLayout(context) {
     }
 
     // --- API pública ---
+    fun setVectors(list: List<Vec3>) {
+        renderer.setVectors(list)
+        glView.requestRender()
+    }
+
+    /** Backwards-compatible single vector setter */
     fun setVector(x: Float, y: Float, z: Float) {
         renderer.setVector(Vec3(x, y, z))
         glView.requestRender()

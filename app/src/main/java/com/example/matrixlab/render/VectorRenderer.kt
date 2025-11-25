@@ -29,7 +29,7 @@ class VectorRenderer : GLSurfaceView.Renderer {
     private var mvpHandle = -1
 
     // --- state (public API modifies these) ---
-    private var currentVector = Vec3(1f, 1f, 0f)
+    @Volatile private var vectors: List<Vec3> = listOf(Vec3(1f,1f,0f)) // now supports multiple vectors
     private var angleX = 0f   // azimuth (degrees)
     private var angleY = 20f  // elevation (degrees)
     private var zoomScale = 1.0f
@@ -46,8 +46,8 @@ class VectorRenderer : GLSurfaceView.Renderer {
     private val labelsPostIntervalMs = 50L
 
     // constants
-    private val AXIS_LENGTH = 100f        // long axes to mimic GeoGebra behavior
-    private val BASE_RADIUS = 6f          // camera base radius
+    private val AXIS_LENGTH = 100f
+    private val BASE_RADIUS = 6f
     private val FOV = 45f
     private val NEAR = 0.1f
     private val FAR = 200f
@@ -56,9 +56,17 @@ class VectorRenderer : GLSurfaceView.Renderer {
     @Volatile private var pendingClearColor = floatArrayOf(1f, 1f, 1f, 1f)
 
     // PUBLIC API
-    fun setVector(v: Vec3) { currentVector = v }
+    /**
+     * Replace all vectors to be drawn.
+     */
+    fun setVectors(list: List<Vec3>) {
+        vectors = list.toList()
+    }
+
+    /** Backwards compatible single-vector setter */
+    fun setVector(v: Vec3) { setVectors(listOf(v)) }
+
     fun applyRotation(dx: Float, dy: Float) {
-        // change azimuth/elevation (invert dx/dy if you prefer)
         angleX = (angleX + dx * 0.5f) % 360f
         angleY = (angleY + dy * 0.5f).coerceIn(-89f, 89f)
     }
@@ -136,11 +144,9 @@ class VectorRenderer : GLSurfaceView.Renderer {
             GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
             if (program == 0) return
 
-            // --- projection: perspective ---
             val ratio = if (viewHeight != 0) viewWidth.toFloat() / viewHeight.toFloat() else 1f
             Matrix.perspectiveM(projMatrix, 0, FOV, ratio, NEAR, FAR)
 
-            // --- camera: orbital based on angleX/angleY and zoomScale ---
             val radius = BASE_RADIUS / zoomScale
             val azi = Math.toRadians(angleX.toDouble())
             val elev = Math.toRadians(angleY.toDouble())
@@ -150,9 +156,9 @@ class VectorRenderer : GLSurfaceView.Renderer {
 
             Matrix.setLookAtM(
                 viewMatrix, 0,
-                camX, camY, camZ,    // eye
-                0f, 0f, 0f,          // center
-                0f, 1f, 0f           // up
+                camX, camY, camZ,
+                0f, 0f, 0f,
+                0f, 1f, 0f
             )
 
             Matrix.multiplyMM(mvpMatrix, 0, projMatrix, 0, viewMatrix, 0)
@@ -168,9 +174,10 @@ class VectorRenderer : GLSurfaceView.Renderer {
                     try { onLabelsUpdated?.invoke(labels) } catch (ex: Throwable) { Log.e(TAG, "onLabelsUpdated exception", ex) }
                 }
             }
-            // <-- fix: drawTicks must accept cam coords (signature changed) -->
             drawTicks(camX, camY, camZ)
-            drawVector(currentVector, camX, camY, camZ)
+
+            // DRAW ALL VECTORS (each with different color)
+            drawVectors(camX, camY, camZ)
         } catch (ex: Throwable) {
             Log.e(TAG, "Exception in onDrawFrame", ex)
         }
@@ -180,13 +187,11 @@ class VectorRenderer : GLSurfaceView.Renderer {
 
     private fun drawAxes() {
         try {
-            // tamanho “visual” fixo
             val axisLen = 10f * zoomScale
 
             // X
             drawLine(Vec3(-axisLen, 0f, 0f), Vec3(axisLen, 0f, 0f), floatArrayOf(0f, 1f, 0f, 1f))
             drawArrowHead(Vec3(axisLen, 0f, 0f), Vec3(axisLen - 0.3f * zoomScale, 0f, 0f), 0.06f * zoomScale, floatArrayOf(0f, 1f, 0f, 1f))
-            // FIX: use drawLetterAtEnd which projects world -> screen and selects size
             drawLetterAtEnd(Vec3(axisLen + 0.1f * zoomScale, 0f, 0f), "X")
 
             // Y
@@ -202,7 +207,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
             Log.e(TAG, "drawAxes exception", ex)
         }
     }
-
 
     private fun drawGrid(size: Float, spacing: Float) {
         try {
@@ -224,11 +228,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
     }
 
     // ---------------- ticks & labels ----------------
-
-    /**
-     * Compute labels for overlay (normalized 0..1 coordinates).
-     * ticks spaced in world by physSpacing but label values computed depending on camera distance.
-     */
     private fun computeTickLabels(camX: Float, camY: Float, camZ: Float): List<OverlayView.TickLabel> {
         val out = mutableListOf<OverlayView.TickLabel>()
         try {
@@ -242,17 +241,14 @@ class VectorRenderer : GLSurfaceView.Renderer {
                 if (i == 0) continue
                 val pos = i * physSpacing
 
-                // X axis label pos (slightly offset in Y in world to avoid overlap with axis)
                 val worldX = Vec3(pos, -physSpacing * 0.45f, 0f)
                 val scrX = projectWorldToScreen(worldX)
                 if (scrX.isOnScreen(viewWidth, viewHeight)) {
-                    // the visible numeric value is symbolic: physSpacing / zoomScale * i
                     val value = i * (physSpacing / zoomScale)
                     val valStr = niceValueString(value)
                     out.add(OverlayView.TickLabel(scrX.toNxNy(viewWidth, viewHeight), valStr))
                 }
 
-                // Y axis label
                 val worldY = Vec3(physSpacing * 0.45f, pos, 0f)
                 val scrY = projectWorldToScreen(worldY)
                 if (scrY.isOnScreen(viewWidth, viewHeight)) {
@@ -260,7 +256,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
                     out.add(OverlayView.TickLabel(scrY.toNxNy(viewWidth, viewHeight), niceValueString(value)))
                 }
 
-                // Z axis label
                 val worldZ = Vec3(0f, -physSpacing * 0.45f, pos)
                 val scrZ = projectWorldToScreen(worldZ)
                 if (scrZ.isOnScreen(viewWidth, viewHeight)) {
@@ -274,10 +269,9 @@ class VectorRenderer : GLSurfaceView.Renderer {
         return out
     }
 
-    // <-- FIX: signature updated to accept camera coords (was parameterless) -->
     private fun drawTicks(camX: Float, camY: Float, camZ: Float) {
-        val spacing = 0.25f * zoomScale      // espaçamento visual fixo
-        val tickSize = 0.02f * zoomScale     // tamanho fixo
+        val spacing = 0.25f * zoomScale
+        val tickSize = 0.02f * zoomScale
 
         val axisLen = 2f * zoomScale
         val steps = (axisLen / spacing).toInt()
@@ -287,21 +281,18 @@ class VectorRenderer : GLSurfaceView.Renderer {
 
             val pos = i * spacing
 
-            // X
             drawLine(
                 Vec3(pos, -tickSize, 0f),
                 Vec3(pos, tickSize, 0f),
                 floatArrayOf(0f,0f,0f,1f)
             )
 
-            // Y
             drawLine(
                 Vec3(-tickSize, pos, 0f),
                 Vec3(tickSize, pos, 0f),
                 floatArrayOf(0f,0f,0f,1f)
             )
 
-            // Z
             drawLine(
                 Vec3(0f, -tickSize, pos),
                 Vec3(0f, tickSize, pos),
@@ -310,18 +301,22 @@ class VectorRenderer : GLSurfaceView.Renderer {
         }
     }
 
+    // ---------------- vectors (multi) ----------------
 
-    // ---------------- vector ----------------
-
-    private fun drawVector(v: Vec3, camX: Float, camY: Float, camZ: Float) {
+    private fun drawVectors(camX: Float, camY: Float, camZ: Float) {
         try {
-            val black = floatArrayOf(0f, 0f, 0f, 1f)
-            drawLine(Vec3(0f, 0f, 0f), v, black)
-            // arrow head size proportional to distance (so it reads well)
-            val camDist = sqrt(camX*camX + camY*camY + camZ*camZ)
-            drawArrowHead(v, Vec3(0f,0f,0f), 0.2f * (camDist / BASE_RADIUS), black)
+            val current = vectors.toList()
+            val total = current.size
+            if (total == 0) return
+
+            for ((i, v) in current.withIndex()) {
+                val color = colorForIndex(i, total)
+                drawLine(Vec3(0f, 0f, 0f), v, color)
+                val camDist = sqrt(camX*camX + camY*camY + camZ*camZ)
+                drawArrowHead(v, Vec3(0f,0f,0f), 0.2f * (camDist / BASE_RADIUS), color)
+            }
         } catch (ex: Throwable) {
-            Log.e(TAG, "drawVector exception", ex)
+            Log.e(TAG, "drawVectors exception", ex)
         }
     }
 
@@ -365,12 +360,9 @@ class VectorRenderer : GLSurfaceView.Renderer {
     }
 
     // ---------------- labels & helpers ----------------
-
     private fun drawLetterAtEnd(worldPos: Vec3, letter: String) {
-        // project to screen and draw using raw lines (simple X/Y/Z glyphs)
         val screen = projectWorldToScreen(worldPos)
         if (!screen.isFinite()) return
-        // choose pixel size depending on distance (bigger when camera far)
         val sizePx = (12f * (1f / zoomScale)).coerceIn(8f, 36f)
         when (letter) {
             "X" -> drawLetterX(screen, sizePx)
@@ -379,7 +371,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
         }
     }
 
-    // simple 2D letter drawing in screen pixels (uses drawRawLine)
     private fun drawLetterX(screen: Vec2, sPx: Float) {
         val p1 = Vec2(screen.x - sPx, screen.y - sPx)
         val p2 = Vec2(screen.x + sPx, screen.y + sPx)
@@ -412,9 +403,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
         drawRawLine(botLeft, botRight, color)
     }
 
-    /**
-     * Draw a 2D line in screen (pixels). px,py origin top-left.
-     */
     private fun drawRawLine(px1: Float, py1: Float, px2: Float, py2: Float, color: FloatArray) {
         if (program == 0) return
         val cx1 = (px1 / viewWidth.toFloat()) * 2f - 1f
@@ -424,7 +412,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
         val vertices = floatArrayOf(cx1, cy1, 0f, cx2, cy2, 0f)
         val fb = makeBuffer(vertices)
         GLES20.glUseProgram(program)
-        // get handles
         positionHandle = GLES20.glGetAttribLocation(program, "vPosition")
         colorHandle = GLES20.glGetUniformLocation(program, "vColor")
         mvpHandle = GLES20.glGetUniformLocation(program, "uMVPMatrix")
@@ -493,20 +480,42 @@ class VectorRenderer : GLSurfaceView.Renderer {
         return shader
     }
 
-    // ---------------- tick spacing logic (nice 1-2-5 steps) ----------------
+    // ---------------- color generation ----------------
 
     /**
-     * Choose a "nice" spacing for ticks based on camera distance.
-     * Using the sequence: 1,2,5 * 10^k
+     * Return RGBA float array for vector index i among total vectors.
+     * Uses HSV hue sweep for distinct colors.
      */
+    private fun colorForIndex(i: Int, total: Int): FloatArray {
+        if (total <= 1) return floatArrayOf(0f, 0f, 0f, 1f)
+        val hue = (i.toFloat() / total.toFloat()) * 360f        // 0..360
+        val rgb = hsvToRgb(hue, 0.7f, 0.9f)                     // saturation/val tuned
+        return floatArrayOf(rgb[0], rgb[1], rgb[2], 1f)
+    }
+
+    private fun hsvToRgb(h: Float, s: Float, v: Float): FloatArray {
+        val hh = ((h % 360f) + 360f) % 360f
+        val c = v * s
+        val x = c * (1f - abs((hh / 60f) % 2f - 1f))
+        val m = v - c
+        val (r1, g1, b1) = when {
+            hh < 60f -> Triple(c, x, 0f)
+            hh < 120f -> Triple(x, c, 0f)
+            hh < 180f -> Triple(0f, c, x)
+            hh < 240f -> Triple(0f, x, c)
+            hh < 300f -> Triple(x, 0f, c)
+            else -> Triple(c, 0f, x)
+        }
+        return floatArrayOf(r1 + m, g1 + m, b1 + m)
+    }
+
+    // ---------------- tick spacing & helpers ----------------
     private fun computeNiceSpacingForTicks(camX: Float, camY: Float, camZ: Float): Float {
         val camDist = sqrt(camX*camX + camY*camY + camZ*camZ)
-        // desired spacing target: proportional to camDist
-        val desired = camDist * 0.12f   // tweak constant to taste
+        val desired = camDist * 0.12f
         return niceNumber(desired)
     }
 
-    // grid spacing a bit coarser
     private fun computeNiceSpacingForGrid(camRadius: Float): Float {
         val desired = camRadius * 0.5f
         return niceNumber(desired).coerceAtLeast(0.5f)
@@ -526,7 +535,6 @@ class VectorRenderer : GLSurfaceView.Renderer {
         return niceFrac * base
     }
 
-    // format label text sensibly (avoid many decimals)
     private fun niceValueString(v: Float): String {
         val av = abs(v)
         return when {
@@ -546,7 +554,7 @@ class VectorRenderer : GLSurfaceView.Renderer {
         }
         fun toNxNy(w: Int, h: Int): Pair<Float, Float> {
             val nx = (x / w.toFloat()).coerceIn(0f, 1f)
-            val ny = 1f - (y / h.toFloat()).coerceIn(0f, 1f) // convert to overlay convention
+            val ny = 1f - (y / h.toFloat()).coerceIn(0f, 1f)
             return Pair(nx, ny)
         }
         fun isFinite(): Boolean = x.isFinite() && y.isFinite()

@@ -19,9 +19,39 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.matrixlab.render.SimpleGLSurfaceView
+import com.example.matrixlab.data.Vec3
 
 class SimulatorFragment : Fragment() {
+
     private val viewModel: SimuladorViewModel by viewModels()
+
+    /** -------------------------------------------------------------------
+     *  Agora interpreta vários vetores:
+     *  Ex: (1,2,3); (4,1,0); -2,3,5 → lista de Vec3
+     *  ------------------------------------------------------------------- */
+    private fun parseVectorList(text: String): List<Vec3> {
+        if (text.isBlank()) return emptyList()
+
+        val parts = text.split(";")        // separa por ponto e vírgula
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+
+        val list = mutableListOf<Vec3>()
+
+        for (part in parts) {
+            val regex = Regex("""\(([^)]+)\)""")
+            val match = regex.find(part)
+
+            val inside = match?.groupValues?.get(1) ?: part
+            val nums = inside.split(",").mapNotNull { it.trim().toFloatOrNull() }
+
+            if (nums.size == 3) {
+                list.add(Vec3(nums[0], nums[1], nums[2]))
+            }
+        }
+
+        return list
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return ComposeView(requireContext()).apply {
@@ -37,7 +67,7 @@ class SimulatorFragment : Fragment() {
                 )
 
                 MaterialTheme(colorScheme = lightColors) {
-                    val vector by viewModel.vector.collectAsState()
+                    val vectors by viewModel.vectors.collectAsState()  // Agora lista
 
                     Box(
                         modifier = Modifier
@@ -48,6 +78,7 @@ class SimulatorFragment : Fragment() {
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
+
                             Text(
                                 text = "Simulador Linear 3D",
                                 style = MaterialTheme.typography.titleLarge,
@@ -63,10 +94,12 @@ class SimulatorFragment : Fragment() {
                                 shape = MaterialTheme.shapes.medium,
                                 color = MaterialTheme.colorScheme.background
                             ) {
+
                                 Box(
                                     modifier = Modifier.fillMaxSize().padding(16.dp),
                                     contentAlignment = Alignment.TopCenter
                                 ) {
+
                                     Surface(
                                         shape = RoundedCornerShape(16.dp),
                                         color = Color(0xFFF5F5F5),
@@ -75,37 +108,28 @@ class SimulatorFragment : Fragment() {
                                         border = BorderStroke(1.dp, Color(0xFFE0E0E0)),
                                         modifier = Modifier.fillMaxSize()
                                     ) {
+
                                         var inputText by remember { mutableStateOf("") }
 
                                         Column(
                                             modifier = Modifier.fillMaxSize().padding(16.dp),
                                             horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
-                                            // Single AndroidView that holds GLSurface + Overlay internally
+
                                             AndroidView(
                                                 factory = { ctx ->
                                                     SimpleGLSurfaceView(ctx).apply {
-                                                        setBackgroundColor(
-                                                            0f,
-                                                            0f,
-                                                            0f,
-                                                            0f
-                                                        ) // keep transparent
-                                                        setVector(vector.x, vector.y, vector.z)
+                                                        setBackgroundColor(0f,0f,0f,0f)
+                                                        setVectors(vectors)   // agora recebe a lista
                                                     }
                                                 },
                                                 update = { view ->
-                                                    val values = inputText.split(",")
-                                                        .mapNotNull { it.trim().toFloatOrNull() }
-                                                    if (values.size == 3) {
-                                                        view.setVector(
-                                                            values[0],
-                                                            values[1],
-                                                            values[2]
-                                                        )
+                                                    val parsedList = parseVectorList(inputText)
+
+                                                    if (parsedList.isNotEmpty()) {
+                                                        view.setVectors(parsedList)
                                                     } else {
-                                                        // keep model vector from viewModel if needed
-                                                        view.setVector(vector.x, vector.y, vector.z)
+                                                        view.setVectors(vectors)
                                                     }
                                                 },
                                                 modifier = Modifier.fillMaxWidth().weight(1f)
@@ -116,10 +140,11 @@ class SimulatorFragment : Fragment() {
                                             OutlinedTextField(
                                                 value = inputText,
                                                 onValueChange = { inputText = it },
-                                                label = { Text("Digite o vetor (x, y, z)") },
-                                                placeholder = { Text("Ex: 1, 2, 3") },
+                                                label = { Text("Digite os vetores separados por ;") },
+                                                placeholder = { Text("(1,2,3); (4,1,0); (-2,3,5)") },
                                                 modifier = Modifier.fillMaxWidth(),
-                                                singleLine = true
+                                                singleLine = false,
+                                                maxLines = 3
                                             )
                                         }
                                     }
