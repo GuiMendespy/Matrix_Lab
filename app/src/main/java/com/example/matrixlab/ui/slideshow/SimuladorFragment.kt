@@ -19,41 +19,151 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.matrixlab.render.SimpleGLSurfaceView
+import com.example.matrixlab.data.Vec3
 
 class SimulatorFragment : Fragment() {
+
     private val viewModel: SimuladorViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    /**
+     * Parser unificado para:
+     *  - soma, soma 1+2, soma todos
+     *  - escalar, escalar 1·2
+     *  - vetorial, vetorial 1×2
+     *
+     * Exemplos:
+     *    (1,2,3); (4,1,0); soma
+     *    (1,2,3); (4,1,0); soma 1+2
+     *    (1,2,3); (4,1,0); escalar
+     *    (1,2,3); (4,1,0); escalar 1·2
+     *    (1,2,3); (4,1,0); vetorial
+     *    (1,2,3); (4,1,0); vetorial 1×2
+     */
+    private fun parseVectorList(text: String): List<Vec3> {
+
+        if (text.isBlank()) return emptyList()
+
+        val parts = text.split(";")
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+
+        val vectors = mutableListOf<Vec3>()
+        var command: String? = null
+
+        // --- (1) Coleta vetores e detecta comando (soma, escalar, vetorial)
+        for (p in parts) {
+
+            val lower = p.lowercase()
+
+            // comandos
+            if (
+                lower.startsWith("soma") ||
+                lower.startsWith("escalar") ||
+                lower.startsWith("vetorial")
+            ) {
+                command = lower
+                continue
+            }
+
+            // extrair parte entre parênteses
+            val inside = Regex("""\(([^)]+)\)""").find(p)?.groupValues?.get(1) ?: p
+            val nums = inside.split(",").mapNotNull { it.trim().toFloatOrNull() }
+
+            if (nums.size == 3)
+                vectors.add(Vec3(nums[0], nums[1], nums[2]))
+        }
+
+        // Se não tem comando, só retorna os vetores normais
+        if (command == null)
+            return vectors
+
+        // --- (2) utilitário para extrair índices tipo "1+2", "1·2", "1×2"
+        fun parseIndices(cmd: String): Pair<Int, Int>? {
+            val nums = Regex("""\d+""").findAll(cmd).map { it.value.toInt() }.toList()
+            if (nums.size >= 2) return (nums[0] - 1) to (nums[1] - 1)
+            return null
+        }
+
+        // --- (3) Processamento dos comandos
+
+        // ➤  OPERAÇÃO: SOMA
+        if (command.startsWith("soma")) {
+
+            var soma = Vec3(0f, 0f, 0f)
+
+            when {
+                // soma simples ou "soma todos"
+                command == "soma" || command.contains("todos") -> {
+                    for (v in vectors)
+                        soma += v
+                }
+
+                // soma 1+2
+                command.matches(Regex("""soma\s+\d+\+\d+.*""")) -> {
+                    val (i, j) = parseIndices(command) ?: return vectors
+                    if (i in vectors.indices && j in vectors.indices)
+                        soma = vectors[i] + vectors[j]
+                }
+            }
+
+            vectors.add(soma)
+            return vectors
+        }
+
+        // ➤  OPERAÇÃO: PRODUTO ESCALAR
+        if (command.startsWith("escalar")) {
+
+            val (i, j) = parseIndices(command) ?: return vectors
+            if (i in vectors.indices && j in vectors.indices) {
+                val dot = vectors[i] dot vectors[j]
+                vectors.add(Vec3(dot, 0f, 0f))   // Representação como vetor no eixo X
+            }
+
+            return vectors
+        }
+
+        // ➤  OPERAÇÃO: PRODUTO VETORIAL
+        if (command.startsWith("vetorial")) {
+
+            val (i, j) = parseIndices(command) ?: return vectors
+            if (i in vectors.indices && j in vectors.indices) {
+                val cross = vectors[i] cross vectors[j]
+                vectors.add(cross)
+            }
+
+            return vectors
+        }
+
+        return vectors
+    }
+
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return ComposeView(requireContext()).apply {
             setContent {
                 val lightColors = lightColorScheme(
                     primary = Color(0xFF1565C0),
                     onPrimary = Color.White,
                     secondary = Color(0xFF64B5F6),
-                    background = Color(0xFFFFFFFF), // Fundo branco principal
+                    background = Color(0xFFFFFFFF),
                     surface = Color(0xFFFFFFFF),
                     onBackground = Color.Black,
                     onSurface = Color.Black
                 )
 
                 MaterialTheme(colorScheme = lightColors) {
-                    val vector by viewModel.vector.collectAsState()
+                    val vectors by viewModel.vectors.collectAsState()  // Agora lista
 
-                    // --- BOX PRINCIPAL (estrutura externa) ---
                     Box(
                         modifier = Modifier
                             .fillMaxSize()
-                            .padding(horizontal = 5.dp, vertical = 60.dp)
+                            .padding(top = 16.dp, start = 5.dp, end = 5.dp, bottom = 42.dp)
                     ) {
                         Column(
                             modifier = Modifier.fillMaxSize(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            // --- TÍTULO ---
+
                             Text(
                                 text = "Simulador Linear 3D",
                                 style = MaterialTheme.typography.titleLarge,
@@ -62,125 +172,65 @@ class SimulatorFragment : Fragment() {
                                 modifier = Modifier.fillMaxWidth()
                             )
 
-                            Spacer(Modifier.height(16.dp))
+                            Spacer(Modifier.height(4.dp))
 
-                            // --- PAINEL PRINCIPAL (fundo branco) ---
                             Surface(
                                 modifier = Modifier.weight(1f),
                                 shape = MaterialTheme.shapes.medium,
                                 color = MaterialTheme.colorScheme.background
                             ) {
-                                // --- BOX INTERNO DO SIMULADOR ---
+
                                 Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .padding(16.dp),
+                                    modifier = Modifier.fillMaxSize().padding(16.dp),
                                     contentAlignment = Alignment.TopCenter
                                 ) {
-                                    // --- SURFACE INTERNA (painel do simulador) ---
+
                                     Surface(
                                         shape = RoundedCornerShape(16.dp),
-                                        color = Color(0xFFF5F5F5), // fundo cinza claro
+                                        color = Color(0xFFF5F5F5),
                                         tonalElevation = 4.dp,
                                         shadowElevation = 8.dp,
                                         border = BorderStroke(1.dp, Color(0xFFE0E0E0)),
                                         modifier = Modifier.fillMaxSize()
                                     ) {
+
+                                        var inputText by remember { mutableStateOf("") }
+
                                         Column(
-                                            modifier = Modifier
-                                                .fillMaxSize()
-                                                .padding(16.dp),
+                                            modifier = Modifier.fillMaxSize().padding(16.dp),
                                             horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
-                                            // --- ÁREA OPENGL ---
+
                                             AndroidView(
                                                 factory = { ctx ->
                                                     SimpleGLSurfaceView(ctx).apply {
-                                                        setZOrderOnTop(true) // necessário para transparência
-                                                        setBackgroundColor(0f, 0f, 0f, 0f) // transparente inicialmente
-                                                        setVector(vector.x, vector.y, vector.z)
+                                                        setBackgroundColor(0f,0f,0f,0f)
+                                                        setVectors(vectors)   // agora recebe a lista
                                                     }
                                                 },
-                                                update = { glView ->
-                                                    glView.setVector(vector.x, vector.y, vector.z)
-                                                    // Aqui você pode mudar a cor do simulador sem afetar o resto
-                                                    glView.setBackgroundColor(1f, 1f, 1f, 1f) // fundo branco só dentro do simulador
+                                                update = { view ->
+                                                    val parsedList = parseVectorList(inputText)
+
+                                                    if (parsedList.isNotEmpty()) {
+                                                        view.setVectors(parsedList)
+                                                    } else {
+                                                        view.setVectors(vectors)
+                                                    }
                                                 },
-                                                modifier = Modifier
-                                                    .fillMaxWidth()
-                                                    .weight(1f)
-                                            )
-
-
-                                            Spacer(Modifier.height(16.dp))
-
-                                            // --- TEXTO DOS VALORES ---
-                                            Text(
-                                                "X = %.2f | Y = %.2f | Z = %.2f".format(
-                                                    vector.x,
-                                                    vector.y,
-                                                    vector.z
-                                                ),
-                                                color = MaterialTheme.colorScheme.onBackground
+                                                modifier = Modifier.fillMaxWidth().weight(1f)
                                             )
 
                                             Spacer(Modifier.height(8.dp))
 
-                                            // --- SLIDERS ---
-                                            Text("Eixo X", color = MaterialTheme.colorScheme.onBackground)
-                                            Slider(
-                                                value = vector.x,
-                                                onValueChange = { newX ->
-                                                    viewModel.updateVector(newX, vector.y, vector.z)
-                                                },
-                                                valueRange = -5f..5f
-                                            )
-
-                                            Text("Eixo Y", color = MaterialTheme.colorScheme.onBackground)
-                                            Slider(
-                                                value = vector.y,
-                                                onValueChange = { newY ->
-                                                    viewModel.updateVector(vector.x, newY, vector.z)
-                                                },
-                                                valueRange = -5f..5f
-                                            )
-
-                                            Text("Eixo Z", color = MaterialTheme.colorScheme.onBackground)
-                                            Slider(
-                                                value = vector.z,
-                                                onValueChange = { newZ ->
-                                                    viewModel.updateVector(vector.x, vector.y, newZ)
-                                                },
-                                                valueRange = -5f..5f
-                                            )
-
-                                            Spacer(Modifier.height(16.dp))
-
-                                            // --- BOTÕES ---
-                                            Row(
+                                            OutlinedTextField(
+                                                value = inputText,
+                                                onValueChange = { inputText = it },
+                                                label = { Text("Digite os vetores separados por ;") },
+                                                placeholder = { Text("(1,2,3); (4,1,0); (-2,3,5)") },
                                                 modifier = Modifier.fillMaxWidth(),
-                                                horizontalArrangement = Arrangement.spacedBy(8.dp)
-                                            ) {
-                                                Button(
-                                                    onClick = { viewModel.updateVector(1f, 1f, 1f) },
-                                                    modifier = Modifier.weight(1f)
-                                                ) {
-                                                    Text("Resetar")
-                                                }
-
-                                                Button(
-                                                    onClick = {
-                                                        viewModel.updateVector(
-                                                            vector.x * 1.2f,
-                                                            vector.y * 1.2f,
-                                                            vector.z * 1.2f
-                                                        )
-                                                    },
-                                                    modifier = Modifier.weight(1f)
-                                                ) {
-                                                    Text("Aplicar Escala")
-                                                }
-                                            }
+                                                singleLine = false,
+                                                maxLines = 3
+                                            )
                                         }
                                     }
                                 }
