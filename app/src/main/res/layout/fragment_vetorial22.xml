@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial22">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+Planos\n\n
+EQUAÇÃO GERAL DO PLANO\n\n
+        Seja A(x1 , y1 ,z1 ) um ponto pertencente ao plano  \u20D7n=(a, b,c), \u20D7n  diferente de 0, um vetor normal (ortogonal) ao plano (Figura 6.1).
+
+
+
+
+"/>
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade2_7"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+        Como n , n é ortogonal a todo vetor representado em . Então, um ponto P(x, y, z) pertence a  se, e somente se, o vetor AP é ortogonal a  n, ou seja,  n ·(P- A)=O
+ou \n\n (a, b,c)·(x-x₁, y-y₁, ,z-z₁) = 0\n\n
+ou   a(x-x₁) + b(y-y₁) + c(z-z₁) = 0\n\n
+ou  ax-ax₁ + by-by₁) +cz-cz₁ = 0\n\n
+
+obtemos .  Esta é a equação geral do plano .\n\n
+"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/alterplanos1"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade2_9"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+EQUAÇÃO VETORIAL E EQUAÇÕES, PARAMÉTRICAS DO PLANO:\n\n
+        Seja A(xo,yo,Zo) um ponto pertencente a um plano  e \u20D7u=(a₁ ,b₁ ,c₁ ) e \u20D7v =(a₂,b₂,c₂) dois vetores paralelos a  (Figura 6.3), e \u20D7u e \u20D7v  não paralelos.
+
+
+
+
+"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade2_10"
+
+            />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+
+
+
+
+"/>
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+    Para todo ponto P do plano, os vetores A\u20D7P, \u20D7u e \u20D7v  são coplanares. Um ponto P(x, y, z) pertence a n se, e somente se, existirem números reais h e t tais que
+\n\nP - A = h u+tv\n\nP =A + h u+tv
+
+
+
+
+"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade2_11"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+     Essa equação é denominada equação vetorial do plano . Os vetores \u20D7u e \u20D7v  são vetores diretores de  . Da equação acima obtém-se
+\n\n(x, y, z) = ( x 0+ a1 h + a2 t, y o + bl h + b2 t, z0 + cl h + c2 t)
+\n\n
+
+
+
+
+
+"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade2_12"
+
+            />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/text3.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+            Seja A uma matriz quadrada. O polinômio minimal de A é um polinômio
+m(x) = xk, + ak-1 xk-1 + …+ a0
+tal que
+i) m(A) = 0, isto é, m(x) anula a matriz A.
+ii) m(x) é o polinômio de menor grau entre aqueles que anulam A.
+Observe que o coeficiente do termo xk do polinômio minimal é 1 (ak = 1).
+
+
+"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+          Produto Interno;
+eja V um espaço vetorial com produto interno (, ). Diz-se que dois vetores ve w de V são ortogonais (em relação a este produto interno) se (v, w) = 0. No caso em que v e w são ortogonais, escrevemos v  w.
+Propriedades:
+i) 0  v para todo v  V.
+ii) v  w implica que w  V.
+iii) Se v  w para todo w  v, então v = 0.
+iv) Se v l  w e v₂  w, então v1 + v2   w.
+y) Se v  w e  é um escalar,  v  w.
+Diz-se que uma base {V1,..., Vn} de V é base ortogonal se (vi, vj) = 0 para i  j, isto é, os vetores da base são dois a dois ortogonais.
+Norma;
+Definição: Seja V um espaço com produto interno (, ). Definimos a norma (ou comprimento) de um vetor v em relação a este produto interno por ||v|| = √(v, v). Se ||v|| = 1, isto é, (v, v) = 1, v é chamado vetor unitário. Dizemos também, neste caso, que v está normalizado.
+Observe que todo vetor não nulo v  V pode ser normalizado, tornando u = V||v||. Se considerarmos, por exemplo, V = R3 e (, ) o produto interno usual, então se v = (x1, x2, x3) R³, ||v|| = √(v, v) = √x21 + x₂2 + x32 que é o comprimento do vetor v. Assim, para v = (1, 2, -1), teremos o vetor normalizado.
+
+"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_40"
+
+            /><TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+       A noção de norma formaliza o conceito de comprimento.
+Ângulo entre dois vetores
+
+"
+
+        />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_41"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+     Ortogonalidade;
+Ortogonalização de Gram-Schimidt;
+A partir de uma base qualquer de um espaço vetorial existe um processo para se obter uma base ortonormal. Inicialmente vamos dar uma descrição deste processo de ortonormalização para uma base ẞ = {v1, v2}.
+
+
+"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_43"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_44"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_45"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_46"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_48"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+     Complemento Ortogonal.
+Seja V um espaço vetorial complexo. Um produto interno sobre V é uma aplicação
+(,): V X V → C
+(u, v) → (u, v)
+que satisfaz as seguintes condições:
+i) (v, v)  0 para todo v V e (v, v) = 0 se, e somente se v = 0.
+ii) (u, v) = (u, v), para todo   C e u, v  V.
+iii) (u1+ u2, v) = (u1, v) + (u2, v) para todo u1, u2, v  V.
+iv) (u, v) = (v, u) para todo u, v  V.
+Observe que a condição (iv) foi mudada em relação ao produto interno definido sobre R. Ela nos diz que (u, v) é o conjugado de (v, u).
+Exemplo: Sejam V = C3, v1, v2  V com v₁ = (x1, x2, x3) e v₂ = (y1, y2, y3). A expressão
+
+
+"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3faltante"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+ define um produto interno em C³. Verifiquemos a condição (iv).
+
+"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_49"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+Do mesmo modo que definimos os conceitos fundamentais (norma, distância, ortogonalidade etc.) num espaço vetorial real com um produto interno, podemos defini-los num espaço vetorial complexo. Por exemplo, a norma de um vetor v = (x1, x2, x3) ∈ C3 em relação ao produto interno dado no exemplo anterior é
+
+"/> <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_50"
+
+        />
+    </LinearLayout>
+</ScrollView>

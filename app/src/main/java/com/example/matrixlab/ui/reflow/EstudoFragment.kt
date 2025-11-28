@@ -8,10 +8,12 @@ import android.widget.Button
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.matrixlab.R
 // Adicione os imports para ExpandedSection e ExpandedSubSection, se existirem na sua ViewModel
 import com.example.matrixlab.ui.reflow.ExpandedSection
 import com.example.matrixlab.ui.reflow.ExpandedSubSection
+import com.example.matrixlab.ui.reflow.Vetorial11
 
 // Nota: A classe EstudoViewModel não está definida neste arquivo, assumindo que ela existe
 // no seu projeto.
@@ -132,47 +134,128 @@ class EstudoFragment : Fragment() {
 
         // --- ÁLGEBRA VETORIAL (AV) ---
         // AV - ESTÁGIO 1
-        btnTopicoVetorial1_1.setOnClickListener { estudoViewModel.onTopicClicked("Definição de Vetor e Operações") }
-        btnTopicoVetorial1_2.setOnClickListener { estudoViewModel.onTopicClicked("Dependência e Independência Linear") }
-        btnTopicoVetorial1_3.setOnClickListener { estudoViewModel.onTopicClicked("Sistemas de Coordenadas no Espaço") }
-        btnTopicoVetorial1_4.setOnClickListener { estudoViewModel.onTopicClicked("Norma, Ângulo e Produto Interno") }
-        btnTopicoVetorial1_5.setOnClickListener { estudoViewModel.onTopicClicked("Produto Vetorial") }
-        btnTopicoVetorial1_6.setOnClickListener { estudoViewModel.onTopicClicked("Produto Misto") }
+        btnTopicoVetorial1_1.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial11)
+        }
+
+        btnTopicoVetorial1_2.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial12)
+        }
+
+        btnTopicoVetorial1_3.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial13)
+        }
+
+        btnTopicoVetorial1_4.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial14)
+        }
+
+        btnTopicoVetorial1_5.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial15)
+        }
+
+        btnTopicoVetorial1_6.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial16)
+        }
 
         // AV - ESTÁGIO 2
-        btnTopicoVetorial2_1.setOnClickListener { estudoViewModel.onTopicClicked("Retas") }
-        btnTopicoVetorial2_2.setOnClickListener { estudoViewModel.onTopicClicked("Planos") }
-        btnTopicoVetorial2_3.setOnClickListener { estudoViewModel.onTopicClicked("Posições Relativas, Interseções e Ângulos") }
-        btnTopicoVetorial2_4.setOnClickListener { estudoViewModel.onTopicClicked("Distâncias") }
+        btnTopicoVetorial2_1.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial21)
+        }
+
+        btnTopicoVetorial2_2.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial22)
+        }
+
+        btnTopicoVetorial2_3.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial23)
+        }
+
+        btnTopicoVetorial2_4.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial24)
+        }
 
         // AV - ESTÁGIO 3
-        btnTopicoVetorial3_1.setOnClickListener { estudoViewModel.onTopicClicked("Circunferências") }
-        btnTopicoVetorial3_2.setOnClickListener { estudoViewModel.onTopicClicked("Elipses") }
-        btnTopicoVetorial3_3.setOnClickListener { estudoViewModel.onTopicClicked("Hipérboles") }
-        btnTopicoVetorial3_4.setOnClickListener { estudoViewModel.onTopicClicked("Parábolas") }
-        btnTopicoVetorial3_5.setOnClickListener { estudoViewModel.onTopicClicked("Quádricas") }
+        btnTopicoVetorial3_1.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial31)
+        }
+
+        btnTopicoVetorial3_2.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial32)
+        }
+
+        btnTopicoVetorial3_3.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial33)
+        }
+
+        btnTopicoVetorial3_4.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial34)
+        }
+
+        btnTopicoVetorial3_5.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_vetorial35)
+        }
 
 
         // --- ÁLGEBRA LINEAR (AL) ---
         // AL - ESTÁGIO 1
-        btnTopicoLinear1_1.setOnClickListener { estudoViewModel.onTopicClicked("Espaços Vetoriais") }
-        btnTopicoLinear1_2.setOnClickListener { estudoViewModel.onTopicClicked("Subespaços Vetoriais") }
-        btnTopicoLinear1_3.setOnClickListener { estudoViewModel.onTopicClicked("Combinação Linear, Dependência e Indep.") }
-        btnTopicoLinear1_4.setOnClickListener { estudoViewModel.onTopicClicked("Bases e Dimensão") }
+        btnTopicoLinear1_1.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear11)
+        }
+
+        btnTopicoLinear1_2.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear12)
+        }
+
+        btnTopicoLinear1_3.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear13)
+        }
+
+        btnTopicoLinear1_4.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear14)
+        }
 
         // AL - ESTÁGIO 2
-        btnTopicoLinear2_1.setOnClickListener { estudoViewModel.onTopicClicked("Transformações Lineares") }
-        btnTopicoLinear2_2.setOnClickListener { estudoViewModel.onTopicClicked("Núcleo e Imagem da TL") }
-        btnTopicoLinear2_3.setOnClickListener { estudoViewModel.onTopicClicked("Transformação Inversa") }
-        btnTopicoLinear2_4.setOnClickListener { estudoViewModel.onTopicClicked("Isomorfismos") }
-        btnTopicoLinear2_5.setOnClickListener { estudoViewModel.onTopicClicked("Matriz da Transformação Linear") }
-        btnTopicoLinear2_6.setOnClickListener { estudoViewModel.onTopicClicked("Matriz de Mudança de Base") }
+        btnTopicoLinear2_1.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear21)
+        }
+
+        btnTopicoLinear2_2.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear22)
+        }
+
+        btnTopicoLinear2_3.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear23)
+        }
+
+        btnTopicoLinear2_4.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear24)
+        }
+
+        btnTopicoLinear2_5.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear25)
+        }
+
+        btnTopicoLinear2_6.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear26)
+        }
 
         // AL - ESTÁGIO 3
-        btnTopicoLinear3_1.setOnClickListener { estudoViewModel.onTopicClicked("Autovalor e Autovetor") }
-        btnTopicoLinear3_2.setOnClickListener { estudoViewModel.onTopicClicked("Polinômio Característico") }
-        btnTopicoLinear3_3.setOnClickListener { estudoViewModel.onTopicClicked("Diagonalização de Operadores") }
-        btnTopicoLinear3_4.setOnClickListener { estudoViewModel.onTopicClicked("Polinômio Minimal") }
+        btnTopicoLinear3_1.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear31)
+        }
+
+        btnTopicoLinear3_2.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear32)
+        }
+
+        btnTopicoLinear3_3.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear33)
+        }
+
+        btnTopicoLinear3_4.setOnClickListener {
+            findNavController().navigate(R.id.action_estudo_to_linear34)
+        }
 
         // =======================================================
         // 🔑 OBSERVAÇÃO NÍVEL 1 (Categoria Principal)

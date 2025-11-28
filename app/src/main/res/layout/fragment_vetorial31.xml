@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial31">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/text3.1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="
+AS SEÇÕES CÔNICAS
+Sejam duas retas e e g concorrentes em O e não perpendiculares. Conservemos fixa a reta e e façamos g girar 360° em torno de e mantendo constante o ângulo entre as retas. Nessas condições, a reta g gera uma superfície cônica circular infinita formada por duas folhas separadas pelo vértice O (Figura 8.1). A reta g é chamada de geratriz da superfície cônica, e a reta e, eixo da superfície. Chama-se seção cônica, ou simplesmente cônica, o conjunto de pontos que formam a interseção de um plano com a superfície cônica.
+Quando uma superfície cônica é seccionada por um plano  qualquer que não passa pelo vértice O, a cônica será:
+
+"
+
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unidade3_1"
+
+                />
+            <TextView
+                android:id="@+id/text3.2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:text="
+a) uma parábola, se   for paralelo a uma geratriz da superfície (Figura 8.2(a) );
+\nb) uma elipse, se  não for paralelo a uma geratriz e intercepta apenas uma das folhas da superfície (Figura 8.2(b)) (ou uma circunferência, se  for perpendicular ao eixo).
+\nc) uma hipérbole, se  não é paralelo a uma geratriz e intercepta as duas folhas da superfície (Figura 8.2(c)). A hipérbole deve ser vista como uma curva só, constituída de dois ramos, um em cada folha da superfície.
+
+"
+
+                />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/unidade3_2"
+
+                />
+
+
+
+
+
+        </LinearLayout>
+    </ScrollView>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+            Sejam A e B bases de um espaço vetorial V. Pretende-se relacionar as coordenadas de um vetor v em relação à base A com as coordenadas do mesmo vetor v em relação à base B.
+Para simplificar, consideremos o caso em que dim V = 3. O problema para os espaços de dimensão n é análogo. Sejam as bases A = {v1, v2,v3} e B = {w1, w2, w3}.
+Dado um vetor v ∈ V, este será combinação linear dos vetores das bases A е В:
+V= x1v1 + x2v2 + x3v3            (1)      e
+V=y1w1 + y2w₂ + y3w3        (2)
+Por sua vez, os vetores da base A podem ser escritos em relação à base B, isto é:
+v1 = a11 W1 +a21 W2 + a31 W3
+v2 = a12 W1 +a22 W2 + a32 W3          (3)
+v3 = a13 W1 +a23 W2 + a33 W3
+Substituindo (3) em (1), temos:
+T (v) = x₁(a11 W1 +a21 W2 + a31 W3) + x2 (a12 W1 + a22W2 + a32 W3) + x3 (a13 W1 +a23 W2 + a33 W3 )
+
+
+"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_21"
+
+            />
+
+        <TextView
+            android:id="@+id/text3.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+         chamada matriz de mudança de base de A para B.
+Notemos que o papel dessa matriz é transformar as componentes de um vetor v na base А em componentes do mesmo v na base B.
+
+
+"
+
+            />
+
+
+
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo45"
+
+            />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+    Seja T: V→V um operador linear. Dizemos que T é um operador diagonalizável se existe uma base de V cujos elementos são autovetores de T.
+Os operadores dos Exemplos 1 e 2 são, portanto, diagonalizáveis. Vamos dar a seguir um exemplo de um operador não diagonalizável.
+Exemplo: Seja T: R3→R³ a transformação linear cuja matriz em relação à base canônica  é
+
+"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_35"
+
+            /><TextView
+        android:id="@+id/text3.8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+   Como P() = (3 - )2 (-1 - ), os autovalores são λ₁ = 3 e 2 = - 1. Associado a λ₁ = 3 conseguimos apenas um autovetor LI, por exemplo, v  = (1, 0, 0). Associado a λ₂ = -1 temos o autovetor LI, u = (-1, -20, 16). Neste caso, temos apenas dois autovetores LI para T, e portanto não existe uma base de R³ constituída só de autovetores. Isto significa que em nenhuma base a matriz de T é uma matriz diagonal, ou seja, T não é diagonalizável.
+
+"
+
+        />
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

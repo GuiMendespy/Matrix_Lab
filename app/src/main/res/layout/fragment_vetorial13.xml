@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial13">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/text16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\nDependência e independência linear\n\nSistemas de coordenadas no espaço\n\n
+    Consideremos dois vetores v₁\u20D7  e v₂\u20D7 não paralelos, representados com a origem no mesmo ponto O, sendo r1 e r2 retas contendo esses representantes, respectivamente, (Figura 1.38).
+
+
+"
+
+            /><ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/exemplo11"
+
+        />
+        <TextView
+            android:id="@+id/text17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n    Os vetores u\u20D7, v\u20D7, w\u20D7, t\u20D7, x\u20D7 e y\u20D7, representados na figura, são expressos em função de v₁\u20D7  e v₂\u20D7 por\n\n
+u\u20D7 = 5 v₁\u20D7+ 4v₂\u20D7 \n
+v\u20D7 = -2 v₁\u20D7+ 3v₂\u20D7\n
+w\u20D7 = -4 v₁\u20D7 - 3v₂\u20D7\n
+t\u20D7 = 3 v₁\u20D7 - 2v₂\u20D7\n
+x\u20D7  = 4 v₁\u20D7 + Ovv₂\u20D7\n
+y\u20D7 = O v₁\u20D7 + 2v₂\u20D7\n
+\n  De modo geral, dados dois vetores quaisquer v₁\u20D7  e v₂\u20D7 não paralelos, para cada vetor v\u20D7 representado no mesmo plano de v₁\u20D7  e v₂\u20D7, existe uma só dupla de números reais a₁ e a₂ tal que
+\n\n
+v\u20D7 = a₁v₁\u20D7 + a₂v₂\u20D7
+\n\n
+    Quando o vetor v\u20D7 é expresso como acima, diz-se que v\u20D7 é combinação linear de v₁\u20D7  e v₂\u20D7 . O conjunto B = {  v₁\u20D7  , v₂\u20D7} é chamado base no plano. Aliás, qualquer conjunto de dois vetores não paralelos constitui uma base no plano. Embora estejamos simbolizando a base como um conjunto, a pensamos como um conjunto ordenado. Então, dada uma base qualquer no plano, todo vetor desse plano é combinação linear dos vetores dessa base, de modo único.
+\n\n
+    Os números a₁ e a₂ da igualdade são chamados componentes ou coordenadas de v\u20D7 na base B. O vetor v\u20D7 da igualdade pode ser representado também por v\u20D7 = (a₁, a₂ )B ou vB = (a₁, a₂).
+Na prática, as bases mais utilizadas são as ortonormais.
+\n\n
+    Todo vetor desse plano é combinação linear dos vetores dessa base, de modo único.
+\n\n
+    Os números a₁ e a₂ da igualdade são chamados componentes ou coordenadas de v\u20D7 na base B. O vetor v\u20D7 da igualdade pode ser representado também por v\u20D7 = (a₁, a₂ )B ou v\u20D7b = (a₁, a₂).
+\n\n
+    Entre as infinitas bases ortonormais no plano, uma delas é particularmente importante. Trata-se da base que determina o conhecido sistema cartesiano ortogonal xOy. Os vetores ortogonais e unitários, neste caso, são simbolizados por i\u20D7 e j\u20D7  ambos com origem em O e extremidades em (1, O) e (O, 1), respectivamente (Figura 1.40), sendo a base C = { i\u20D7 , j\u20D7} chamada canônica. Portanto, i\u20D7 = (1, O) e j\u20D7 =(O, 1).
+\n\n
+
+"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo12"
+
+            />
+
+        <TextView
+            android:id="@+id/text18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="  Dado um vetor v\u20D7  qualquer do plano (Figura 1.41), existe uma só dupla de números x e y tal que
+\n\n v\u20D7 = xi\u20D7  + yj\u20D7
+\n
+
+
+
+
+"
+
+            />
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo13"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="  Os números x e y são as componentes de v\u20D7  na base canônica. A primeira componente é chamada abscissa de v\u20D7 , e a segunda componente y é a ordenada de v\u20D7 . Este vetor também representado por  v\u20D7 = (x,y).
+Vetor no plano é um par ordenado (x, y) de números reais. O par (x, y) é chamado expressão analítica de v\u20D7 .
+
+
+
+
+"
+
+            />
+
+    </LinearLayout>
+</ScrollView>

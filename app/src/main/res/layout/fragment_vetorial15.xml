@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial15">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <TextView
+        android:id="@+id/text28"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n\nProduto vetorial:\n\
+    Chama-se produto vetorial de dois vetores u\u20D7  = x1i\u20D7 + y1j\u20D7 + z1k\u20D7  e   v\u20D7 = x2i\u20D7 + y2j\u20D7 + z2k\u20D7, e se representam por u\u20D7  x v\u20D7 , ao vetor
+\n\n
+    fórmula a partir da qual se calcula o ângulo e entre os vetores u\u20D7 e v\u20D7 não nulos.
+"
+
+        />
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/produtovetorial_concerto_1"
+
+        />
+    <TextView
+        android:id="@+id/text29"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="A equação acima pode ser obtida do desenvolvimento segundo o Teorema de Laplace (item d das Preliminares) substituindo-se a, b e c pelos -- vetores unitários i\u20D7 , j\u20D7  e k\u20D7 , fato que sugere a notação
+
+"
+
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/exemplo17"
+
+        />
+
+    <TextView
+        android:id="@+id/text30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="
+"
+
+        />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/produtovetorial_concerto_2"
+
+            />
+
+    </LinearLayout>
+</ScrollView>

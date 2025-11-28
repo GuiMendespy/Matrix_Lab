@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/text3.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\nSubespaços vetoriais;
+Sejam V um espaço vetorial e S um subconjunto não-vazio de V. O subconjunto S é um subespaço vetorial de V se S é um espaço vetorial em relação à adição e à multiplicação por escalar definidas em V.
+Para mostrar que um subconjunto S é um subespaço vetorial de V, deveríamos testar os oito axiomas de espaço vetorial relativos à adição e à multiplicação por escalar. No entanto, como S é parte de V. que já se sabe ser um espaço vetorial, não há necessidade da verificação de certos axiomas em S.  Por exemplo, o axioma A2, diz que u + v = v + u, u, v V. Ora, se a comutatividade da adição é válida para todos os vetores de V, ela valerá, consequentemente, para todos os vetores de S. Existem outros axiomas de espaço vetorial merecedores de comentário idêntico. O teorema seguinte estabelece as condições para que um subconjunto S de um espaço vetorial V seja um subespaço vetorial de V.
+Um subconjunto S, não-vazio, de um espaço vetorial V é um subespaço vetorial de V se estiverem satisfeitas as condições:
+1) Para quaisquer u, v  S, tem-se:
+u+v  S
+I1) Para quaisquer   IR, u  S, tem-se:
+ u  S
+Todo espaço vetorial V admite pelo menos dois subespaços: o conjunto {0}, chamado subespaço zero ou subespaço nulo, e o próprio espaço vetorial V. Esses dois são os subespaços triviais de V. Os demais subespaços são denominados subespaços próprios de V.
+\n
+
+"
+
+            />
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

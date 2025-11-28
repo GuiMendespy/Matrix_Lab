@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial11">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:text="Definição de vetor e operações vetoriais básicas:"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+        />
+
+
+
+    <TextView
+    android:id="@+id/text2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="  Há dois tipos de grandezas físicas: as escalares e as vetoriais.
+    As grandezas escalares são definidas como aquelas que podem ser completamente descritas por um único valor numérico,
+    ou módulo, acompanhado de sua respectiva unidade de medida.
+    "
+
+        />
+    <TextView
+    android:id="@+id/text3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Em contraste, as grandezas vetoriais exigem uma caracterização mais detalhada para serem perfeitamente compreendidas. Elas são definidas por três componentes essenciais:
+                \n \n1) Módulo: Refere-se à intensidade, comprimento ou valor numérico da grandeza.
+                \n\n 2)Direção: Indica a linha de atuação da grandeza (por exemplo, horizontal, vertical ou em um ângulo específico).
+    \n\n3)Sentido: Especifica a orientação dentro dessa direção (por exemplo, para cima ou para baixo, para a direita ou para a esquerda).
+
+
+    "
+
+        />
+    <TextView
+    android:id="@+id/text4"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Na Figura 1.1 (a), observam-se três linhas retas. R₁ estabelece uma orientação específica, enquanto R₂ indica outra orientação distinta. R₃, sendo paralela a R₁, compartilha sua orientação. Dessa forma, o conceito de orientação é estabelecido por uma linha reta e todas aquelas que lhe são paralelas - ou seja, linhas paralelas possuem orientação idêntica. .
+                \n\n    Na Figura 1.1 (b), a orientação é determinada pela linha que conecta os pontos A e B. O movimento ao longo dessa orientação pode ocorrer de dois modos: partindo de A em direção a B, ou inversamente, de B para A. Logo, cada orientação possui duas possibilidades de percurso. Conclui-se que só é possível comparar percursos como idênticos ou opostos quando se trata da mesma orientação///
+
+
+    "
+
+        />
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo1"
+
+        />
+    <TextView
+    android:id="@+id/text5"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Vejamos um exemplo de grandeza vetorial. Imagine um avião voando a 400 km/h constantes, movendo-se para nordeste em um ângulo de 40° (na aviação, os ângulos são medidos a partir do norte, seguindo o sentido horário). Essa grandeza (velocidade) é representada por uma seta (Figura 1.2), onde sua intensidade corresponde ao tamanho do segmento (neste caso, 4 cm, sendo que cada centímetro equivale a 100 km/h), e sua orientação e trajeto são determinados pelo ângulo de 40°. Uma seta na ponta superior do segmento indica o trajeto do movimento.
+
+
+
+    "
+
+        />
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo2"
+
+        />
+    <TextView
+    android:id="@+id/text6"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Note que se o ângulo for de 220° (40° + 180°), a orientação permanece inalterada, mas o trajeto se inverte. Este exemplo de grandeza vetorial introduz o conceito de vetor. Deixando de lado as grandezas vetoriais, podemos dizer que o vetor é representado por um segmento orientado (um segmento possui orientação quando nele há um trajeto definido como positivo).
+                \n\n    Segmentos orientados que possuem comprimento idêntico, orientação igual (paralelos ou colineares) e mesmo trajeto representam um único vetor. Na Figura 1.3, todos os segmentos orientados paralelos com trajeto e comprimento iguais ao de AB correspondem ao mesmo vetor, que pode ser indicado por AB ou B-A, onde A representa o ponto inicial e B o ponto final do segmento. O vetor também pode ser simbolizado por uma letra minúscula com uma seta acima, como v\u20D7 .
+
+
+    "
+
+        />
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo3"
+
+        />
+    <TextView
+    android:id="@+id/text7"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Ao escrevermos v\u20D7  = A\u20D7B\u20D7 (Figura 1.4), indicamos que o vetor  v\u20D7 é definido pelo segmento orientado A\u20D7B\u20D7. Contudo, qualquer outro segmento com comprimento, orientação e trajeto idênticos ao de A\u20D7B\u20D7 também representa esse mesmo vetor  v\u20D7. Dessa forma, qualquer ponto no espaço pode servir como ponto inicial de um segmento orientado que representa o vetor v̄. Por essa razão, o vetor é denominado vetor livre, pois seu representante pode ter origem em qualquer localização.
+
+
+    "
+
+        />
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo4"
+
+        />
+    <TextView
+    android:id="@+id/text8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    O módulo, a direção e o sentido de um vetor v\u20D7  é o módulo, a direção e o sentido de qualquer um dos seus representantes. Indica-se o módulo de v\u20D7  por lv\u20D7 l ou llv\u20D7 ll .
+
+    "
+
+        />
+    <TextView
+    android:id="@+id/tvBody"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\nOperações com vetores:
+
+    "
+    android:textStyle="bold"
+
+        />
+    <TextView
+    android:id="@+id/text9"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Consideremos os vetores u\u20D7 e v\u20D7 , cuja soma u\u20D7 + v\u20D7  pretendemos encontrar. Tomemos um ponto A qualquer (Figura 1.14)  e, a partir dele, traçamos um segmento orientado AB que representa o vetor u\u20D7 .
+
+    "
+
+        />
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo5"
+
+        />
+    <TextView
+    android:id="@+id/text10"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Utilizaremos a extremidade B para traçar o segmento orientado BC representante de v\u20D7. O vetor representado pelo segmento orientado de  origem A e extremidade C é, por definição, o vetor soma de u\u20D7 e v\u20D7 , ou seja,  u\u20D7 + v\u20D7 =  A\u20D7C ou  A\u20D7B +  B\u20D7C =  A\u20D7C. Sendo u\u20D7  // v\u20D7 , a maneira de obter o vetor u\u20D7 + v\u20D7  é a mesma e está ilustrada na Figura 1.15 (a) ( u\u20D7 e  v\u20D7 de mesmo sentido) e na Figura l.l5 (b) (u\u20D7 e  v\u20D7 de sentidos contrários).
+    "
+
+        />
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo6"
+
+        />
+    <TextView
+    android:id="@+id/text11"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Quando os vetores  u\u20D7 e  v\u20D7 não são paralelos, existe outro método para determinar o vetor soma u\u20D7 + v\u20D7 . Representam-se u\u20D7  =  A\u20D7B e  v\u20D7  = A\u20D7D por segmentos orientados com origem comum em A. Constrói-se o paralelogramo ABCD (Figura 1.16), e o segmento orientado partindo de A, correspondente à diagonal do paralelogramo, representa o vetor u\u20D7 + v\u20D7 , ou seja, u\u20D7 + v\u20D7 =  A\u20D7C ou  A\u20D7B +  B\u20D7C =  A\u20D7C.
+
+
+
+    "
+
+        />
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo7"
+
+        />
+    <TextView
+    android:id="@+id/text12"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Para calcular a soma de três ou mais vetores, o procedimento é semelhante (Figura 1.17 (a)). Especialmente, se a extremidade do representante do último vetor coincidir com a origem do representante do primeiro (Figura 1.17 (b)), o resultado será o vetor nulo (u\u20D7 +v\u20D7 +w\u20D7 +t\u20D7 = 0 ).
+
+
+    "
+
+        />
+
+
+
+
+
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo8"
+
+        />
+    <TextView
+    android:id="@+id/text13"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n    Sendo u\u20D7 , v\u20D7  e w\u20D7  vetores quaisquer, a adição admite as seguintes propriedades:
+    \n\ni)Comutativa: u\u20D7 +v\u20D7  = v\u20D7 + u\u20D7
+    \nii)Associativa: (u\u20D7 + v\u20D7 ) + w\u20D7 = u\u20D7 (v\u20D7 + w\u20D7 )
+    \niii)Elemento neutro: u\u20D7 + 0\u20D7 = u\u20D7
+    \niv)Elemento oposto: u\u20D7 + (-u)\u20D7 = 0\u20D7
+    \n\n
+        O vetor  u\u20D7 + (-v)\u20D7, escreve-se u\u20D7  - v\u20D7, é denominado diferença entre u\u20D7  e v\u20D7. Note que no paralelogramo determinado pelos vetores u\u20D7  e v\u20D7 (Figura 1.18), verifica-se que a soma u\u20D7 +v\u20D7 é representada por uma das diagonais, enquanto a diferença u\u20D7  - v\u20D7, pela outra diagonal.
+
+    "
+
+        />
+
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo9"
+
+        />
+    <TextView
+    android:id="@+id/text14"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\nMultiplicação de número real por vetor:\n
+    "
+    android:textStyle="bold"
+        />
+    <TextView
+    android:id="@+id/text15"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp"
+    android:text="\n Dado um vetor v\u20D7 ≠ 0\u20D7 e um número real  ≠ 0, chama-se produto do número real  pelo vetor v\u20D7, o vetor v\u20D7 tal que:
+    \n\na) módulo: |(k) v\u20D7| =  (k)|v\u20D7|, ou seja, o comprimento v\u20D7 é igual ao comprimento de  v multiplicado por k  ;
+     \n\b) direção: kv\u20D7 é paralelo a  v\u20D7;
+    \nc) sentido: kv\u20D7 e v\u20D7  têm o mesmo sentido se  k &gt; O e contrário se  k &lt; O. Se  k = 0 ou v\u20D7 = 0, então a v  = 0 . A Figura 1.20 apresenta o vetor v\u20D7 e alguns de seus múltiplos.
+    "
+
+        />
+
+    <ImageView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:src="@drawable/exemplo10"
+
+        />   <TextView
+    android:id="@+id/text16"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textSize="16sp" />
+
+
+
+        </LinearLayout>
+    </ScrollView>

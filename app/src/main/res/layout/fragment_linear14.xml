@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+            Base de um Espaço Vetorial
+Um conjunto B= {v1, …, vn}  V é uma base do espaço vetorial V se:
+B é LI;
+B gera V.
+Exemplo:
+B = {(1. 0), (0. 1)} é base de IR2. denominada base canônica.
+I) B é Ll, pois a (1. 0) + b(0, 1) = (0, 0) implica a = b = 0;
+II) B gera IR2, pois todo vetor (x, y) R2 é tal que:
+(x, y) = x (1, 0) + y(0, 1)
+Dimensão de um Espaço Vetorial
+Se V possui uma base com n vetores, então V tem dimensão n e anota-se dim V = n
+Se V não possui base, dim V = 0
+Se V tem uma base com infinitos vetores, então a dimensão de V é infinita e anota-se dim V=
+Exemplo:
+dim IR2 = 2, pois toda base do R2 tem dois vetores.
+\/
+
+"
+
+            />
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

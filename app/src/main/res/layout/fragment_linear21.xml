@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:id="@+id/text3.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+
+Temos um tipo especial de função (ou aplicação), onde o domínio e o contradomínio são espaços vetoriais reais. Assim, tanto a variável independente como a variável dependente são vetores, razão pela qual essas funções são chamadas vetoriais. Estamos particularmente interessados nas funções vetoriais lineares, que serão denominadas transformações lineares.
+Para dizer que T é uma transformação do espaço vetorial V no espaço vetorial W, escreve-se T: VW. Sendo T uma função, cada vetor vV tem um só vetor imagem wW, que será indicado por w = T(v).
+Vamos exemplificar, considerando V = R2 e W = R3.
+Uma transformação T: R2  R3 associa vetores v = (x, y) ∈ R2 com vetores w = (x, y, z)  R3. Se a lei que define a transformação T for
+T (x, y) = (3x, -2y, x - у)
+O diagrama da página seguinte apresenta três vetores particulares v e suas correspondentes imagens w.
+Deve ficar bem claro que, para calcular, por exemplo, T(2, 1), tem-se: x = 2 e y= 1, e daí:
+T (2, 1) = (3 x 2,-2 x 1, 2- 1) = (6, -2, 1)
+
+"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_14"
+
+            />
+
+
+        <TextView
+            android:id="@+id/text3.9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+
+Definição
+Sejam V e W espaços vetoriais. Uma aplicação T: V W é chamada transformação linear de V em W se:
+I) T(u+v) = T (u) + T(v)
+II) T(u) = T (u)
+para u, v  V e    IR.
+
+"
+
+            />
+
+
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

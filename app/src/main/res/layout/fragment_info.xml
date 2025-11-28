@@ -109,7 +109,41 @@
             android:contentDescription="Logotipo do IFPB - Campus Campina Grande"
             android:layout_gravity="center_horizontal"
             android:scaleType="fitCenter"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- ========================== -->
+        <!--        REFERÊNCIAS         -->
+        <!-- ========================== -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Referências Bibliográficas"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="1) Álgebra linear:\nWINTERLE, Paulo. Vetores e geometria analítica. 2º Edição. São Paulo: Pearson Education do Brasil Ltda, 2014. 242 p. Disponível em:\nhttps://ia904606.us.archive.org/6/items/VetoresEGeometriaAnaliticaPauloWinterleLivroCompleto/Vetores%20e%20Geometria%20Analitica%20-%20Paulo%20Winterle%20-%20Livro%20Completo_text.pdf\nAcesso em: 5 nov. 2025.\n"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="2) Álgebra Linear para unidades de Transformação linear e Diagonalização de operadores:\nWINTERLE, Paulo; STEINBRUCH, Alfredo. Álgebra linear. Pearson Education do Brasil Ltda, 2014. 583 p. Disponível em:\nhttps://tsxvspbr.dyndns.org/arquivos/UFFS/Algebra%20Linear%20-%20Steinbruch.pdf\nAcesso em: 5 nov. 2025.\n"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="3) A partir do Capítulo de Álgebra linear, da unidade de Diagonalização de operadores:\nBOLDINI, José Luiz; COSTA, Sueli I. Rodrigues; FIGUEIREDO, Vera Lúcia; WETZLER, Henry G. Álgebra Linear. 3º edição. São Paulo: HARBRA Itda, 1980. 411 p. Disponível em:\nhttps://www.cin.ufpe.br/~bgrccf/archive/Algebra%20Linear%20Boldrini.pdf\nAcesso em: 20 nov. 2025.\n"
+            android:layout_marginBottom="24dp"/>
 
     </LinearLayout>
 </ScrollView>

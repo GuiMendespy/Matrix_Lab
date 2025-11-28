@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial23">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/exemplo31"
+
+        /> <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="
+
+
+EQUAÇÃO VETORIAL DE UM PARALELOGRAMO\n\n
+Dados os pontos A, B e C não em linha reta, os vetores A\u20D7Be A\u20D7C determinam o paralelogramo (Figura 6.8) cuja equação vetorial é
+\n\nP = A + h(A\u20D7B) + t(A\u20D7C)  ou\n\nP = A + h(B - A) + t(C - A) com h, t  [O, l]
+
+
+
+"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/concertodeposicoes2"
+
+            /><TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="
+ÂNGULO DE DOIS PLANOS
+
+
+
+
+
+"/>
+
+
+        <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/concertoposicoes1"
+
+        />
+        <TextView
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="
+\n\n
+RETA CONTIDA EM UM PLANO
+
+
+
+"/><ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade2_15"
+
+        />
+    </LinearLayout>
+</ScrollView>

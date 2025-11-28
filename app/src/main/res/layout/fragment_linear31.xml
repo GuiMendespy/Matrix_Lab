@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+ T: V→V
+Definição: Seja  T: V→V um operador linear. Se existirem v  V, v  0, e   R tais que Tv = λv,  λ é um autovalor de T e v um autovetor de T associado a λ.
+Observe que λ pode ser o número 0, embora v não possa ser o vetor nulo. Daremos a seguir exemplos de como calcular autovalores e autovetores, usando a definição.
+Exemplo
+T:R2 → R2
+v → 2v
+
+"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_22"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+ Neste caso, 2 é um autovalor de T e qualquer (x, y)  (0, 0) é um autovetor de T associado ao autovalor 2. Observe geometricamente:
+
+"
+
+            />  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_23"
+
+        /> <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+De um modo geral toda transformação
+T:R2 → R2
+v → v ,   0
+tem  como autovalor e qualquer (x, y)  (0, 0) como autovetor correspondente. Observe que T(v) é sempre um vetor da mesma direção que v. Ainda mais, se:
+i)  menor que 0, T inverte o sentido do vetor.
+ii) ||  maior que 1, T dilata o vetor.
+iii) ||  menor que 1, T contrai o vetor.
+iv)  = 1, T é a identidade.
+Autovalores e Autovetores de uma Matriz
+Dada uma matriz quadrada, A, de ordem n, estaremos entendendo por autovalor e autovetor de A autovalor e autovetor da transformação linear  TA:Rn → Rn , associada à matriz A em relação à base canônica, isto é, TA (v) = A* v (na forma coluna). Assim, um autovalor λ E R de A, e um autovetor v  Rn, são soluções da equação A• v = v, v 0.
+Exemplo: Dada a matriz diagonal
+
+"
+
+        /><ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_24"
+
+        /><TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+e dados os vetores e₁ = (1, 0, ..., 0), e2 = (0, 1, 0, ..., 0),..., en = = (0, 0, ..., 0, 1), temos
+
+"
+
+        /><ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_25"
+
+        /><TextView
+        android:id="@+id/text3.8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+A * ei = aiiei. Então, estes vetores da base canônica de Rn são autovetores para A, e o autovetor ei é associado ao autovalor aii.
+
+"
+
+        />
+
+
+
+
+    </LinearLayout>
+</ScrollView>

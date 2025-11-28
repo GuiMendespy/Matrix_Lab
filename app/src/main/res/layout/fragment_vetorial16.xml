@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/text30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\u20D7u  = x1\u20D7i + y1\u20D7j + z1\u20D7k,  \u20D7v = x2\u20D7i + y2\u20D7j + z2\u20D7k  e w = x3\u20D7i + y3\u20D7j + z3\u20D7k , tomados nessa ordem, ao número real \u20D7u   ( \u20D7v  x \u20D7w ). \n\n
+
+"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo18"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo19"
+
+            />
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/text3.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="COMBINAÇÃO LINEAR
+Sejam os vetores v1,v2, ...,vn  do espaço vetorial V e os escalares a1, a2,..., a Qualquer vetor v  V da forma:
+v = a1 v1 + a2 v2 +... + an
+é uma combinação linear dos vetores v1,v2, ...,vn
+Exemplo
+No espaço vetorial P₂ dos polinômios de grau 2, o polinômio v = 7x² + 11x-26 é uma combinação linear dos polinômios:
+v= 5x² - 3x+ 2 e v2 = -2x² + 5x - 8
+De fato:
+ v= 3v1, + 4v2
+isto é,
+7x2 + 11x - 26 = 3(5x²- 3x + 2) + 4(-2x² + 5x -8)
+7x2 + 11x -26 = 15x2- 9x + 6 - 8x2 + 20x - 32
+7x2 + 11x - 26 = 7x2 + 11x - 26
+DEPENDÊNCIA E INDEPENDÊNCIA LINEAR
+Sejam V um espaço vetorial e
+A= {v1,..., vn }  V
+Consideremos a equação
+a1, v1 +... +аn vn = 0    (2.7)
+Sabemos que essa equação admite pelo menos uma solução:
+a1 = 0, a2 = 0, ..., an = 0        chamada solução trivial.
+O conjunto A diz-se linearmente independente (LI), ou os vetores v1, vn são LI, caso a equação (2.7) admita apenas a solução trivial. Um conjunto A= {V₁, ..., Vn} é LI se, e somente se, nenhum desses vetores for combinação linear dos outros.
+Se existirem soluções a 0, diz-se que o conjunto A é linearmente dependente (LD), ou que os vetores v1, .... vn são LD. Dois vetores v₁ e v2 são LD se, e somente se, um vetor é múltiplo escalar do outro.
+Exemplo:
+1) No espaço vetorial V = R3, os vetores v1= (2,-1, 3), v2= (-1, 0,-2) e v3 = (2, -3, 1) formam um conjunto linearmente dependente, pois
+3V1+4v2 -V3 = 0
+ou seja:
+3(2, -1, 3) +4(-1, 0,-2)-(2, -3, 1) = (0, 0, 0)
+
+
+"
+
+            />
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial35">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="A equação geral do 2° grau nas três variáveis x, y e z
+\n\n
+
+"
+
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_12"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="      onde pelo menos um dos coeficientes a, b, c, d, e ou fé diferente de zero (a fim de assegurar o segundo grau da equação), representa uma superfície quádrica, ou simplesmente uma quádrica. Observemos que, se a superfície quádrica dada pela equação (1) for cortada pelos planos coordenados ou por planos paralelos a eles, a curva de interseção será uma cônica. A interseção de uma superfície com um plano é chamada traço da superfície no plano. Por exemplo, o traço da superfície quádrica (1) no plano z = O é a cônica
+
+\n\n
+
+"
+
+            />
+
+
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_13"
+
+            />
+
+
+
+        <TextView
+            android:id="@+id/text3.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+            contida no plano z = O, isto é, no plano xüy, e representa uma elipse, uma hipérbole ou uma parábola, pois suas equações gerais são desse tipo. Em casos particulares, no entanto, a equação (2) pode também representar uma reta (3x2 =O se e somente se x =O), ou duas retas (xy =O se e somente se x =O ou y =O), ou um ponto (3x2 + 4 y 2 =O se e somente se x = y =O) ou o conjunto vazio (x2 + y 2 + 3 = O). Estes casos constituem as cônicas degeneradas.
+A redução da equação geral (1) das quádricas às suas formas mais simples exige cálculos laboriosos, o que não é objeto deste texto. Daremos ênfase ao estudo das quádricas representadas por equações denominadas canônicas e intimamente relacionadas às formas reduzidas das cônicas.
+
+
+"
+
+            />
+
+
+
+
+
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial14">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:id="@+id/text19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+     Os números x e y são as componentes de v\u20D7  na base canônica. A primeira componente é chamada abscissa de v\u20D7 , e a segunda componente y\u20D7 é a ordenada de v\u20D7 . Este vetor também representado por  v\u20D7 = (x,y).
+\n\n    Vetor no plano é um par ordenado (x, y) de números reais. O par (x, y) é chamado expressão analítica de v\u20D7 .
+\n\n
+    Norma de um vetor, ângulo entre vetores e produto interno
+
+
+
+"
+
+            /><TextView
+        android:id="@+id/text20"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n\nMódulo de um vetor
+"
+        android:textStyle="bold"
+
+        />
+        <TextView
+            android:id="@+id/text21"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n\n  Seja o vetor v\u20D7 = (x,y) (Figura 1.51). Pelo teorema de Pitágoras, vem \n\n
+|v\u20D7| = (x² + y²) ⁰·⁵
+
+"
+
+
+            />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo14"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo15"
+
+            />
+        <TextView
+            android:id="@+id/text22"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="Produto escalar
+
+" android:textStyle="bold"
+
+            />
+        <TextView
+            android:id="@+id/text23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n\n     Chama-se produto escalar de dois vetores u\u20D7  = x1i\u20D7 + y1j\u20D7 + z1k\u20D7  e   v\u20D7 = x2i\u20D7 + y2\u20D7j + z2k\u20D7 , e se representa por  u\u20D7  v\u20D7 , ao número real
+\n\nu\u20D7.v\u20D7 = x1 x2 + y1 y2  + z1 z2
+
+
+"
+
+            />
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo16"
+
+            />
+
+        <TextView
+            android:id="@+id/text24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+Definição geométrica de produto escalar:
+"
+            android:textStyle="bold"
+
+            />
+        <TextView
+            android:id="@+id/text25"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n\n Dois vetores e o ângulo entre eles: \n\n
+u\u20D7.v\u20D7  =| u\u20D7 | | v\u20D7 | cos , &lt;= 0° &gt;=    180°
+
+"
+
+            /><TextView
+        android:id="@+id/text26"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n\n
+Cálculo do ângulo de dois vetores:
+"   android:textStyle="bold"
+
+        /><TextView
+        android:id="@+id/text27"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n\n  Vem da igualdade de definição geométrica de produto escalar, vem: \n\n
+cos  = (u\u20D7.  v\u20D7) / |u\u20D7| |v\u20D7|\n\n
+    fórmula a partir da qual se calcula o ângulo e entre os vetores u\u20D7 e v\u20D7 não nulos.
+"
+
+        />
+
+    </LinearLayout>
+</ScrollView>

@@ -26,7 +26,123 @@
         android:id="@+id/nav_Estudo"
         android:name="com.example.matrixlab.ui.reflow.EstudoFragment"
         android:label="@string/menu_estudo"
-        tools:layout="@layout/fragment_estudo" />
+        tools:layout="@layout/fragment_estudo">
+
+        <!-- AÇÕES DE NAVEGAÇÃO PARA OS TÓPICOS -->
+        <action
+            android:id="@+id/action_estudo_to_vetorial11"
+            app:destination="@id/nav_vetorial11" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial12"
+            app:destination="@id/nav_vetorial12" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial13"
+            app:destination="@id/nav_vetorial13" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial14"
+            app:destination="@id/nav_vetorial14" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial15"
+            app:destination="@id/nav_vetorial15" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial16"
+            app:destination="@id/nav_vetorial16" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial21"
+            app:destination="@id/nav_vetorial21" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial22"
+            app:destination="@id/nav_vetorial22" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial23"
+            app:destination="@id/nav_vetorial23" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial24"
+            app:destination="@id/nav_vetorial24" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial31"
+            app:destination="@id/nav_vetorial31" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial32"
+            app:destination="@id/nav_vetorial32" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial33"
+            app:destination="@id/nav_vetorial33" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial34"
+            app:destination="@id/nav_vetorial34" />
+
+        <action
+            android:id="@+id/action_estudo_to_vetorial35"
+            app:destination="@id/nav_vetorial35" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear11"
+            app:destination="@id/nav_linear11" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear12"
+            app:destination="@id/nav_linear12" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear13"
+            app:destination="@id/nav_linear13" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear14"
+            app:destination="@id/nav_linear14" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear21"
+            app:destination="@id/nav_linear21" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear22"
+            app:destination="@id/nav_linear22" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear23"
+            app:destination="@id/nav_linear23" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear24"
+            app:destination="@id/nav_linear24" />
+        <action
+            android:id="@+id/action_estudo_to_linear25"
+            app:destination="@id/nav_linear25" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear26"
+            app:destination="@id/nav_linear26" />
+        <action
+            android:id="@+id/action_estudo_to_linear31"
+            app:destination="@id/nav_linear31" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear32"
+            app:destination="@id/nav_linear32" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear33"
+            app:destination="@id/nav_linear33" />
+
+        <action
+            android:id="@+id/action_estudo_to_linear34"
+            app:destination="@id/nav_linear34" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_BancoQuestoes"
@@ -44,4 +160,176 @@
         android:name="com.example.matrixlab.ui.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_vetorial11"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial11"
+        android:label="Vetorial 1.1"
+        tools:layout="@layout/fragment_vetorial11" />
+
+    <fragment
+        android:id="@+id/nav_vetorial12"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial12"
+        android:label="Vetorial 1.2"
+        tools:layout="@layout/fragment_vetorial12" />
+
+    <fragment
+        android:id="@+id/nav_vetorial13"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial13"
+        android:label="Vetorial 1.3"
+        tools:layout="@layout/fragment_vetorial13" />
+
+    <fragment
+        android:id="@+id/nav_vetorial14"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial14"
+        android:label="Vetorial 1.4"
+        tools:layout="@layout/fragment_vetorial14" />
+
+    <fragment
+        android:id="@+id/nav_vetorial15"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial15"
+        android:label="Vetorial 1.5"
+        tools:layout="@layout/fragment_vetorial15" />
+
+    <fragment
+        android:id="@+id/nav_vetorial16"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial16"
+        android:label="Vetorial 1.6"
+        tools:layout="@layout/fragment_vetorial16" />
+    <fragment
+        android:id="@+id/nav_vetorial21"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial21"
+        android:label="Vetorial 2.1"
+        tools:layout="@layout/fragment_vetorial21" />
+
+    <fragment
+        android:id="@+id/nav_vetorial22"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial22"
+        android:label="Vetorial 2.2"
+        tools:layout="@layout/fragment_vetorial22" />
+
+    <fragment
+        android:id="@+id/nav_vetorial23"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial23"
+        android:label="Vetorial 2.3"
+        tools:layout="@layout/fragment_vetorial23" />
+
+    <fragment
+        android:id="@+id/nav_vetorial24"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial24"
+        android:label="Vetorial 2.4"
+        tools:layout="@layout/fragment_vetorial24" />
+
+    <fragment
+        android:id="@+id/nav_vetorial31"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial31"
+        android:label="Vetorial 3.1"
+        tools:layout="@layout/fragment_vetorial31" />
+
+    <fragment
+        android:id="@+id/nav_vetorial32"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial32"
+        android:label="Vetorial 3.2"
+        tools:layout="@layout/fragment_vetorial32" />
+
+    <fragment
+        android:id="@+id/nav_vetorial33"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial33"
+        android:label="Vetorial 3.3"
+        tools:layout="@layout/fragment_vetorial33" />
+
+    <fragment
+        android:id="@+id/nav_vetorial34"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial34"
+        android:label="Vetorial 3.4"
+        tools:layout="@layout/fragment_vetorial34" />
+
+    <fragment
+        android:id="@+id/nav_vetorial35"
+        android:name="com.example.matrixlab.ui.reflow.Vetorial35"
+        android:label="Vetorial 3.5"
+        tools:layout="@layout/fragment_vetorial35" />
+
+    <fragment
+        android:id="@+id/nav_linear11"
+        android:name="com.example.matrixlab.ui.reflow.Linear11"
+        android:label="Linear 1.1"
+        tools:layout="@layout/fragment_linear11" />
+
+    <fragment
+        android:id="@+id/nav_linear12"
+        android:name="com.example.matrixlab.ui.reflow.Linear12"
+        android:label="Linear 1.2"
+        tools:layout="@layout/fragment_linear12" />
+
+    <fragment
+        android:id="@+id/nav_linear13"
+        android:name="com.example.matrixlab.ui.reflow.Linear13"
+        android:label="Linear 1.3"
+        tools:layout="@layout/fragment_linear13" />
+
+    <fragment
+        android:id="@+id/nav_linear14"
+        android:name="com.example.matrixlab.ui.reflow.Linear14"
+        android:label="Linear 1.4"
+        tools:layout="@layout/fragment_linear14" />
+
+    <fragment
+        android:id="@+id/nav_linear21"
+        android:name="com.example.matrixlab.ui.reflow.Linear21"
+        android:label="Linear 2.1"
+        tools:layout="@layout/fragment_linear21" />
+
+    <fragment
+        android:id="@+id/nav_linear22"
+        android:name="com.example.matrixlab.ui.reflow.Linear22"
+        android:label="Linear 2.2"
+        tools:layout="@layout/fragment_linear22" />
+
+    <fragment
+        android:id="@+id/nav_linear23"
+        android:name="com.example.matrixlab.ui.reflow.Linear23"
+        android:label="Linear 2.3"
+        tools:layout="@layout/fragment_linear23" />
+
+    <fragment
+        android:id="@+id/nav_linear24"
+        android:name="com.example.matrixlab.ui.reflow.Linear24"
+        android:label="Linear 2.4"
+        tools:layout="@layout/fragment_linear24" />
+    <fragment
+        android:id="@+id/nav_linear25"
+        android:name="com.example.matrixlab.ui.reflow.Linear25"
+        android:label="Linear 2.5"
+        tools:layout="@layout/fragment_linear25" />
+    <fragment
+        android:id="@+id/nav_linear26"
+        android:name="com.example.matrixlab.ui.reflow.Linear26"
+        android:label="Linear 2.6"
+        tools:layout="@layout/fragment_linear26" />
+
+    <fragment
+        android:id="@+id/nav_linear31"
+        android:name="com.example.matrixlab.ui.reflow.Linear31"
+        android:label="Linear 3.1"
+        tools:layout="@layout/fragment_linear31" />
+
+    <fragment
+        android:id="@+id/nav_linear32"
+        android:name="com.example.matrixlab.ui.reflow.Linear32"
+        android:label="Linear 3.2"
+        tools:layout="@layout/fragment_linear32" />
+
+    <fragment
+        android:id="@+id/nav_linear33"
+        android:name="com.example.matrixlab.ui.reflow.Linear33"
+        android:label="Linear 3.3"
+        tools:layout="@layout/fragment_linear33" />
+
+    <fragment
+        android:id="@+id/nav_linear34"
+        android:name="com.example.matrixlab.ui.reflow.Linear34"
+        android:label="Linear 3.4"
+        tools:layout="@layout/fragment_linear34" />
+
+
 </navigation>

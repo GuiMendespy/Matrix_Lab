@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+
+
+
+        <TextView
+            android:id="@+id/text3.9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+            Observamos nos exemplos da seção anterior que se nos basearmos nas definições de autovalor e autovetor, para efetuar os cálculos que determinam seus valores, estaremos adotando um procedimento muito complicado. Por isso, vamos procurar um método prático para encontrar autovalores e autovetores de uma matriz real A de ordem n. Faremos um exemplo para o caso em que n = 3, e em seguida generalizamos para n qualquer.
+Exemplo:
+
+
+"
+
+            /><ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_28"
+
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+            Procuramos vetores v  R3 e escalares   R tais que A * v = v. Observe que se I for a matriz identidade de ordem 3, então a equação acima pode ser escrita na forma Av = (XI)v, ou ainda, (A - l)v = 0. Escrevendo explicitamente
+
+
+
+"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_29"
+
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+         Se escrevermos explicitamente o sistema de equações lineares equivalente a esta equação matricial, iremos obter um sistema de três equações e três incógnitas. Se o determinante da matriz dos coeficientes for diferente de zero, sabemos que este sistema tem uma única solução, que é a solução nula, ou seja x = y = z = 0. Mas estamos interessados em calcular os autovetores de A, isto é, vetores v  0, tais que (A - l)v = 0. Neste caso det(A - l) deve ser zero, ou seja
+
+
+"
+
+            />  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_30"
+
+        />   <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+        E portanto -3 + 7² - 16λ + 12 = 0.
+Vemos que det(A - l) é um polinômio em . Este polinômio é chamado o polinômio característico de A. Continuando a resolução, temos (λ - 2)2 (λ - 3) = 0. Logo λ = 2 e λ = 3 são as raízes do polinômio característico de A, e portanto os autovalores da matriz A são 2 e 3. Conhecendo os autovalores podemos encontrar os autovetores correspondentes. Resolvendo a equação Av = λv, para os casos:
+i) λ = 2
+
+
+"
+
+        />  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_31"
+
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+       A terceira equação implica que y = 0 e por isso vemos na segunda que x = 0. Como nenhuma equação impõe uma restrição em z, os autovetores associados a λ = 2 são do tipo (0, 0, z), ou seja, pertencem ao subespaço [(0, 0, 1)].
+i) λ = 3
+Resolvendo a equação Av = 3v, temos
+
+
+"
+
+            />  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_32"
+
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+     anto da primeira equação quanto da segunda vemos que x = -2y e da terceira vem z = y. Os autovetores associados ao autovalor λ = 3 são do tipo (-2y, y, y), ou seja, pertencem ao subespaço [(-2, 1, 1)].
+Escrevendo esta equação explicitamente, temos
+
+
+"
+
+            />  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_33"
+
+        />   <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+     Chamemos de B a primeira matriz acima. Então B * v = 0. Se det B ≠ 0, sabemos que o posto da matriz B é n e portanto o sistema de equações lineares homogêneo indicado acima tem uma única solução. Ora, como x1 = x2 = ...= = xn = 0 (ou v = 0) sempre é solução de um sistema homogêneo, então esta única solução seria a nula. Assim, a única maneira de encontrarmos autovetores v (soluções não nulas da equação acima) é termos detB = 0, ou seja
+det (A - l) = 0.
+Impondo esta condição determinamos primeiramente os autovalores A que satisfazem a equação e depois os autovetores a eles associados. Observamos que
+
+"
+
+        />  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade3_34"
+
+        /> <TextView
+        android:id="@+id/text3.8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+    é um polinômio em A de grau n.
+P() = (a11 -)... (ann - ) + termos de grau  menor que n, e os autovalores procurados são as raízes deste polinômio. P() é chamado polinômio característico da matriz A.
+
+"
+
+        />
+
+
+
+    </LinearLayout>
+</ScrollView>

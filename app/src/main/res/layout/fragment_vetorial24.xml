@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reflow.Vetorial24">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+DISTÂNCIA ENTRE DOIS PONTOS\n\n
+Dados os pontos P1(x1 ,y1 ,z1 ) e P2 (x2 ,y2 ,z2 ), a distância dentre eles é modulo P1P2 • Como
+
+
+
+
+
+"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade2_16"
+
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+DISTÂNCIA DE UM PONTO A UMA RETA:\n
+        Dado um ponto P do espaço e uma reta r, que-se calcular a distância d(P, r) de P a r.Consideremos a reta r um ponto A e um vetor diretor v. Os vetores v e AP determinam um paralelogramo cuja altura corresponde à distância d (P, r)A área A do paralelogramo é dada por
+\n\na) A=(base)(altura) =lvl·d
+\n\nb) A= |v x AP|
+
+
+
+
+"/>
+
+
+
+
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/exemplo36"
+
+            />  <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade2_17"
+
+        />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="
+
+DISTÂNCIA DE PONTO A PLANO
+Dado um ponto P0 e um plano , calcular a distância d(P0 ,n:) de P0 a . Seja A um ponto qualquer de  e n um vetor normal a . A Figura 7.3 esclarece que a distância d(P0 ,) é o módulo da projeção de  na direção de n.
+
+
+
+
+"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade2_18"/>
+
+
+        <TextView
+        android:id="@+id/text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="
+Desenvolvendo temos:
+
+
+
+
+
+"/><ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/unidade2_20"/>
+
+
+
+    </LinearLayout>
+</ScrollView>

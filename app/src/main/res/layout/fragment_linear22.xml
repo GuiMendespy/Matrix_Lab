@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+            NÚCLEO DE UMA TRANSFORMAÇÃO LINEAR
+Definição
+chama-se núcleo de uma transformação linear T: VW ao conjunto de todos os vetores v V que são transformados em 0∈ W. Indica-se esse conjunto por N(T) on ker (T):
+N(T)= {v V/T(v) = 0}
+
+
+"
+
+            />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_16"
+
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+           Observemos que N(T) V e N(T)  0, pois 0  N(T), tendo em vista que T (0) = 0.
+Exemplo:
+1) O núcleo da transformação linear
+T: R2  R²,T (x, y) = (x+ y, 2x - y)
+é o conjunto:
+N(T)= {(x,y) ∈ R2 /T (x, y) = (0, 0)}
+o que implica:
+(x + y, 2x - y) = (0, 0)
+ou:
+
+
+"
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_15"
+
+            /> <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:text="\n
+ sistema cuja solução é:
+x = 0 e y = 0
+logo:
+N(T) = {(0, 0)}
+IMAGEM
+Chama-se imagem de uma transformação linear T: V→W o conjunto dos vetores w E W que são imagens de pelo menos um vetor vE V. Indica-se esse conjunto por Im(Т) ou T(V):
+Im(T) = {w ∈ W/T(v) = w para algum v ∈ V}
+Exemplos
+Seja T: R3 → R3  T(x, y, z) = (x, y, 0) a projeção ortogonal do R3 sobre o plano xy. A imagem de T é o próprio plano xy:
+Im(T) = {(x, y, 0) R³/x, y ∈ R}"
+
+
+        />
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+ sistema cuja solução é:
+x = 0 e y = 0
+logo:
+N(T) = {(0, 0)}
+IMAGEM
+Chama-se imagem de uma transformação linear T: V→W o conjunto dos vetores w E W que são imagens de pelo menos um vetor vE V. Indica-se esse conjunto por Im(Т) ou T(V):
+Im(T) = {w ∈ W/T(v) = w para algum v ∈ V}
+Exemplos
+Seja T: R3 → R3  T(x, y, z) = (x, y, 0) a projeção ortogonal do R3 sobre o plano xy. A imagem de T é o próprio plano xy:
+Im(T) = {(x, y, 0) R³/x, y ∈ R}"
+
+
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/unidade3_18"
+
+            />
+        <TextView
+            android:id="@+id/text3.8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="\n
+Observemos que o núcleo de Té o eixo dos z:
+N(T) = {(0, 0, z)/z ∈ IR}
+pois T(0, 0, z) = (0, 0, 0) para todo z ∈ IR.
+A imagem de uma transformação T: VW é um subespaço de W.
+Teorema de dimensão
+Seja V um espaço de dimensão finita e T: VW uma transformação linear. Então, dim N(T) + dim Im(T) = dim V."
+
+            />
+
+
+    </LinearLayout>
+</ScrollView>
