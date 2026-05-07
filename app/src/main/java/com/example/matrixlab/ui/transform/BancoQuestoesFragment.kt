@@ -8,9 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.matrixlab.databinding.FragmentBancoquestoesBinding
-import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
+import kotlinx.coroutines.launch // garante paralelismo em execuçãop de processos pesadpos
+import okhttp3.OkHttpClient // gerenciar as conexopes http bruta
+import retrofit2.Retrofit //garante uma abstrAÇÃO para que consigamos se comunicar com o servidopr de forma mais facil
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
@@ -35,7 +35,7 @@ class BancoQuestoesFragment : Fragment() {
 
         Retrofit.Builder()
             // TROCAMOS O IP AQUI:
-            .baseUrl("http://192.168.1.80:8000/")
+            .baseUrl("http://matrix-server.local:8000/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -54,7 +54,7 @@ class BancoQuestoesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 2. Configurar o clique do botão que já existe no seu XML
+        // Configurar o clique do botão que já existe
         binding.QButton.setOnClickListener {
             gerarQuestaoComAgente()
         }
@@ -64,13 +64,13 @@ class BancoQuestoesFragment : Fragment() {
         // Mostra um texto temporário enquanto a IA responde
         binding.QText.text = "O Agente está pensando..."
 
-        // 3. Chamar a API usando Coroutine (lifecycleScope)
+        // Chamar a API usando Coroutine (lifecycleScope)
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                // Envia a pergunta para o seu servidor Python/LangChain
+                // Envia a pergunta para o servidor Python/LangChain
                 val resposta = service.enviarPergunta(ChatRequest("Gere uma questão de prova sobre matrizes"))
 
-                // 4. Atualiza a tela com a resposta da IA
+                //  Atualiza a tela com a resposta da IA
                 binding.QText.text = resposta.response
                 Log.d("SUCESSO", "O Agente disse: ${resposta.response}")
 
