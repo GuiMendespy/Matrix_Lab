@@ -4,56 +4,96 @@
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.reflow.Vetorial32">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
-
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_3"
-
-            />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_4"
-
-            />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_5"
-
-            />
-
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/exemplo45"
-
-            />
-
+            android:text="A ELIPSE"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:gravity="center"
+            android:paddingBottom="16dp" />
 
         <TextView
-            android:id="@+id/text3.8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\n
-
-"
             android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="A elipse é o lugar geométrico dos pontos P cuja soma das distâncias a dois pontos fixos (focos) é constante." />
 
-            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/unidade3_3"
+            android:layout_marginTop="12dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n1. Eixo Maior sobre o eixo Ox"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <WebView
+            android:id="@+id/math_elipse_ox"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/unidade3_4" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n2. Eixo Maior sobre o eixo Oy"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <WebView
+            android:id="@+id/math_elipse_oy"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/unidade3_5" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nExemplo de Aplicação"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/exemplo45" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

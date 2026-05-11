@@ -4,74 +4,103 @@
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.reflow.Vetorial35">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Superfícies Quádricas"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#005088"
+            android:paddingBottom="8dp" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="3dp"
+            android:background="#005088"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="A equação geral do 2° grau nas três variáveis x, y e z
-\n\n
+            android:justificationMode="inter_word"
+            android:text="Uma superfície quádrica é o lugar geométrico dos pontos P(x, y, z) cujas coordenadas satisfazem a equação geral do 2° grau em três variáveis:" />
 
-"
-
-            />
+        <WebView
+            android:id="@+id/math_quadrica_geral"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_12"
+            android:adjustViewBounds="true"
+            android:src="@drawable/unidade3_12" />
 
-            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="      onde pelo menos um dos coeficientes a, b, c, d, e ou fé diferente de zero (a fim de assegurar o segundo grau da equação), representa uma superfície quádrica, ou simplesmente uma quádrica. Observemos que, se a superfície quádrica dada pela equação (1) for cortada pelos planos coordenados ou por planos paralelos a eles, a curva de interseção será uma cônica. A interseção de uma superfície com um plano é chamada traço da superfície no plano. Por exemplo, o traço da superfície quádrica (1) no plano z = O é a cônica
-
-\n\n
-
-"
-
-            />
-
-
-
-
+            android:justificationMode="inter_word"
+            android:paddingTop="12dp"
+            android:text="A interseção de uma superfície com um plano é chamada de traço. Se seccionarmos uma quádrica por planos paralelos aos planos coordenados, a curva resultante será sempre uma cônica." />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_13"
-
-            />
-
-
+            android:adjustViewBounds="true"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/unidade3_13" />
 
         <TextView
-            android:id="@+id/text3.8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="\n
-            contida no plano z = O, isto é, no plano xüy, e representa uma elipse, uma hipérbole ou uma parábola, pois suas equações gerais são desse tipo. Em casos particulares, no entanto, a equação (2) pode também representar uma reta (3x2 =O se e somente se x =O), ou duas retas (xy =O se e somente se x =O ou y =O), ou um ponto (3x2 + 4 y 2 =O se e somente se x = y =O) ou o conjunto vazio (x2 + y 2 + 3 = O). Estes casos constituem as cônicas degeneradas.
-A redução da equação geral (1) das quádricas às suas formas mais simples exige cálculos laboriosos, o que não é objeto deste texto. Daremos ênfase ao estudo das quádricas representadas por equações denominadas canônicas e intimamente relacionadas às formas reduzidas das cônicas.
+            android:justificationMode="inter_word"
+            android:paddingTop="12dp"
+            android:text="Existem casos onde a equação pode representar pontos, retas ou o conjunto vazio, conhecidos como quádricas degeneradas. Focaremos nas formas canônicas centradas:" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n1. Elipsoide"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-"
+        <WebView
+            android:id="@+id/math_elipsoide"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent" />
 
-            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n2. Hiperboloides (Uma e Duas Folhas)"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
+        <WebView
+            android:id="@+id/math_hiperboloides"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@android:color/transparent" />
 
-
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

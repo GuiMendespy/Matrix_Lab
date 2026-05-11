@@ -24,4 +24,14 @@
     </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="title_vetorial">Dependência e independência linear\nSistemas de coordenadas no espaço</string>
+    <string name="desc_vetores_base">Os vetores representados na figura são expressos em função dos vetores da base por:</string>
+    <string name="desc_combinacao_geral">De modo geral, dados dois vetores quaisquer não paralelos, para cada vetor representado no mesmo plano, existe uma só dupla de números reais tal que:</string>
+    <string name="desc_teoria_base">Quando o vetor é expresso como acima, diz-se que ele é combinação linear. O conjunto B = {v₁, v₂} é chamado base no plano. Todo vetor desse plano é combinação linear dos vetores dessa base de modo único.\n\nOs números a₁ e a₂ são chamados componentes ou coordenadas de v na base B. O vetor pode ser representado por v = (a₁, a₂)B. Na prática, as bases mais utilizadas são as ortonormais.\n\nUma delas é a base que determina o sistema cartesiano xOy. Os vetores unitários são simbolizados por i e j, sendo a base C chamadas canônica. Portanto:</string>
+
+    <string name="content_figura_1">Gráfico representando vetores v1 e v2</string>
+    <string name="content_figura_2">Gráfico do sistema cartesiano ortogonal</string>
+    <string name="content_figura_3">Vetor v no plano cartesiano</string>
+
 </resources>

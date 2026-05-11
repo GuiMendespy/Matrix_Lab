@@ -4,76 +4,84 @@
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.reflow.Vetorial23">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Equação Vetorial de um Paralelogramo"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingBottom="8dp" />
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/exemplo31"
-
-        /> <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="
-
-
-EQUAÇÃO VETORIAL DE UM PARALELOGRAMO\n\n
-Dados os pontos A, B e C não em linha reta, os vetores A\u20D7Be A\u20D7C determinam o paralelogramo (Figura 6.8) cuja equação vetorial é
-\n\nP = A + h(A\u20D7B) + t(A\u20D7C)  ou\n\nP = A + h(B - A) + t(C - A) com h, t  [O, l]
-
-
-
-"/>
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/concertodeposicoes2"
+            android:adjustViewBounds="true"
+            android:src="@drawable/exemplo31" />
 
-            /><TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="
-ÂNGULO DE DOIS PLANOS
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="\nDados os pontos A, B e C não colineares, os vetores AB e AC determinam o paralelogramo cuja equação vetorial é apresentada abaixo:" />
 
-
-
-
-
-"/>
-
+        <WebView
+            android:id="@+id/math_eq_paralelogramo"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent" />
 
         <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/concertoposicoes1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/concertodeposicoes2" />
 
-        />
         <TextView
-        android:id="@+id/text2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="
-\n\n
-RETA CONTIDA EM UM PLANO
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nÂngulo entre dois Planos"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingTop="16dp" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/concertoposicoes1" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nReta contida em um Plano"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingTop="16dp" />
 
-"/><ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/unidade2_15"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/unidade2_15" />
 
-        />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
     </LinearLayout>
 </ScrollView>

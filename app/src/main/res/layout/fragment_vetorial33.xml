@@ -4,76 +4,118 @@
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.reflow.Vetorial33">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A Hipérbole"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#005088"
+            android:paddingBottom="8dp" />
 
+        <View
+            android:layout_width="100dp"
+            android:layout_height="3dp"
+            android:background="#005088"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="\n
-            Parábolas
-Definição ,
-Parábola é o conjunto de todos os pontos de um plano equidistantes de um ponto fixo e de uma reta fixa desse plano.
-Consideramos uma reta de um ponto F não pertencente a d. Na Figura 8.5 estão assinalados cinco pontos (P 1 , P 2 , V, P 3 e P) que são equidistantes do ponto F e da reta d.
+            android:justificationMode="inter_word"
+            android:textColor="#333333"
+            android:text="Hipérbole é o lugar geométrico dos pontos de um plano cuja diferença das distâncias, em valor absoluto, a dois pontos fixos chamados focos (F1 e F2) é constante e igual a 2a." />
 
-        "
-
-            />
-
-
-
-
-        <ImageView
+        <WebView
+            android:id="@+id/math_hiperbole_def"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_9"
-
-            />
+            android:layout_height="70dp"
+            android:background="@android:color/transparent" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="\n
-           Então, um ponto P qualquer pertence à parábola se e somente se, d(P,F) = d(P,d)
-        "
-
-            />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_10"
-
-
-            />
+            android:text="1. Eixo Real sobre o eixo Ox"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingTop="16dp" />
 
         <TextView
-            android:id="@+id/text3.8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="\n
-            sendo P' o pé da perpendicular baixada de P sobre a reta d.
-        "
+            android:textSize="15sp"
+            android:text="Os focos estão em F1(-c, 0) e F2(c, 0). A equação reduzida é:" />
 
-            />
+        <WebView
+            android:id="@+id/math_hiperbole_ox"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_11"
+            android:adjustViewBounds="true"
+            android:src="@drawable/hiperbole_ox"
+            android:contentDescription="Gráfico da Hipérbole Horizontal" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Eixo Real sobre o eixo Oy"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingTop="16dp" />
 
-            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Os focos estão em F1(0, -c) e F2(0, c). A equação reduzida é:" />
 
+        <WebView
+            android:id="@+id/math_hiperbole_oy"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/hiperbole_oy"
+            android:contentDescription="Gráfico da Hipérbole Vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Relação Pitagórica e Excentricidade"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingTop="20dp" />
+
+        <WebView
+            android:id="@+id/math_hiperbole_props"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

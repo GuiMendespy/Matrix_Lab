@@ -1,43 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.reflow.Vetorial16">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
+
         <TextView
-            android:id="@+id/text30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Produto Misto"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingBottom="12dp" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="\u20D7u  = x1\u20D7i + y1\u20D7j + z1\u20D7k,  \u20D7v = x2\u20D7i + y2\u20D7j + z2\u20D7k  e w = x3\u20D7i + y3\u20D7j + z3\u20D7k , tomados nessa ordem, ao número real \u20D7u   ( \u20D7v  x \u20D7w ). \n\n
+            android:justificationMode="inter_word"
+            android:text="Dados os vetores u, v e w, tomados nesta ordem, chama-se produto misto ao número real obtido pelo produto escalar do primeiro pelo produto vetorial dos outros dois:" />
 
-"
+        <WebView
+            android:id="@+id/math_def_misto"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/transparent" />
 
-            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="O produto misto pode ser calculado diretamente através do determinante das componentes dos três vetores:" />
+
+        <WebView
+            android:id="@+id/math_det_misto"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@android:color/transparent" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/exemplo18"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/exemplo18" />
 
-            />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/exemplo19"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/exemplo19" />
 
-            />
-
-
-
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

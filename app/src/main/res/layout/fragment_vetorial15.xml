@@ -1,71 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.reflow.Vetorial15">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
-    <TextView
-        android:id="@+id/text28"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="\n\nProduto vetorial:\n\
-    Chama-se produto vetorial de dois vetores u\u20D7  = x1i\u20D7 + y1j\u20D7 + z1k\u20D7  e   v\u20D7 = x2i\u20D7 + y2j\u20D7 + z2k\u20D7, e se representam por u\u20D7  x v\u20D7 , ao vetor
-\n\n
-    fórmula a partir da qual se calcula o ângulo e entre os vetores u\u20D7 e v\u20D7 não nulos.
-"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Produto Vetorial"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingBottom="12dp" />
 
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Chama-se produto vetorial de dois vetores u e v, representados por u x v, ao vetor obtido conforme a definição analítica abaixo:" />
 
+        <WebView
+            android:id="@+id/math_def_vetorial"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent" />
 
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/produtovetorial_concerto_1"
-
-        />
-    <TextView
-        android:id="@+id/text29"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="A equação acima pode ser obtida do desenvolvimento segundo o Teorema de Laplace (item d das Preliminares) substituindo-se a, b e c pelos -- vetores unitários i\u20D7 , j\u20D7  e k\u20D7 , fato que sugere a notação
-
-"
-
-        />
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/exemplo17"
-
-        />
-
-    <TextView
-        android:id="@+id/text30"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="
-"
-
-        />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/produtovetorial_concerto_2"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/produtovetorial_concerto_1" />
 
-            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="A equação acima pode ser obtida através do desenvolvimento pelo Teorema de Laplace, substituindo-se os coeficientes pelos vetores unitários i, j e k. Este fato sugere a utilização de um determinante simbólico para facilitar a memorização:" />
+
+        <WebView
+            android:id="@+id/math_determinante_simbolico"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/exemplo17" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/produtovetorial_concerto_2" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

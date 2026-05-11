@@ -1,151 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.reflow.Vetorial21">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/text20.1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="
-Retas \n\n
-Equação vetorial da reta \n\n
-Considerando um ponto A(x1, y1, z1) e um vetor não nulo v\u20D7 (a, b,c).  Só existe uma reta r que passa por A e tem a direção de v\u20D7 . Um ponto P(x, y, z) pertence a r se, e somente se, o vetor AP  é paralelo a v\u20D7  (Figura 5.1) \n\n
-
-
-
-
-
-"/><ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:src="@drawable/unidade2_1"
-
-        />
+            android:text="Estudo da Reta"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
         <TextView
-            android:id="@+id/text20.2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="
-
-P = A + -t \u20D7v , \n\n
-ou por coordenadas: \n\
-(x, y, z) = (x1, y1, z1 )+ t(a, b,c) \n\n
-Pela equação vetorial, obtemos a equação paramétrica: \n\n
-
-
-
-
-"/>
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/unidade2_2"
-
-            />
-
+            android:text="\nEquação Vetorial da Reta"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/text20.3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="
+            android:justificationMode="inter_word"
+            android:text="Considerando um ponto A e um vetor diretor v não nulo, a reta r é o conjunto de pontos P tais que o vetor AP é paralelo a v:" />
 
-    Ainda temos a reta definida por dois pontos: é a reta que passa por dois prontos A (ou B) e tem a direção do vetor v\u20D7 = AB .  \n\n
-\n\n
-
-
-
-"/>
+        <WebView
+            android:id="@+id/math_eq_vetorial_reta"
+            android:layout_width="match_parent"
+            android:layout_height="70dp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade2_3"
-
-            />
-
+            android:adjustViewBounds="true"
+            android:src="@drawable/unidade2_1" />
 
         <TextView
-            android:id="@+id/text20.4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="
-RETA DEFINIDA POR DOIS PONTOS: \n   A reta definida pelos pontos A e B é a reta que passa por A (ou B) e tem a direção do vetor \u20D7v = A\u20D7B .
+            android:text="\nEquações Paramétricas e Simétricas"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-
-
-
-
-"/>
-        <ImageView
+        <WebView
+            android:id="@+id/math_eq_param_simetrica"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/unidade2_4"
-
-            />
-
-
-
-
-
-
-        <TextView
-            android:id="@+id/text11"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="
-EQUAÇÕES SIMÉTRICAS DA RETA:
-\n\n
-
-"/>
+            android:layout_height="180dp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade2_5"
-
-            />
-
-
-
+            android:adjustViewBounds="true"
+            android:src="@drawable/unidade2_5" />
 
         <TextView
-            android:id="@+id/text2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="\n\n
-ÂNGULO DE DUAS RETAS\n
-    Sejam as retas r₁ e r₂ com as direções de \u20D7v₁ e \u20D7v₂ , respectivamente (Figura 5.9).
+            android:text="\nÂngulo entre duas Retas"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-\n\n
-
-
-"/>
-        <ImageView
+        <WebView
+            android:id="@+id/math_angulo_retas"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/unidade2_6"
+            android:layout_height="90dp" />
 
-            />
-
-
-
+        <View android:layout_width="match_parent" android:layout_height="80dp" />
     </LinearLayout>
 </ScrollView>
