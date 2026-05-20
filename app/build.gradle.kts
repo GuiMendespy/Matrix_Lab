@@ -88,4 +88,6 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     // 🪵 Logging Interceptor (Opcional, mas ajuda a ver erros no Logcat)
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    implementation("androidx.compose.material:material-icons-extended")
 }
