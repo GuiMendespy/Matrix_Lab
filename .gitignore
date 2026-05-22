@@ -1,0 +1,48 @@
+# Ambiente virtual
+venv/
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Compilações
+build/
+dist/
+*.egg-info/
+
+# VSCode
+.vscode/
+
+# JetBrains
+.idea/
+
+# Logs
+*.log
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Chroma DB
+chroma/
+
+# Arquivos temporários
+temp/
+tmp/
+
+# SQLite
+*.sqlite3
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Pytest
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+
+# Ruff
+.ruff_cache/
