@@ -2,7 +2,7 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_chroma import Chroma
 from core.llm import embeddings
-from config.settings import PDF_PATH
+from config.settings import QUESTION_BANK_PATH
 
 retriever = None
 
@@ -12,7 +12,7 @@ def build_rag():
 
     print("Construindo RAG...")
 
-    loader = PyPDFLoader(PDF_PATH)
+    loader = PyPDFLoader(QUESTION_BANK_PATH)
     docs = loader.load()
 
     splitter = RecursiveCharacterTextSplitter(

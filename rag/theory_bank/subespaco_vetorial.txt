@@ -1,0 +1,16 @@
+Definição
+Sejam V um espaço vetorial e S um subconjunto não-vazio de V. O subconjunto S é um subespaço vetorial de V se S é um espaço vetorial em relação à adição e à multiplicação por escalar definidas em V.
+
+Verificação
+Para mostrar que um subconjunto S é um subespaço vetorial de V, deveríamos testar os oito axiomas de espaço vetorial relativos à adição e à multiplicação por escalar. No entanto, como S é parte de V. que já se sabe ser um espaço vetorial, não há necessidade da verificação de certos axiomas em S. Por exemplo, o axioma A2, diz que u + v = v + u, u, v V. Ora, se a comutatividade da adição é válida para todos os vetores de V, ela valerá, consequentemente, para todos os vetores de S. Existem outros axiomas de espaço vetorial merecedores de comentário idêntico.
+
+Condições Necessárias
+Um subconjunto S, não-vazio, de um espaço vetorial V é um subespaço vetorial de V se estiverem satisfeitas as condições:
+
+Para quaisquer u, v  S, tem-se:
+u+v  S
+I1) Para quaisquer   IR, u  S, tem-se:
+u  S
+
+Observações
+Todo espaço vetorial V admite pelo menos dois subespaços: o conjunto {0}, chamado subespaço zero ou subespaço nulo, e o próprio espaço vetorial V. Esses dois são os subespaços triviais de V. Os demais subespaços são denominados subespaços próprios de V.
