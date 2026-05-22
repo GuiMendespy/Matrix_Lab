@@ -1,4 +1,7 @@
 import os
 
-GOOGLE_API_KEY = "AIzaSyCA_tZqUbTrZGE4vLAUugXzm_v1QyF3tZY"
-PDF_PATH = os.getenv("PDF_PATH", "questoes.pdf")
+# Definicão das chaves de API
+GOOGLE_API_KEY = "AIzaSyDpdiJWhJ_oA3g3RPdZJN5tY8JjS6sYF8c"
+
+# Definição dos caminhos para os arquivos
+QUESTION_BANK_PATH = os.getenv("QUESTION_BANK_PATH", "rag/question_bank")

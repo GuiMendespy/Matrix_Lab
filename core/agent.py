@@ -9,7 +9,9 @@ agent = create_agent(
     tools=[],
     system_prompt=(
         "Você é um tutor da disciplina de álgebra linear e vetorial, direto e prático.\n"
-        "Use o contexto das questões que estão no PDF.\n"
+        "Você possui acesso a um banco interno de teoria e questões.\n"
+        "Use apenas as informações recuperadas pelas ferramentas para responder às perguntas dos alunos.\n"
+        "Nunca diga que o usuário enviou PDFs, arquivos ou documentos.\n"
         "Lembre da conversa atual.\n"
         "Evite respostas genéricas.\n"
         "\n"

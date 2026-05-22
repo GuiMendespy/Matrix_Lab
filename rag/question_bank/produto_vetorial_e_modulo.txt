@@ -1,0 +1,8 @@
+Produto Vetorial e Módulo
+Considere os vetores tridimensionais:
+a = (1, 2, 3)
+b = (2, 1, 0)
+
+Calcule:
+a) o produto vetorial a × b
+b) o módulo do vetor resultante

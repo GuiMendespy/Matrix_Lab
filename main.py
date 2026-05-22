@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 
-from rag.build import build_rag
+from rag.build_rag import build_question_rag
 from network.mdns import start_mdns
 from api.chat import router
 
@@ -13,9 +13,9 @@ app.include_router(router)
 if __name__ == "__main__":
 
     try:
-        build_rag()
+        build_question_rag()
     except Exception as e:
-        print(f"Erro ao construir RAG: {e}")
+        print(f"Erro ao construir RAG de questões: {e}")
         exit(1)
 
     try:
