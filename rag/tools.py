@@ -3,12 +3,18 @@ from langchain.tools import tool
 import rag.build_rag as build_rag
 
 @tool
-def search_questions(query: str):
+def search_exercises(query: str) -> str:
     """
-    Busca questões relacionadas ao tema informado.
-    """
+    Busca exercícios, listas, problemas e questões
+    de álgebra linear e vetorial.
 
-    print(f"\n[TOOL] search_questions: {query}\n")
+    Use esta ferramenta SEMPRE que o usuário:
+    - pedir uma questão
+    - pedir exercícios
+    - pedir listas
+    - pedir problemas
+    - pedir exemplos práticos
+    """
 
     if build_rag.question_retriever is None:
         return "RAG de questões não inicializado."
@@ -27,12 +33,16 @@ def search_questions(query: str):
 
 
 @tool
-def search_theory(query: str):
+def search_theory(query: str) -> str:
     """
-    Busca teorias relacionadas ao tema informado.
-    """
+    Busca teoria, definições e explicações
+    de álgebra linear e vetorial.
 
-    print(f"\n[TOOL] search_theory: {query}\n")
+    Use esta ferramenta para:
+    - conceitos
+    - definições
+    - explicações
+    """
 
     if build_rag.theory_retriever is None:
         return "RAG de teoria não inicializado."

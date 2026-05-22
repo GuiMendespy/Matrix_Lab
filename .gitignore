@@ -46,3 +46,8 @@ tmp/
 
 # Ruff
 .ruff_cache/
+
+# Chroma
+chroma/
+chroma_questions/
+chroma_theory/

@@ -48,7 +48,8 @@ def build_question_rag():
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
-        collection_name="question_rag"
+        collection_name="question_rag",
+        persist_directory="./chroma/chroma_questions"
     )
 
     question_retriever = vectorstore.as_retriever(
@@ -97,7 +98,8 @@ def build_theory_rag():
     vectorstore = Chroma.from_documents(
         documents=chunks,
         embedding=embeddings,
-        collection_name="theory_rag"
+        collection_name="theory_rag",
+        persist_directory="./chroma/chroma_theory"
     )
 
     theory_retriever = vectorstore.as_retriever(

@@ -4,7 +4,7 @@ from langchain.agents import create_agent
 from core.llm import llm
 
 from rag.tools import (
-    search_questions,
+    search_exercises,
     search_theory
 )
 
@@ -14,7 +14,7 @@ agent = create_agent(
     model=llm,
 
     tools=[
-        search_questions,
+        search_exercises,
         search_theory
     ],
 
