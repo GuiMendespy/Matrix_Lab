@@ -1,7 +1,8 @@
 import os
 
 # Definicão das chaves de API
-GOOGLE_API_KEY = "AIzaSyDpdiJWhJ_oA3g3RPdZJN5tY8JjS6sYF8c"
+OPENROUTER_API_KEY = "CHAVE AQUI"
 
 # Definição dos caminhos para os arquivos
 QUESTION_BANK_PATH = os.getenv("QUESTION_BANK_PATH", "rag/question_bank")
+THEORY_BANK_PATH = os.getenv("THEORY_BANK_PATH", "rag/theory_bank")
