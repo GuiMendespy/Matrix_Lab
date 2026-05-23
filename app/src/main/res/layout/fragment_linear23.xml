@@ -1,41 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.reflow.Linear23">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Matriz de uma Transformação"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#005088"
+            android:paddingBottom="8dp" />
 
+        <View
+            android:layout_width="100dp"
+            android:layout_height="3dp"
+            android:background="#005088"
+            android:layout_marginBottom="16dp"/>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Toda transformação linear entre espaços de dimensão finita pode ser representada por uma matriz. Isso permite que a aplicação de T a um vetor seja calculada por uma simples multiplicação matricial." />
+
+        <WebView
+            android:id="@+id/math_equacao_matricial"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Como construir a matriz?"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingTop="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:justificationMode="inter_word"
+            android:text="Para encontrar a matriz [T], aplicamos a transformação nos vetores da base do domínio e colocamos os resultados como colunas da matriz." />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/exemplo45"
-
-            />
-
-
+            android:adjustViewBounds="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/exemplo45" />
 
         <TextView
-            android:id="@+id/text3.8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="\n
+            android:text="Exemplo de Aplicação"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#005088" />
 
-"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Se T(x, y) = (2x + y, x - 3y), a matriz associada na base canônica é formada pelas imagens de (1,0) e (0,1):" />
 
-            />
+        <WebView
+            android:id="@+id/math_exemplo_matriz"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@android:color/transparent" />
 
-
-
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

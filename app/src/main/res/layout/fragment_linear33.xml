@@ -1,59 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.reflow.Linear33">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
-
-
-
-        <ImageView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/exemplo45"
+            android:text="Operadores Diagonalizáveis"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#005088"
+            android:paddingBottom="8dp" />
 
-            />
-
-
+        <View
+            android:layout_width="100dp"
+            android:layout_height="3dp"
+            android:background="#005088"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="\n
-    Seja T: V→V um operador linear. Dizemos que T é um operador diagonalizável se existe uma base de V cujos elementos são autovetores de T.
-Os operadores dos Exemplos 1 e 2 são, portanto, diagonalizáveis. Vamos dar a seguir um exemplo de um operador não diagonalizável.
-Exemplo: Seja T: R3→R³ a transformação linear cuja matriz em relação à base canônica  é
+            android:justificationMode="inter_word"
+            android:text="Dizemos que um operador linear T é diagonalizável se existe uma base de V composta exclusivamente por autovetores de T. Nessa base, a matriz do operador assume uma forma diagonal." />
 
-"
-
-            />
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_35"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/exemplo45" />
 
-            /><TextView
-        android:id="@+id/text3.8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="\n
-   Como P() = (3 - )2 (-1 - ), os autovalores são λ₁ = 3 e 2 = - 1. Associado a λ₁ = 3 conseguimos apenas um autovetor LI, por exemplo, v  = (1, 0, 0). Associado a λ₂ = -1 temos o autovetor LI, u = (-1, -20, 16). Neste caso, temos apenas dois autovetores LI para T, e portanto não existe uma base de R³ constituída só de autovetores. Isto significa que em nenhuma base a matriz de T é uma matriz diagonal, ou seja, T não é diagonalizável.
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nCritério de Diagonalização"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Um operador de ordem n é diagonalizável se, e somente se, ele possui n autovetores linearmente independentes (LI)." />
 
-        />
+        <WebView
+            android:id="@+id/math_def_diag"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="@android:color/transparent" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exemplo: Operador Não Diagonalizável"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#C62828"
+            android:paddingTop="12dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Nem todo operador é diagonalizável. Considere a matriz abaixo:" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/unidade3_35" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:background="#FDEAEA"
+            android:padding="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Neste exemplo, o polinômio característico possui raízes repetidas, mas não gera autovetores LI suficientes para formar uma base do ℝ³. Logo, T não pode ser diagonalizado." />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>
