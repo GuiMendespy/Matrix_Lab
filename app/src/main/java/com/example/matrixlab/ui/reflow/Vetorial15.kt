@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.matrixlab.R
-import android.webkit.WebView // Importante adicionar este import
-
+import android.webkit.WebView
 
 class Vetorial15 : Fragment() {
 
@@ -16,9 +17,9 @@ class Vetorial15 : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Conecta o XML ao fragmento
         return inflater.inflate(R.layout.fragment_vetorial15, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -34,11 +35,9 @@ class Vetorial15 : Fragment() {
             webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
         }
 
-        // Definição analítica do produto vetorial
         loadLatex(view.findViewById(R.id.math_def_vetorial),
             "\\[ \\vec{u} \\times \\vec{v} = (y_1 z_2 - z_1 y_2, z_1 x_2 - x_1 z_2, x_1 y_2 - y_1 x_2) \\]")
 
-        // Determinante simbólico (Teorema de Laplace)
         loadLatex(view.findViewById(R.id.math_determinante_simbolico), """
         \[ \vec{u} \times \vec{v} = \begin{vmatrix} 
         \vec{i} & \vec{j} & \vec{k} \\ 
@@ -46,5 +45,12 @@ class Vetorial15 : Fragment() {
         x_2 & y_2 & z_2 
         \end{vmatrix} \]
     """.trimIndent())
+
+        // Botão que navega para o Simulador com o exemplo pré-carregado
+        view.findViewById<android.widget.Button>(R.id.btn_simulador_vetorial)
+            .setOnClickListener { btn ->
+                val args = bundleOf("comando" to btn.tag.toString())
+                findNavController().navigate(R.id.nav_Simulador, args)
+            }
     }
 }

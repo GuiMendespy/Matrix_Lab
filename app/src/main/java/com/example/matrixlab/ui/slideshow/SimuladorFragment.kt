@@ -29,6 +29,7 @@ import androidx.fragment.app.Fragment
 import com.example.matrixlab.render.SimpleGLSurfaceView
 import com.example.matrixlab.data.Vec3
 import kotlin.random.Random
+import androidx.compose.runtime.LaunchedEffect
 
 // Modelo de dados simples para segurar os resultados escalares na lista
 data class EscalarResult(
@@ -177,7 +178,14 @@ class SimulatorFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MaterialTheme {
+                    val comandoInicial = arguments?.getString("comando") ?: ""
                     var inputText by remember { mutableStateOf("") }
+
+                    LaunchedEffect(comandoInicial) {
+                        if (comandoInicial.isNotBlank()) {
+                            processarComandoTexto(comandoInicial)
+                        }
+                    }
 
                     Column(modifier = Modifier.fillMaxSize().background(Color(0xFFECEFF1))) {
 
