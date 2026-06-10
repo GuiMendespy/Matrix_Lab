@@ -32,7 +32,8 @@ async def chat_endpoint(request: ChatRequest):
                 }
             ]
         },
-        config=config
+        config=config,
+        timeout=120
     )
 
     return {

@@ -39,8 +39,8 @@ def build_question_rag():
             docs.extend(loaded_docs)
 
     splitter = RecursiveCharacterTextSplitter(
-        chunk_size=300,
-        chunk_overlap=50
+        chunk_size=1000,
+        chunk_overlap=150
     )
 
     chunks = splitter.split_documents(docs)
