@@ -6,6 +6,21 @@ import androidx.lifecycle.ViewModel
 
 class BancoQuestoesViewModel : ViewModel() {
 
+    // Mantém o histórico do chat e a sessão
+    private val _historicoHtml = MutableLiveData<String>("")
+    val historicoHtml: LiveData<String> = _historicoHtml
+
+    private var _sessionId: String? = null
+    val sessionId: String? get() = _sessionId
+
+    fun atualizarHistorico(novoHistorico: String) {
+        _historicoHtml.value = novoHistorico
+    }
+
+    fun salvarSessionId(id: String?) {
+        _sessionId = id
+    }
+
     // LiveData: A questão atual sendo exibida (pode ser uma String ou um objeto de dados)
     private val _questao = MutableLiveData<String>()
     val questao: LiveData<String> = _questao

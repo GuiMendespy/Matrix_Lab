@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.matrixlab.databinding.FragmentBancoquestoesBinding
 import kotlinx.coroutines.launch
@@ -21,7 +22,8 @@ import java.util.concurrent.TimeUnit
 
 class BancoQuestoesFragment : Fragment() {
 
-    private var sessionId: String? = null
+    private val viewModel: BancoQuestoesViewModel by viewModels()
+    private var historicoChat = StringBuilder()
 
     private var _binding: FragmentBancoquestoesBinding? = null
     private val binding get() = _binding!!
@@ -60,7 +62,17 @@ class BancoQuestoesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configurarWebView()
-        exibirHtml(htmlVazio())
+
+        // Observa o histórico persistente do ViewModel
+        viewModel.historicoHtml.observe(viewLifecycleOwner) { html ->
+            // Só atualiza se o conteúdo for realmente novo (evita loop infinito)
+            if (!html.isNullOrEmpty() && html != historicoChat.toString()) {
+                historicoChat = StringBuilder(html)
+                exibirHtml(wrapComKatex(html))
+            } else if (html.isNullOrEmpty() && historicoChat.isEmpty()) {
+                exibirHtml(htmlVazio())
+            }
+        }
 
         binding.QButton.setOnClickListener {
             gerarQuestaoComAgente()
@@ -86,11 +98,18 @@ class BancoQuestoesFragment : Fragment() {
         val pergunta = binding.QInput.text.toString().trim()
 
         if (pergunta.isEmpty()) {
-            exibirHtml("<p style='color:#999;'>Digite uma pergunta antes de gerar.</p>")
             return
         }
 
-        exibirHtml(htmlLoading())
+        // 1. Adiciona a pergunta do usuário ao histórico imediatamente
+        adicionarMensagemAoChat("Você", pergunta, isUsuario = true)
+        binding.QInput.text?.clear()
+        
+        // 2. Mostra o balão de "pensando" temporariamente
+        val loadingId = "loading_${System.currentTimeMillis()}"
+        historicoChat.append("<div id='$loadingId' class='balao agente'>⏳ O Agente está pensando...</div>")
+        atualizarWebView()
+        
         binding.QButton.isEnabled = false
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -98,23 +117,47 @@ class BancoQuestoesFragment : Fragment() {
                 val resposta = service.enviarPergunta(
                     ChatRequest(
                         message = pergunta,
-                        sessionId = sessionId
+                        sessionId = viewModel.sessionId
                     )
                 )
 
-                sessionId = resposta.sessionId
-                exibirHtml(wrapComKatex(resposta.response))
+                viewModel.salvarSessionId(resposta.sessionId)
+                
+                // Remove o loading e adiciona a resposta real
+                val loadingTag = "<div id='$loadingId' class='balao agente'>⏳ O Agente está pensando...</div>"
+                val index = historicoChat.indexOf(loadingTag)
+                if (index != -1) {
+                    historicoChat.delete(index, index + loadingTag.length)
+                }
+                
+                adicionarMensagemAoChat("Agente", resposta.response, isUsuario = false)
 
                 Log.d("MATRIXLAB", "Resposta recebida: ${resposta.response}")
-                Log.d("MATRIXLAB", "Session ID: $sessionId")
 
             } catch (e: Exception) {
-                exibirHtml(htmlErro(e.message ?: "Erro desconhecido"))
-                Log.e("MATRIXLAB", "Falha na conexão: ${e.message}")
+                adicionarMensagemAoChat("Erro", "Falha na conexão: ${e.message}", isUsuario = false)
             } finally {
                 binding.QButton.isEnabled = true
             }
         }
+    }
+
+    private fun adicionarMensagemAoChat(autor: String, conteudo: String, isUsuario: Boolean) {
+        val estiloClasse = if (isUsuario) "usuario" else "agente"
+        historicoChat.append("""
+            <div class="balao $estiloClasse">
+                <div class="autor">$autor</div>
+                <div class="conteudo">$conteudo</div>
+            </div>
+        """.trimIndent())
+        atualizarWebView()
+    }
+
+    private fun atualizarWebView() {
+        val htmlCompleto = wrapComKatex(historicoChat.toString())
+        exibirHtml(htmlCompleto)
+        // Salva no ViewModel para persistir entre trocas de tela
+        viewModel.atualizarHistorico(historicoChat.toString())
     }
 
     private fun wrapComKatex(conteudoHtml: String): String = """
@@ -123,59 +166,76 @@ class BancoQuestoesFragment : Fragment() {
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
           <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
           <style>
             body {
               font-family: sans-serif;
               font-size: 15px;
-              padding: 8px 4px;
+              padding: 10px;
               color: #1a1a1a;
-              background: transparent;
-              line-height: 1.8;
+              background: #f8f9fa;
+              line-height: 1.5;
+              display: flex;
+              flex-direction: column;
             }
-            .secao {
-              margin-bottom: 20px;
-              padding: 12px 14px;
-              background: #F5F3FF;
-              border-left: 3px solid #6200EE;
-              border-radius: 8px;
+            .balao {
+              margin-bottom: 12px;
+              padding: 10px 14px;
+              border-radius: 15px;
+              max-width: 85%;
+              word-wrap: break-word;
+              position: relative;
             }
-            .titulo {
+            .usuario {
+              align-self: flex-end;
+              background: #6200EE;
+              color: white;
+              border-bottom-right-radius: 2px;
+              margin-left: auto;
+            }
+            .agente {
+              align-self: flex-start;
+              background: white;
+              color: #1a1a1a;
+              border-bottom-left-radius: 2px;
+              border: 1px solid #e0e0e0;
+              box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            }
+            .autor {
+              font-size: 11px;
               font-weight: bold;
-              font-size: 14px;
-              color: #3700B3;
-              margin: 0 0 8px 0;
               text-transform: uppercase;
-              letter-spacing: 0.5px;
+              margin-bottom: 4px;
+              opacity: 0.8;
             }
-            .chip {
-              display: inline-block;
-              background: #EDE7F6;
-              color: #4527A0;
-              border-radius: 999px;
-              padding: 3px 12px;
-              font-size: 13px;
-              margin: 2px 4px 2px 0;
-            }
-            p { margin: 6px 0; }
-            .katex-display { overflow-x: auto; padding: 4px 0; }
+            .usuario .autor { color: #E0E0E0; }
+            .agente .autor { color: #6200EE; }
+            p { margin: 4px 0; }
+            .katex-display { overflow-x: auto; padding: 4px 0; margin: 0; }
           </style>
         </head>
         <body>
           $conteudoHtml
+          <div id="anchor"></div>
           <script>
-            document.addEventListener("DOMContentLoaded", function() {
+            function renderizar() {
               renderMathInElement(document.body, {
                 delimiters: [
                   {left: '$$', right: '$$', display: true},
-                  {left: '$',  right: '$',  display: false}
+                  {left: '$',  right: '$',  display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
                 ],
                 throwOnError: false
               });
-            });
+              // Rola para o final
+              document.getElementById('anchor').scrollIntoView();
+            }
+            document.addEventListener("DOMContentLoaded", renderizar);
+            // Caso o conteúdo mude dinamicamente
+            window.scrollTo(0, document.body.scrollHeight);
           </script>
         </body>
         </html>
