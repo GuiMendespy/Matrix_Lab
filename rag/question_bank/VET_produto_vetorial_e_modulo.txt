@@ -10,27 +10,23 @@ Considere os vetores tridimensionais:
     b = (2, 1, 0)
 
 Calcule:
-a) o produto vetorial a × b
+a) o produto vetorial a x b
 b) o módulo do vetor resultante
 
 ALTERNATIVAS:
-A) a × b = (-3, 6, -3)  e  |a × b| = 3√6
+A) a x b = (-3, 6, -3)  e  |a x b| = 3√6
 
-B) a × b = (-3, 6, -3)  e  |a × b| = √54
+B) a x b = (-3, 6, -3)  e  |a x b| = √54
 
-C) a × b = (3, -6, 3)   e  |a × b| = 3√6
+C) a x b = (3, -6, 3)   e  |a x b| = 3√6
 
-D) a × b = (-3, 6, -3)  e  |a × b| = 6√3
+D) a x b = (-3, 6, -3)  e  |a x b| = 6√3
 
 RESPOSTA_CORRETA: A
 RESOLUCAO:
-a × b = | i   j   k  |
-        | 1   2   3  |
-        | 2   1   0  |
+i: (2x0 - 3x1) = -3
+j: (3x2 - 1x0) =  6
+k: (1x1 - 2x2) = -3
 
-i: (2×0 - 3×1) = -3
-j: (3×2 - 1×0) =  6
-k: (1×1 - 2×2) = -3
-
-a × b = (-3, 6, -3)
-|a × b| = √(9 + 36 + 9) = √54 = 3√6
+a x b = (-3, 6, -3)
+|a x b| = √(9 + 36 + 9) = √54 = 3√6
