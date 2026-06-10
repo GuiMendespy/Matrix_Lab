@@ -1,5 +1,5 @@
 # Ambiente virtual
-venv/
+.venv/
 .env
 
 # Python cache
@@ -51,3 +51,6 @@ tmp/
 chroma/
 chroma_questions/
 chroma_theory/
+
+#banco de questões geradas
+Questoes_geradas
