@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|center_vertical"
-                    android:text="1.1 Definição de vetor e operações vetoriais básicas"
+                    android:text="1.1 Definição de vetor"
                     android:textColor="@color/black" />
 
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="start|center_vertical"
-                    android:text="1.2 Dependência e Independência linear"
+                    android:text="1.2 Operações vetoriais básicas"
                     android:textColor="@color/black" />
                 <View android:layout_width="match_parent" android:layout_height="1dp" android:background="#CCCCCC" />
 
