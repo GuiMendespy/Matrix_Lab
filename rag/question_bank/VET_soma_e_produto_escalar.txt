@@ -1,0 +1,28 @@
+ID: VET-002
+TOPICO: Vetores
+SUBTOPICO: Soma de Vetores e Produto Escalar
+DIFICULDADE: basico
+
+ENUNCIADO:
+Considere os vetores:
+
+    u = (2, 3)
+    v = (4, -1)
+
+Determine:
+a) a soma u + v
+b) o produto escalar u · v
+
+ALTERNATIVAS:
+A) u + v = (6, 2)  e  u · v = 5
+
+B) u + v = (6, 2)  e  u · v = 11
+
+C) u + v = (6, 4)  e  u · v = 5
+
+D) u + v = (2, 4)  e  u · v = 8
+
+RESPOSTA_CORRETA: A
+RESOLUCAO:
+u + v = (2+4, 3+(-1)) = (6, 2)
+u · v = (2×4) + (3×(-1)) = 8 - 3 = 5

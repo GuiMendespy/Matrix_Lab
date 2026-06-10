@@ -1,0 +1,36 @@
+ID: VET-001
+TOPICO: Vetores
+SUBTOPICO: Produto Vetorial e Módulo
+DIFICULDADE: basico
+
+ENUNCIADO:
+Considere os vetores tridimensionais:
+
+    a = (1, 2, 3)
+    b = (2, 1, 0)
+
+Calcule:
+a) o produto vetorial a × b
+b) o módulo do vetor resultante
+
+ALTERNATIVAS:
+A) a × b = (-3, 6, -3)  e  |a × b| = 3√6
+
+B) a × b = (-3, 6, -3)  e  |a × b| = √54
+
+C) a × b = (3, -6, 3)   e  |a × b| = 3√6
+
+D) a × b = (-3, 6, -3)  e  |a × b| = 6√3
+
+RESPOSTA_CORRETA: A
+RESOLUCAO:
+a × b = | i   j   k  |
+        | 1   2   3  |
+        | 2   1   0  |
+
+i: (2×0 - 3×1) = -3
+j: (3×2 - 1×0) =  6
+k: (1×1 - 2×2) = -3
+
+a × b = (-3, 6, -3)
+|a × b| = √(9 + 36 + 9) = √54 = 3√6

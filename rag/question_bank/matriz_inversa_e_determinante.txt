@@ -1,8 +1,0 @@
-Considere a matriz:
-A =
-[ 2 1 ]
-[ 5 3 ]
-
-Determine:
-a) o determinante da matriz A
-b) a matriz inversa de A, caso exista

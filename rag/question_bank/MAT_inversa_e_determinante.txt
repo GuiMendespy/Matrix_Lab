@@ -1,0 +1,31 @@
+ID: MAT-001
+TOPICO: Matrizes
+SUBTOPICO: Determinante e Matriz Inversa
+DIFICULDADE: basico
+
+ENUNCIADO:
+Considere a matriz:
+
+    A = [ 2  1 ]
+        [ 5  3 ]
+
+Determine:
+a) o determinante da matriz A
+b) a matriz inversa de A, caso exista
+
+ALTERNATIVAS:
+A) det(A) = 1  e  A⁻¹ = [  3  -1 ]
+                        [ -5   2 ]
+
+B) det(A) = 2  e  A⁻¹ não existe
+
+C) det(A) = 1  e  A⁻¹ não existe
+
+D) det(A) = 11  e  A⁻¹ = [  3  -1 ]
+                         [ -5   2 ]
+
+RESPOSTA_CORRETA: A
+RESOLUCAO:
+det(A) = (2×3) - (1×5) = 6 - 5 = 1
+A⁻¹ = (1/1) × [  3  -1 ] = [  3  -1 ]
+              [ -5   2 ]   [ -5   2 ]
