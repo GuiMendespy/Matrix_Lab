@@ -5,16 +5,17 @@
     android:id="@+id/activity_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-    <!-- DrawerLayout sem fitsSystemWindows para permitir que o conteúdo cubra toda a tela -->
+    <!-- DrawerLayout com fitsSystemWindows="true" para evitar que o conteúdo fique sob as barras do sistema -->
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="0dp"
         android:padding="0dp"
-        android:fitsSystemWindows="false">
+        android:fitsSystemWindows="true">
 
         <!-- Inclui o layout principal da barra e do conteúdo -->
         <include
@@ -22,7 +23,7 @@
             layout="@layout/app_bar_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fitsSystemWindows="false"
+            android:fitsSystemWindows="true"
             android:layout_margin="0dp"
             android:padding="0dp" />
 
