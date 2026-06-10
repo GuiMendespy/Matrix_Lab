@@ -1,11 +1,18 @@
 package com.example.matrixlab.ui.transform
 
+import com.google.gson.annotations.SerializedName
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-// Estas classes de dados (Data Classes) representam o JSON que vai e volta
-data class ChatRequest(val message: String)
-data class ChatResponse(val response: String)
+data class ChatRequest(
+    val message: String,
+    @SerializedName("session_id") val sessionId: String? = null
+)
+
+data class ChatResponse(
+    val response: String,
+    @SerializedName("session_id") val sessionId: String
+)
 
 interface LangChainService {
     @POST("chat")

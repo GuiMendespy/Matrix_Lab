@@ -21,6 +21,8 @@ import java.util.concurrent.TimeUnit
 
 class BancoQuestoesFragment : Fragment() {
 
+    private var sessionId: String? = null
+
     private var _binding: FragmentBancoquestoesBinding? = null
     private val binding get() = _binding!!
 
@@ -44,47 +46,43 @@ class BancoQuestoesFragment : Fragment() {
             .create(LangChainService::class.java)
     }
 
-    override fun onCreateView(//mostrar o layout
-        inflater: LayoutInflater,//infla o layout para que objetos imgens de tela se transformem em objetos
+    override fun onCreateView(
+        inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBancoquestoesBinding.inflate(inflater, container, false)
-        return binding.root //retornar para tela
+        return binding.root
     }
 
-    @SuppressLint("SetJavaScriptEnabled")//agente desativa os avisos c isso
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {//aqui fazemos a configuracao de tela e clique do botao
+    @SuppressLint("SetJavaScriptEnabled")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Configura a WebView para renderizar HTML + KaTeX
         configurarWebView()
-
-        // ajeita para deixar a tela mais amigavel
         exibirHtml(htmlVazio())
 
-        binding.QButton.setOnClickListener {//é o butão normal
+        binding.QButton.setOnClickListener {
             gerarQuestaoComAgente()
         }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun configurarWebView() {//configuração da pagina web view
-        binding.QWebView.apply { //o javascript vem por padroa desativado , entao eu tivei aqui
-            settings.javaScriptEnabled = true        // KaTeX precisa de JS
+    private fun configurarWebView() {
+        binding.QWebView.apply {
+            settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.loadWithOverviewMode = true
             settings.useWideViewPort = true
-            setBackgroundColor(Color.TRANSPARENT)    // fundo transparente
+            setBackgroundColor(Color.TRANSPARENT)
 
-            // Evita que links abram o navegador externo
             webViewClient = object : WebViewClient() {
                 override fun shouldOverrideUrlLoading(view: WebView?, url: String?) = true
             }
         }
     }
 
-    private fun gerarQuestaoComAgente() {//parte de trabalho com agentes
+    private fun gerarQuestaoComAgente() {
         val pergunta = binding.QInput.text.toString().trim()
 
         if (pergunta.isEmpty()) {
@@ -92,18 +90,23 @@ class BancoQuestoesFragment : Fragment() {
             return
         }
 
-        // Mostra loading enquanto o agente pensa
         exibirHtml(htmlLoading())
-        binding.QButton.isEnabled = false //deaticado o botao
+        binding.QButton.isEnabled = false
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val resposta = service.enviarPergunta(ChatRequest(pergunta))
+                val resposta = service.enviarPergunta(
+                    ChatRequest(
+                        message = pergunta,
+                        sessionId = sessionId
+                    )
+                )
 
-                // Agente retornou HTML com KaTeX — monta a página e renderiza
+                sessionId = resposta.sessionId
                 exibirHtml(wrapComKatex(resposta.response))
 
                 Log.d("MATRIXLAB", "Resposta recebida: ${resposta.response}")
+                Log.d("MATRIXLAB", "Session ID: $sessionId")
 
             } catch (e: Exception) {
                 exibirHtml(htmlErro(e.message ?: "Erro desconhecido"))
@@ -114,7 +117,6 @@ class BancoQuestoesFragment : Fragment() {
         }
     }
 
-    //aqui temos a montagem da pagina completa
     private fun wrapComKatex(conteudoHtml: String): String = """
         <!DOCTYPE html>
         <html>
@@ -179,14 +181,9 @@ class BancoQuestoesFragment : Fragment() {
         </html>
     """.trimIndent()
 
-    // ================================================================
-    // Funções auxiliares de estado da UI
-    // ================================================================
-
     private fun exibirHtml(html: String) {
-        // pega o html e coloca dentro de um web view, renderizar, atualizar tela
         binding.QWebView.loadDataWithBaseURL(
-            "https://cdn.jsdelivr.net",//baixar os recursos katex para formatção matematica
+            "https://cdn.jsdelivr.net",
             html,
             "text/html",
             "UTF-8",
