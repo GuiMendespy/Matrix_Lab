@@ -1,30 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".ui.reflow.Vetorial12">
+    tools:context=".ui.reflow.Vetorial13">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height= "match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/text16_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/title_vetorial"
+            android:text="Dependência e independência linear\nSistemas de coordenadas no espaço"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:paddingBottom="12dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Consideremos dois vetores não paralelos, representados com a origem no mesmo ponto O, sendo r1 e r2 retas contendo esses representantes, respectivamente:" />
+
         <WebView
             android:id="@+id/math_v1_v2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/exemplo11"
+            android:contentDescription="Figura 1.38" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Os vetores representados na figura são expressos em função da base por:" />
+
+        <WebView
+            android:id="@+id/math_list_equations"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="De modo geral, dados dois vetores quaisquer não paralelos, para cada vetor representado no mesmo plano, existe uma só dupla de números reais tal que:" />
+
+        <WebView
+            android:id="@+id/math_comb_linear"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Quando o vetor é expresso como acima, diz-se que ele é combinação linear. O conjunto B é chamado base no plano. Todo vetor desse plano é combinação linear dos vetores dessa base de modo único.\n\nNa prática, as bases mais utilizadas são as ortonormais. Uma delas determina o sistema cartesiano ortogonal xOy. Os vetores unitários são simbolizados por i e j, sendo a base C chamada canônica. Portanto:" />
+
+        <WebView
+            android:id="@+id/math_canonica"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@android:color/transparent" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/exemplo12"
+            android:contentDescription="Figura 1.40" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Dado um vetor qualquer do plano, existe uma só dupla de números x e y tal que:" />
+
+        <WebView
+            android:id="@+id/math_v_final"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@android:color/transparent" />
@@ -33,75 +110,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/content_figura_1"
-            android:src="@drawable/exemplo11" />
+            android:src="@drawable/exemplo13"
+            android:contentDescription="Figura 1.41" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/desc_vetores_base"
-            android:textSize="16sp"
-            android:justificationMode="inter_word" />
-
-        <WebView
-            android:id="@+id/math_list_equations"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:background="@android:color/transparent" />
-
-        <TextView
-            android:id="@+id/text17_body"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/desc_combinacao_geral"
-            android:textSize="16sp"
-            android:justificationMode="inter_word" />
-
-        <WebView
-            android:id="@+id/math_comb_linear"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@android:color/transparent" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/desc_teoria_base"
-            android:textSize="16sp"
-            android:justificationMode="inter_word" />
-
-        <WebView
-            android:id="@+id/math_canonica"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@android:color/transparent" />
-
-        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/content_figura_2"
-            android:src="@drawable/exemplo12" />
-
-        <WebView
-            android:id="@+id/math_final"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@android:color/transparent" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/content_figura_3"
-            android:src="@drawable/exemplo13" />
+            android:paddingBottom="40dp"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Os números x e y são as componentes de v na base canônica. A primeira é a abscissa e a segunda a ordenada. O par (x, y) é chamado expressão analítica." />
 
     </LinearLayout>
 </ScrollView>
