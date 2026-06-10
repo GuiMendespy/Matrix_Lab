@@ -1,43 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.reflow.Linear12">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subespaços Vetoriais"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#005088"
+            android:paddingBottom="8dp" />
 
-
-
-
+        <View
+            android:layout_width="100dp"
+            android:layout_height="3dp"
+            android:background="#005088"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
-            android:id="@+id/text3.8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="\nSubespaços vetoriais;
-Sejam V um espaço vetorial e S um subconjunto não-vazio de V. O subconjunto S é um subespaço vetorial de V se S é um espaço vetorial em relação à adição e à multiplicação por escalar definidas em V.
-Para mostrar que um subconjunto S é um subespaço vetorial de V, deveríamos testar os oito axiomas de espaço vetorial relativos à adição e à multiplicação por escalar. No entanto, como S é parte de V. que já se sabe ser um espaço vetorial, não há necessidade da verificação de certos axiomas em S.  Por exemplo, o axioma A2, diz que u + v = v + u, u, v V. Ora, se a comutatividade da adição é válida para todos os vetores de V, ela valerá, consequentemente, para todos os vetores de S. Existem outros axiomas de espaço vetorial merecedores de comentário idêntico. O teorema seguinte estabelece as condições para que um subconjunto S de um espaço vetorial V seja um subespaço vetorial de V.
-Um subconjunto S, não-vazio, de um espaço vetorial V é um subespaço vetorial de V se estiverem satisfeitas as condições:
-1) Para quaisquer u, v  S, tem-se:
-u+v  S
-I1) Para quaisquer   IR, u  S, tem-se:
- u  S
-Todo espaço vetorial V admite pelo menos dois subespaços: o conjunto {0}, chamado subespaço zero ou subespaço nulo, e o próprio espaço vetorial V. Esses dois são os subespaços triviais de V. Os demais subespaços são denominados subespaços próprios de V.
-\n
+            android:justificationMode="inter_word"
+            android:textColor="#333333"
+            android:text="Seja V um espaço vetorial. Um subconjunto S (não vazio) é um subespaço de V se ele próprio for um espaço vetorial sob as mesmas operações de V." />
 
-"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nTeorema Fundamental"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Para provar que S é subespaço, basta verificar o fechamento da adição e da multiplicação por escalar:" />
 
+        <WebView
+            android:id="@+id/math_teorema_subespaco"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:background="@android:color/transparent" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subespaços Triviais e Próprios"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:paddingTop="16dp" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:justificationMode="inter_word"
+            android:text="Todo espaço V admite dois subespaços triviais:\n1. O subespaço nulo {0}.\n2. O próprio espaço V.\nQualquer outro subespaço é chamado de Próprio." />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nExemplos Clássicos"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#005088" />
+
+        <WebView
+            android:id="@+id/math_exemplos_subespaco"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@android:color/transparent" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

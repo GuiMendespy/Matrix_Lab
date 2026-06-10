@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.matrixlab.R
 import android.webkit.WebView // Importante adicionar este import
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
+import kotlin.toString
 
 
 class Vetorial16 : Fragment() {
@@ -33,6 +36,12 @@ class Vetorial16 : Fragment() {
             webView.settings.javaScriptEnabled = true
             webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
         }
+
+        view.findViewById<android.widget.Button>(R.id.btn_simulador_misto)
+            .setOnClickListener { btn ->
+                val args = bundleOf("comando" to btn.tag.toString())
+                findNavController().navigate(R.id.nav_Simulador, args)
+            }
 
         // Definição do Produto Misto
         loadLatex(view.findViewById(R.id.math_def_misto),

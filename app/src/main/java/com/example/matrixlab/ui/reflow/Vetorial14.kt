@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView // Importante adicionar este import
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.matrixlab.R
+import androidx.navigation.fragment.findNavController
+import kotlin.toString
 
 class Vetorial14 : Fragment() {
 
@@ -32,6 +35,11 @@ class Vetorial14 : Fragment() {
             webView.settings.javaScriptEnabled = true
             webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
         }
+        view.findViewById<android.widget.Button>(R.id.btn_simulador_prodescalar)
+            .setOnClickListener { btn ->
+                val args = bundleOf("comando" to btn.tag.toString())
+                findNavController().navigate(R.id.nav_Simulador, args)
+            }
 
         // Módulo (Norma)
         loadLatex(view.findViewById(R.id.math_modulo), "\\[ |\\vec{v}| = \\sqrt{x^2 + y^2} \\]")

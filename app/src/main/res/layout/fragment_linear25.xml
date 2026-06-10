@@ -1,60 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scroll"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.reflow.Linear25">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="16dp">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Representação Matricial (Geral)"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#005088"
+            android:paddingBottom="8dp" />
 
-
-
-
-
+        <View
+            android:layout_width="100dp"
+            android:layout_height="3dp"
+            android:background="#005088"
+            android:layout_marginBottom="16dp"/>
 
         <TextView
-            android:id="@+id/text3.8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="\n
-            Sejam T: V→W uma transformação linear, A uma base de V e B uma base de W. Sem prejuízo da generalização, consideremos o caso em que dim V = 2 e dim W= 3.
-Sejam A = {v₁, v2} e B = {w1, w2, w3} bases de V e W, respectivamente.
-Um vetor v ∈ V pode ser expresso por:
-v = x1 v1 + x2 v2  ou vA = (x1, x2)
-e a imagem T(v) por:
-T(v) = y1 w2 + y2w2 + y3 w3                       (1)
-Por outro lado:
-T (v) = T (x₁ v1 + x2v2) = x1 T(v1) + x2T(v2)               (2)
-Sendo T(v₁) e T(v2) vetores de W, eles são combinações lineares dos vetores de В:
-T(V₁) = a11 W +a21 W2 + a31 W3
-T (v2) = a12 W1 + a22W2 + a32 W3
-Substituindo esses vetores em (2), vem:
-T (v) = x₁(a11 W1 +a21 W2 + a31 W3) + x2 (a12 W1 + a22W2 + a32 W3)
-Comparando essa igualdade com (1), conclui-se:
-У1 = a11 Х1 +a12X2
-У2 = а21 Х1 + a22X2
-Уз = аз1 X₁ + a32X2
+            android:justificationMode="inter_word"
+            android:text="Dada uma transformação T: V → W, podemos relacionar as coordenadas de um vetor v (na base A) com as coordenadas de sua imagem T(v) (na base B) através de um sistema linear." />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nDesenvolvimento Teórico"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
 
-"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Sejam as bases A = {v₁, v₂} e B = {w₁, w₂, w₃}. O mapeamento das coordenadas resulta no seguinte sistema:" />
 
-            />
+        <WebView
+            android:id="@+id/math_sistema_coordenadas"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@android:color/transparent" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="A Matriz da Transformação"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#005088"
+            android:paddingTop="12dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:justificationMode="inter_word"
+            android:text="Os coeficientes aᵢⱼ do sistema acima formam as colunas da matriz de T em relação às bases A e B:" />
+
+        <WebView
+            android:id="@+id/math_matriz_final"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@android:color/transparent" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/unidade3_20"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/unidade3_20" />
 
-
-            />
-
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
 
     </LinearLayout>
 </ScrollView>

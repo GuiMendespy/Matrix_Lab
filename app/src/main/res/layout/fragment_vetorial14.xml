@@ -60,6 +60,20 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="\nExemplo"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/exemplo_modulo" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="\nProduto Escalar"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -83,6 +97,65 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:src="@drawable/exemplo16" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nExemplo"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/exemplo_de_produto_escalar" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#EDE7F6">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Experimente no Simulador 3D"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#512DA8"
+                    android:paddingBottom="6dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="v₁ = (3.0, -5.0, 8.0)&#10;v₂ = (4.0, -2.0, -1)&#10;&#10;Produto escalar(v₁, v₂) = ?"
+                    android:textSize="14sp"
+                    android:textColor="#37474F"
+                    android:fontFamily="monospace"
+                    android:paddingBottom="12dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_simulador_prodescalar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="▶  Ver Produto Escalar"
+                    android:tag="(3.0, -5.0, 8.0); (4.0, -2.0, -1); prodescalar v1 v2"
+                    app:backgroundTint="#673AB7" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
 
         <TextView
             android:layout_width="match_parent"
@@ -118,6 +191,21 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:background="@android:color/transparent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nExemplo do cálculo do ângulo entre dois vetores"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/exemplo_angulovetores" />
+
 
         <View
             android:layout_width="match_parent"

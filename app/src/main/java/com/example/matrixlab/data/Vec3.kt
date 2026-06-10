@@ -1,27 +1,29 @@
 package com.example.matrixlab.data
 
-//define um vetor 3D imutável (3 dimensões sempre...)
-data class Vec3(val x: Float, val y: Float, val z: Float) {
-    //Operações basicas vetoriais
+import android.graphics.Color
+import java.util.UUID
 
-    //Soma vetorial
-    operator fun plus(other: Vec3) = Vec3(
-        this.x + other.x,
-        this.y + other.y,
-        this.z + other.z
-    )
-    //Subtração vetorial
+data class Vec3(
+    val x: Float,
+    val y: Float,
+    val z: Float,
+    val id: String = UUID.randomUUID().toString(),
+    val name: String = "v",
+    val color: FloatArray = floatArrayOf(0f, 0f, 0f, 1f), // RGBA padrão Preto
+    val isVisible: Boolean = true,
+    val isDotted: Boolean = false // Se true, renderiza como linha tracejada (ótimo para projeções)
+) {
+    // Operações básicas matemáticas mantidas
+    operator fun plus(other: Vec3) = Vec3(this.x + other.x, this.y + other.y, this.z + other.z)
     operator fun minus(o: Vec3) = Vec3(x - o.x, y - o.y, z - o.z)
-    //Multiplicação por escalar
     operator fun times(s: Float) = Vec3(x * s, y * s, z * s)
-    //Produto Escalar
-    infix fun dot(o: Vec3): Float =
-        x * o.x + y * o.y + z * o.z
-    //Produto vetorial
-    infix fun cross(o: Vec3): Vec3 =
-        Vec3(
-            y * o.z - z * o.y,
-            z * o.x - x * o.z,
-            x * o.y - y * o.x
-        )
+    infix fun dot(o: Vec3): Float = x * o.x + y * o.y + z * o.z
+    infix fun cross(o: Vec3): Vec3 = Vec3(
+        y * o.z - z * o.y,
+        z * o.x - x * o.z,
+        x * o.y - y * o.x
+    )
+
+    // Magnitude/Norma do vetor
+    fun length(): Float = kotlin.math.sqrt(x*x + y*y + z*z)
 }

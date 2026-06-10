@@ -103,5 +103,321 @@
             android:justificationMode="inter_word"
             android:hyphenationFrequency="full" />
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/figura1_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Casos particulares de vetores"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="a) Dois vetores ū e v⃗ são paralelos, indicados por ū // v⃗ , quando seus representantes possuem a mesma direção. Na figura 1.6, tem-se ū // v⃗  // w̄, em que ū e v⃗  têm o mesmo sentido, enquanto ū e v⃗  têm sentido contrário ao de w̄."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig6" />
+
+        <TextView
+            android:id="@+id/textB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="b) Dois vetores ū e v̄ são iguais, indicados por ū = v̄, quando possuem o mesmo módulo, direção e sentido."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <TextView
+            android:id="@+id/textC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="c) Qualquer ponto do espaço pode representar o vetor zero (ou vetor nulo), indicado por 0̄. Por não possuir direção nem sentido definidos, o vetor zero é considerado paralelo a qualquer vetor."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <TextView
+            android:id="@+id/textD"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="d) A cada vetor não nulo v̄ corresponde um vetor oposto −v̄, de mesmo módulo e mesma direção, porém com sentido contrário (Figura 1.7). Se v̄ = A⃗B⃗, então B⃗A⃗ é o oposto de A⃗B⃗, ou seja, B⃗A⃗ = −A⃗B⃗."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig7" />
+
+        <TextView
+            android:id="@+id/textE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="e) Um vetor ū é unitário se |ū| = 1. A cada vetor v̄, v̄ ≠ 0̄, é possível associar dois vetores unitários de mesma direção: ū e −ū (Figura 1.8). Nesta situação, se |v̄| = 3, então |ū| = |−ū| = 1. O vetor ū que possui o mesmo sentido de v̄ é chamado versor de v̄. Esse versor não é exclusivo de v̄, mas de todos os vetores paralelos e de mesmo sentido que sejam medidos com a mesma unidade."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig8" />
+
+        <TextView
+            android:id="@+id/textF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="f) Dois vetores ū e v̄ (Figura l .9(a)) são ortogonais, indicados por ū ⟂ v̄, quando algum representante de ū forma ângulo reto com algum representante de v̄. A Figura 1.9(b) apresenta dois representantes de ü e v, com origem no ponto A,
+formando ângulo reto. O vetor zero é considerado ortogonal a qualquer vetor."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig9" />
+
+        <TextView
+            android:id="@+id/textG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="g) Dois ou mais vetores são coplanares quando existe um plano no qual todos eles podem ser representados. Dois vetores quaisquer são sempre coplanares, pois basta considerar um ponto P no espaço e, com origem nele, traçar representantes de ū e v̄ pertencendo a um mesmo plano pi que passa por esse ponto (Figura 1.1 O)."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig10" />
+
+        <TextView
+            android:id="@+id/textPlano"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No caso de ū e v̄ não serem paralelos, como na figura, esses vetores determinam a direção do plano n, que é a mesma de todos os planos paralelos a ele. Três vetores podem ser coplanares (Figura 1.11(a)) ou não (Figura 1.11(b))."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig11" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Exemplo"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig12" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Operações basicas com vetores"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Adição de vetores"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textSomaVetoresIntro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consideremos os vetores u⃗ e v⃗, cuja soma u⃗ + v⃗ pretendemos encontrar. Tomemos um ponto A qualquer (Figura 1.14) e, a partir dele, traçamos um segmento orientado AB que representa o vetor u⃗."
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig14" />
+
+        <TextView
+            android:id="@+id/textSomaVetoresRegra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"
+            android:text="Utilizaremos a extremidade B para traçar o segmento orientado BC⃗ representante de v⃗. O vetor representado pelo segmento orientado de origem A e extremidade C é, por definição, o vetor soma de u⃗ e v⃗, ou seja, u⃗ + v⃗ = AC⃗ ou AB⃗ + BC⃗ = AC⃗. Sendo u⃗ // v⃗, a maneira de obter o vetor u⃗ + v⃗ é a mesma e está ilustrada na Figura 1.15 (a) (u⃗ e v⃗ de mesmo sentido) e na Figura 1.15 (b) (u⃗ e v⃗ de sentidos contrários)." />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig15" />
+
+        <TextView
+            android:id="@+id/textMetodoParalelogramo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"
+            android:text="Quando os vetores u⃗ e v⃗ não são paralelos, existe outro método para determinar o vetor soma u⃗ + v⃗. Representam-se u⃗ = AB⃗ e v⃗ = AD⃗ por segmentos orientados com origem comum em A. Constrói-se o paralelogramo ABCD (Figura 1.16), e o segmento orientado partindo de A, correspondente à diagonal do paralelogramo, representa o vetor u⃗ + v⃗, ou seja, u⃗ + v⃗ = AC⃗ ou AB⃗ + BC⃗ = AC⃗." />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig16" />
+
+        <TextView
+            android:id="@+id/textSomaVariosVetores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"
+            android:text="Para calcular a soma de três ou mais vetores, o procedimento é semelhante (Figura 1.17 (a)). Especialmente, se a extremidade do representante do último vetor coincidir com a origem do representante do primeiro (Figura 1.17 (b)), o resultado será o vetor nulo (u⃗ + v⃗ + w⃗ + t⃗ = 0⃗)." />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig17" />
+
+        <TextView
+            android:id="@+id/textPropriedadesESubtracaoVetores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"
+            android:text="Sendo u⃗, v⃗ e w⃗ vetores quaisquer, a adição admite as seguintes propriedades:\n\ni) Comutativa: u⃗ + v⃗ = v⃗ + u⃗\n
+ii) Associativa: (u⃗ + v⃗) + w⃗ = u⃗ + (v⃗ + w⃗)\niii) Elemento neutro: u⃗ + 0⃗ = u⃗\niv) Elemento oposto: u⃗ + (– u⃗) = 0⃗\n\nO vetor u⃗ + (– v⃗),
+escreve-se u⃗ - v⃗, é denominado diferença entre u⃗ e v⃗. Note que no paralelogramo determinado pelos vetores u⃗ e v⃗ (Figura 1.18),
+verifica-se que a soma u⃗ + v⃗ é representada por uma das diagonais, enquanto a diferença u⃗ - v⃗, pela outra diagonal." />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig18" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Exemplo"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/exemplo_exercico12" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:text="Multiplicação de número real por vetor "
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/textProdutoEscalarVetor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:hyphenationFrequency="full"
+            android:text="Dado um vetor v⃗ ≠ 0⃗ e um número real α ≠ 0, chama-se produto do número real α pelo vetor v⃗, o vetor αv⃗ tal que:\n
+        a) módulo: |αv⃗| = |α| |v⃗|, ou seja, o comprimento αv⃗ é igual ao comprimento de v⃗ multiplicado por |α|;\n
+        b) direção: αv⃗ é paralelo a v⃗;\n
+        c) sentido: αv⃗ e v⃗ têm o mesmo sentido se α &gt; 0 e contrário se α &lt; 0. Se α = 0 ou v⃗ = 0⃗, então αv⃗ = 0⃗.
+        A Figura 1.20 apresenta o vetor v⃗ e alguns de seus múltiplos." />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig20" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/fig_exemplo20" />
+
     </LinearLayout>
 </ScrollView>

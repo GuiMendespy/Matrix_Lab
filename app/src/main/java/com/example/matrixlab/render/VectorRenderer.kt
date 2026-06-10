@@ -29,7 +29,7 @@ class VectorRenderer : GLSurfaceView.Renderer {
     private var mvpHandle = -1
 
     // --- state (public API modifies these) ---
-    @Volatile private var vectors: List<Vec3> = listOf(Vec3(1f,1f,0f)) // now supports multiple vectors
+    @Volatile private var vectors: List<Vec3> = emptyList()
     private var angleX = 0f   // azimuth (degrees)
     private var angleY = 20f  // elevation (degrees)
     private var zoomScale = 1.0f
@@ -253,19 +253,39 @@ class VectorRenderer : GLSurfaceView.Renderer {
                 val scrY = projectWorldToScreen(worldY)
                 if (scrY.isOnScreen(viewWidth, viewHeight)) {
                     val value = i * (physSpacing / zoomScale)
-                    out.add(OverlayView.TickLabel(scrY.toNxNy(viewWidth, viewHeight), niceValueString(value)))
+                    out.add(
+                        OverlayView.TickLabel(
+                            scrY.toNxNy(viewWidth, viewHeight),
+                            niceValueString(value)
+                        )
+                    )
                 }
 
                 val worldZ = Vec3(0f, -physSpacing * 0.45f, pos)
                 val scrZ = projectWorldToScreen(worldZ)
                 if (scrZ.isOnScreen(viewWidth, viewHeight)) {
                     val value = i * (physSpacing / zoomScale)
-                    out.add(OverlayView.TickLabel(scrZ.toNxNy(viewWidth, viewHeight), niceValueString(value)))
+                    out.add(
+                        OverlayView.TickLabel(
+                            scrZ.toNxNy(viewWidth, viewHeight),
+                            niceValueString(value)
+                        )
+                    )
                 }
             }
-        } catch (ex: Throwable) {
-            Log.e(TAG, "computeTickLabels exception", ex)
+            val currentVectors = vectors.toList()
+            for (v in currentVectors) {
+                if (!v.isVisible) continue
+                // Projeta a ponta do vetor para coordenadas da tela
+                val scrPos = projectWorldToScreen(Vec3(v.x, v.y, v.z))
+                if (scrPos.isOnScreen(viewWidth, viewHeight)) {
+                    out.add(OverlayView.TickLabel(scrPos.toNxNy(viewWidth, viewHeight), v.name))
+                }
+            }
+            }catch (e: Exception) {
+            Log.e("VectorRenderer", "Error computing vector names labels", e)
         }
+
         return out
     }
 
@@ -306,17 +326,29 @@ class VectorRenderer : GLSurfaceView.Renderer {
     private fun drawVectors(camX: Float, camY: Float, camZ: Float) {
         try {
             val current = vectors.toList()
-            val total = current.size
-            if (total == 0) return
+            if (current.isEmpty()) return
 
-            for ((i, v) in current.withIndex()) {
-                val color = colorForIndex(i, total)
-                drawLine(Vec3(0f, 0f, 0f), v, color)
-                val camDist = sqrt(camX*camX + camY*camY + camZ*camZ)
-                drawArrowHead(v, Vec3(0f,0f,0f), 0.2f * (camDist / BASE_RADIUS), color)
+            val camDist = sqrt(camX * camX + camY * camY + camZ * camZ)
+            val arrowSize = 0.2f * (camDist / BASE_RADIUS)
+
+            for (v in current) {
+                // SE O VETOR ESTIVER OCULTO NO GEOGEBRA, NÃO RENDERIZA
+                if (!v.isVisible) continue
+
+                // 1. Desenha o corpo do vetor (Seta)
+                if (v.isDotted) {
+                    // Se for uma projeção auxiliar, desenha uma linha fina e de outra estrutura se preferir
+                    drawLine(Vec3(0f, 0f, 0f), Vec3(v.x, v.y, v.z), v.color)
+                } else {
+                    drawLine(Vec3(0f, 0f, 0f), Vec3(v.x, v.y, v.z), v.color)
+                    // Desenha a cabeça da seta apenas se o vetor tiver tamanho significante
+                    if (v.length() > 0.01f) {
+                        drawArrowHead(Vec3(v.x, v.y, v.z), Vec3(0f, 0f, 0f), arrowSize, v.color)
+                    }
+                }
             }
         } catch (ex: Throwable) {
-            Log.e(TAG, "drawVectors exception", ex)
+            Log.e("VectorRenderer", "drawVectors exception", ex)
         }
     }
 
