@@ -39,4 +39,4 @@ if __name__ == "__main__":
     # testar_agente("O que é uma matriz identidade?")
     
     # Para GERAR uma questão e SALVAR no banco:
-    testar_gerador("Matriz inversa")
+    testar_gerador("Gere uma questao de produto misto")
