@@ -54,3 +54,5 @@ chroma_theory/
 
 #banco de questões geradas
 Questoes_geradas
+# Session
+session.json
