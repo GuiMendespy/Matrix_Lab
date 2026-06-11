@@ -28,6 +28,13 @@ class BancoQuestoesFragment : Fragment() {
     private var _binding: FragmentBancoquestoesBinding? = null
     private val binding get() = _binding!!
 
+    // Palavras que indicam intenção de GERAR questão
+    private val palavrasGerador = listOf(
+        "gerar", "gere", "criar", "crie", "nova questão", "nova questao",
+        "adicionar questão", "adicionar questao", "fazer questão", "fazer questao",
+        "montar questão", "montar questao", "produzir", "elaborar"
+    )
+
     private val service: LangChainService by lazy {
         val logging = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
@@ -35,9 +42,9 @@ class BancoQuestoesFragment : Fragment() {
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(logging)
-            .connectTimeout(60, TimeUnit.SECONDS)
-            .readTimeout(60, TimeUnit.SECONDS)
-            .writeTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(120, TimeUnit.SECONDS)
+            .readTimeout(120, TimeUnit.SECONDS)
+            .writeTimeout(120, TimeUnit.SECONDS)
             .build()
 
         Retrofit.Builder()
@@ -63,9 +70,7 @@ class BancoQuestoesFragment : Fragment() {
 
         configurarWebView()
 
-        // Observa o histórico persistente do ViewModel
         viewModel.historicoHtml.observe(viewLifecycleOwner) { html ->
-            // Só atualiza se o conteúdo for realmente novo (evita loop infinito)
             if (!html.isNullOrEmpty() && html != historicoChat.toString()) {
                 historicoChat = StringBuilder(html)
                 exibirHtml(wrapComKatex(html))
@@ -74,42 +79,34 @@ class BancoQuestoesFragment : Fragment() {
             }
         }
 
+        // Um único botão — decide internamente qual agente chamar
         binding.QButton.setOnClickListener {
-            gerarQuestaoComAgente()
+            despacharParaAgente()
         }
     }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun configurarWebView() {
-        binding.QWebView.apply {
-            settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-            settings.loadWithOverviewMode = true
-            settings.useWideViewPort = true
-            setBackgroundColor(Color.TRANSPARENT)
+    // ── ROTEADOR: decide qual agente usar ─────────────────────────────────
+    private fun despacharParaAgente() {
+        val texto = binding.QInput.text.toString().trim()
+        if (texto.isEmpty()) return
 
-            webViewClient = object : WebViewClient() {
-                override fun shouldOverrideUrlLoading(view: WebView?, url: String?) = true
-            }
+        val ehGerador = palavrasGerador.any { texto.lowercase().contains(it) }
+
+        if (ehGerador) {
+            gerarNovaQuestao(texto)
+        } else {
+            consultarAgente(texto)
         }
     }
 
-    private fun gerarQuestaoComAgente() {
-        val pergunta = binding.QInput.text.toString().trim()
-
-        if (pergunta.isEmpty()) {
-            return
-        }
-
-        // 1. Adiciona a pergunta do usuário ao histórico imediatamente
+    // ── AGENTE 1: Consulta (/chat) ────────────────────────────────────────
+    private fun consultarAgente(pergunta: String) {
         adicionarMensagemAoChat("Você", pergunta, isUsuario = true)
         binding.QInput.text?.clear()
-        
-        // 2. Mostra o balão de "pensando" temporariamente
+
         val loadingId = "loading_${System.currentTimeMillis()}"
         historicoChat.append("<div id='$loadingId' class='balao agente'>⏳ O Agente está pensando...</div>")
         atualizarWebView()
-        
         binding.QButton.isEnabled = false
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -122,23 +119,72 @@ class BancoQuestoesFragment : Fragment() {
                 )
 
                 viewModel.salvarSessionId(resposta.sessionId)
-                
-                // Remove o loading e adiciona a resposta real
-                val loadingTag = "<div id='$loadingId' class='balao agente'>⏳ O Agente está pensando...</div>"
-                val index = historicoChat.indexOf(loadingTag)
-                if (index != -1) {
-                    historicoChat.delete(index, index + loadingTag.length)
-                }
-                
+                removerLoading(loadingId)
                 adicionarMensagemAoChat("Agente", resposta.response, isUsuario = false)
-
-                Log.d("MATRIXLAB", "Resposta recebida: ${resposta.response}")
+                Log.d("MATRIXLAB", "[CONSULTA] ${resposta.response}")
 
             } catch (e: Exception) {
+                removerLoading(loadingId)
                 adicionarMensagemAoChat("Erro", "Falha na conexão: ${e.message}", isUsuario = false)
+                Log.e("MATRIXLAB", "[CONSULTA] Erro: ${e.message}")
             } finally {
                 binding.QButton.isEnabled = true
             }
+        }
+    }
+
+    // ── AGENTE 2: Gerador (/generate) ─────────────────────────────────────
+    private fun gerarNovaQuestao(instrucao: String) {
+        adicionarMensagemAoChat("Você", instrucao, isUsuario = true)
+        binding.QInput.text?.clear()
+
+        val loadingId = "loading_${System.currentTimeMillis()}"
+        historicoChat.append("<div id='$loadingId' class='balao agente'>⏳ Gerando nova questão, aguarde...</div>")
+        atualizarWebView()
+        binding.QButton.isEnabled = false
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val resposta = service.gerarNovaQuestao(
+                    GenerateRequest(
+                        message = instrucao,
+                        threadId = "generator-${System.currentTimeMillis()}"
+                    )
+                )
+
+                removerLoading(loadingId)
+
+                val conteudoComBadge = """
+                    <div style="margin-bottom:6px;">
+                      <span style="background:#E8F5E9;color:#2E7D32;border:1px solid #A5D6A7;
+                                   border-radius:999px;padding:2px 10px;font-size:12px;">
+                        ✅ Nova questão salva no banco
+                      </span>
+                    </div>
+                    ${resposta.response}
+                """.trimIndent()
+
+                adicionarMensagemAoChat("Agente Gerador", conteudoComBadge, isUsuario = false)
+                Log.d("MATRIXLAB", "[GERADOR] ${resposta.response}")
+
+            } catch (e: Exception) {
+                removerLoading(loadingId)
+                adicionarMensagemAoChat("Erro", "Falha ao gerar: ${e.message}", isUsuario = false)
+                Log.e("MATRIXLAB", "[GERADOR] Erro: ${e.message}")
+            } finally {
+                binding.QButton.isEnabled = true
+            }
+        }
+    }
+
+    // ── HELPERS ───────────────────────────────────────────────────────────
+
+    private fun removerLoading(loadingId: String) {
+        val tag = "<div id='$loadingId' class='balao agente'>⏳ O Agente está pensando...</div>"
+        val tagGerador = "<div id='$loadingId' class='balao agente'>⏳ Gerando nova questão, aguarde...</div>"
+        listOf(tag, tagGerador).forEach { t ->
+            val i = historicoChat.indexOf(t)
+            if (i != -1) historicoChat.delete(i, i + t.length)
         }
     }
 
@@ -156,8 +202,21 @@ class BancoQuestoesFragment : Fragment() {
     private fun atualizarWebView() {
         val htmlCompleto = wrapComKatex(historicoChat.toString())
         exibirHtml(htmlCompleto)
-        // Salva no ViewModel para persistir entre trocas de tela
         viewModel.atualizarHistorico(historicoChat.toString())
+    }
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun configurarWebView() {
+        binding.QWebView.apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.loadWithOverviewMode = true
+            settings.useWideViewPort = true
+            setBackgroundColor(Color.TRANSPARENT)
+            webViewClient = object : WebViewClient() {
+                override fun shouldOverrideUrlLoading(view: WebView?, url: String?) = true
+            }
+        }
     }
 
     private fun wrapComKatex(conteudoHtml: String): String = """
@@ -186,7 +245,6 @@ class BancoQuestoesFragment : Fragment() {
               border-radius: 15px;
               max-width: 85%;
               word-wrap: break-word;
-              position: relative;
             }
             .usuario {
               align-self: flex-end;
@@ -230,11 +288,9 @@ class BancoQuestoesFragment : Fragment() {
                 ],
                 throwOnError: false
               });
-              // Rola para o final
               document.getElementById('anchor').scrollIntoView();
             }
             document.addEventListener("DOMContentLoaded", renderizar);
-            // Caso o conteúdo mude dinamicamente
             window.scrollTo(0, document.body.scrollHeight);
           </script>
         </body>
@@ -251,24 +307,11 @@ class BancoQuestoesFragment : Fragment() {
         )
     }
 
-    private fun htmlLoading() = wrapComKatex("""
-        <div style="text-align:center; padding: 40px 0; color: #6200EE;">
-          <p style="font-size:16px;">⏳ O Agente está pensando...</p>
-        </div>
-    """)
-
     private fun htmlVazio() = wrapComKatex("""
         <div style="text-align:center; padding: 40px 16px; color: #999;">
-          <p style="font-size:15px;">Digite uma pergunta e toque em <b>Gerar</b></p>
-          <p style="font-size:13px;">Exemplo: <i>"Calcule os autovalores da matriz do PDF"</i></p>
-        </div>
-    """)
-
-    private fun htmlErro(msg: String) = wrapComKatex("""
-        <div style="padding:12px; background:#FFEBEE; border-left:3px solid #B00020; border-radius:8px;">
-          <p style="color:#B00020; font-weight:bold; margin:0 0 4px;">Erro de conexão</p>
-          <p style="color:#600; font-size:13px; margin:0;">$msg</p>
-          <p style="color:#900; font-size:12px; margin:8px 0 0;">Verifique se o servidor Python está rodando.</p>
+          <p style="font-size:15px;">Digite uma pergunta e toque em <b>Enviar</b></p>
+          <p style="font-size:13px;">Para consultar: <i>"Explique produto vetorial"</i></p>
+          <p style="font-size:13px;">Para gerar questão: <i>"Gere uma questão de determinante"</i></p>
         </div>
     """)
 
