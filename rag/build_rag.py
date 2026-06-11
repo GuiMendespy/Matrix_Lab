@@ -41,7 +41,7 @@ def build_question_rag():
             persist_directory="./chroma/chroma_questions"
         )
     else:
-        splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
+        splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
         chunks = splitter.split_documents(docs)
 
         question_vectorstore = Chroma.from_documents(
@@ -78,7 +78,7 @@ def add_new_question_to_rag(file_name: str, content: str):
     )
 
     # 2. Divide em chunks igualzinho ao build inicial
-    splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
+    splitter = RecursiveCharacterTextSplitter(chunk_size=1500, chunk_overlap=150)
     chunks = splitter.split_documents([new_doc])
 
     # 3. Adiciona diretamente ao Chroma existente
