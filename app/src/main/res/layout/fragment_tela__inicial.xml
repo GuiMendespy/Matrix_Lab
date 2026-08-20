@@ -65,7 +65,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="12dp"
             android:backgroundTint="#AEE1F6"
-            android:text="ℹ️ Info"
+            android:text="Info"
             android:textColor="@android:color/white" />
 
         <Button
@@ -75,7 +75,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="40dp"
             android:backgroundTint="#AEE1F6"
-            android:text="📘 Tutorial"
+            android:text="Tutorial"
             android:textColor="@android:color/white" />
 
         <ImageView
