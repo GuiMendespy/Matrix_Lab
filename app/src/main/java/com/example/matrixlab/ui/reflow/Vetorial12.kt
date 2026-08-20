@@ -74,7 +74,7 @@ class Vetorial12 : Fragment() {
         carregarFormula(wvCan, "\\[ \\vec{i} = (1, 0) \\quad \\text{e} \\quad \\vec{j} = (0, 1) \\]")
 
         // 5. Bloco Final
-        val wvFinal = view.findViewById<WebView>(R.id.math_final)
+        val wvFinal = view.findViewById<WebView>(R.id.math_v_final)
         carregarFormula(wvFinal, "Dado um vetor \\(\\vec{v}\\) qualquer: \\[ \\vec{v} = x\\vec{i} + y\\vec{j} \\]")
     }
 }
