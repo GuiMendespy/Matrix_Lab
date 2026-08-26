@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 import uuid
 
-from core.agent import agent
+from core.agent import run_agent
 
 router = APIRouter()
 
@@ -14,29 +14,11 @@ class ChatRequest(BaseModel):
 
 @router.post("/chat")
 async def chat_endpoint(request: ChatRequest):
-
     session_id = request.session_id or str(uuid.uuid4())
 
-    config = {
-        "configurable": {
-            "thread_id": session_id
-        }
-    }
-
-    response = agent.invoke(
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": request.message
-                }
-            ]
-        },
-        config=config,
-        timeout=120
-    )
+    resposta = run_agent(request.message, session_id)
 
     return {
         "session_id": session_id,
-        "response": response["messages"][-1].content
+        "response": resposta
     }

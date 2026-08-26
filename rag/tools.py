@@ -3,7 +3,7 @@ import re
 from datetime import datetime
 from langchain.tools import tool
 import rag.build_rag as build_rag
-from config.settings import QUESTION_BANK_PATH # Usando o seu caminho centralizado
+from config.settings import QUESTION_BANK_PATH
 
 
 # Garante que o caminho use a variável centralizada do sistema
@@ -15,18 +15,17 @@ def search_exercises(query: str) -> str:
     """
     Busca exercícios, listas, problemas e questões
     de álgebra linear e vetorial.
-
-    Use esta ferramenta SEMPRE que o usuário:
-    - pedir uma questão
-    - pedir exercícios
-    - pedir listas
-    - pedir problemas
-    - pedir exemplos práticos
     """
 
     if build_rag.question_retriever is None:
         return "RAG de questões não inicializado."
 
+    # busca por palavra-chave direta no conteúdo
+    resultado_keyword = build_rag.buscar_por_palavra_chave(query)
+    if resultado_keyword:
+        return resultado_keyword
+
+    # fallback para busca por embedding (similaridade)
     docs = build_rag.question_retriever.invoke(query)
 
     if not docs:
