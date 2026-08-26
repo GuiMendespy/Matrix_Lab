@@ -1,14 +1,11 @@
-from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 from langchain_huggingface import HuggingFaceEmbeddings
 
-from config.settings import OPENROUTER_API_KEY
-
-llm = ChatOpenAI(
-    model="openai/gpt-oss-120b:free",
-    base_url="https://openrouter.ai/api/v1",
-    api_key=OPENROUTER_API_KEY,
+llm = ChatOllama(
+    model="qwen2.5:1.5b",
     temperature=0,
-    request_timeout=60
+    base_url="http://localhost:11434",
+    num_predict=300
 )
 
 embeddings = HuggingFaceEmbeddings(
