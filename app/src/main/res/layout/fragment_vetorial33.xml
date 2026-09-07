@@ -1,121 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".ui.reflow.Vetorial33">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="A Hipérbole"
-            android:textSize="24sp"
+            android:text="Cônicas: Hipérbole"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#005088"
-            android:paddingBottom="8dp" />
+            android:textColor="@android:color/black" />
 
-        <View
-            android:layout_width="100dp"
-            android:layout_height="3dp"
-            android:background="#005088"
-            android:layout_marginBottom="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nDefinição e Assíntotas"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:justificationMode="inter_word"
-            android:textColor="#333333"
-            android:text="Hipérbole é o lugar geométrico dos pontos de um plano cuja diferença das distâncias, em valor absoluto, a dois pontos fixos chamados focos (F1 e F2) é constante e igual a 2a." />
-
-        <WebView
-            android:id="@+id/math_hiperbole_def"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@android:color/transparent" />
+            android:text="A hipérbole é o lugar geométrico dos pontos do plano cuja diferença das distâncias a dois pontos fixos (focos) em valor absoluto é constante e igual a 2a." />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1. Eixo Real sobre o eixo Ox"
+            android:text="\nVisualização Geométrica"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:paddingTop="16dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="Os focos estão em F1(-c, 0) e F2(c, 0). A equação reduzida é:" />
+            android:textColor="#1A73E8" />
 
         <WebView
-            android:id="@+id/math_hiperbole_ox"
+            android:id="@+id/math_hiperbole_visualizacao"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@android:color/transparent" />
+            android:layout_height="260dp" />
 
-        <ImageView
+        <WebView
+            android:id="@+id/math_eq_hiperbole"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/hiperbole_ox"
-            android:contentDescription="Gráfico da Hipérbole Horizontal" />
+            android:layout_height="320dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2. Eixo Real sobre o eixo Oy"
+            android:text="\nRelação Pitagórica"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <WebView
+            android:id="@+id/math_rel_hiperbole"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nExercícios Resolvidos"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:paddingTop="16dp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:text="Os focos estão em F1(0, -c) e F2(0, c). A equação reduzida é:" />
+            android:textColor="#1A73E8" />
 
         <WebView
-            android:id="@+id/math_hiperbole_oy"
+            android:id="@+id/math_ex_resolvidos_33"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:background="@android:color/transparent" />
+            android:layout_height="420dp" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/hiperbole_oy"
-            android:contentDescription="Gráfico da Hipérbole Vertical" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Relação Pitagórica e Excentricidade"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:paddingTop="20dp" />
-
-        <WebView
-            android:id="@+id/math_hiperbole_props"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@android:color/transparent" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="80dp" />
-
+        <View android:layout_width="match_parent" android:layout_height="80dp" />
     </LinearLayout>
 </ScrollView>

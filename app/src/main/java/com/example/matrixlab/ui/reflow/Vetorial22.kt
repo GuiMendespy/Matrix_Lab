@@ -45,5 +45,15 @@ class Vetorial22 : Fragment() {
             <br>
             \[ \begin{cases} x = x_0 + a_1 h + a_2 t \\ y = y_0 + b_1 h + b_2 t \\ z = z_0 + c_1 h + c_2 t \end{cases} \]
         """.trimIndent())
+
+        // Exemplo Prático
+        loadLatex(view.findViewById(R.id.math_exemplo_plano), """
+            <div style="text-align:left; padding:10px;">
+            <b>Plano que passa por \(A(2, -1, 3)\) com vetor normal \(\vec{n} = (3, 2, -4)\):</b><br><br>
+            Equação Geral:<br>
+            \[ 3(x - 2) + 2(y + 1) - 4(z - 3) = 0 \]
+            \[ 3x + 2y - 4z + 8 = 0 \]
+            </div>
+        """.trimIndent())
     }
 }

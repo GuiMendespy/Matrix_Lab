@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".ui.reflow.Vetorial35">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -17,90 +14,163 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Superfícies Quádricas"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="#005088"
-            android:paddingBottom="8dp" />
+            android:textColor="@android:color/black" />
 
-        <View
-            android:layout_width="100dp"
-            android:layout_height="3dp"
-            android:background="#005088"
-            android:layout_marginBottom="16dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nDefinição Geral"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:justificationMode="inter_word"
-            android:text="Uma superfície quádrica é o lugar geométrico dos pontos P(x, y, z) cujas coordenadas satisfazem a equação geral do 2° grau em três variáveis:" />
+            android:text="Uma superfície quádrica é o lugar geométrico dos pontos (x, y, z) do espaço que satisfazem uma equação do segundo grau a três variáveis. Elas são a extensão tridimensional das cônicas." />
 
         <WebView
-            android:id="@+id/math_quadrica_geral"
+            android:id="@+id/math_eq_quadrica"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@android:color/transparent" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/unidade3_12" />
+            android:layout_height="220dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:justificationMode="inter_word"
-            android:paddingTop="12dp"
-            android:text="A interseção de uma superfície com um plano é chamada de traço. Se seccionarmos uma quádrica por planos paralelos aos planos coordenados, a curva resultante será sempre uma cônica." />
+            android:text="\nClassificação e Estudo das Quádricas"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#1A73E8" />
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/unidade3_13" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:justificationMode="inter_word"
-            android:paddingTop="12dp"
-            android:text="Existem casos onde a equação pode representar pontos, retas ou o conjunto vazio, conhecidos como quádricas degeneradas. Focaremos nas formas canônicas centradas:" />
-
+        <!-- 1. Elipsoide -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="\n1. Elipsoide"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
-
-        <WebView
-            android:id="@+id/math_elipsoide"
-            android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="@android:color/transparent" />
-
+            android:textStyle="bold" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\n2. Hiperboloides (Uma e Duas Folhas)"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black" />
-
+            android:text="É uma superfície onde todas as seções planas são elipses (ou circunferências). Se a=b=c, temos uma esfera."
+            android:textSize="15sp" />
         <WebView
-            android:id="@+id/math_hiperboloides"
+            android:id="@+id/img_elipsoide"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:background="@android:color/transparent" />
-
-        <View
+            android:layout_height="220dp" />
+        <WebView
+            android:id="@+id/math_elipsoide"
             android:layout_width="match_parent"
-            android:layout_height="80dp" />
+            android:layout_height="350dp" />
 
+        <!-- 2. Hiperboloide de 1 Folha -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n2. Hiperboloide de uma Folha"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Uma superfície contínua que possui seções elípticas paralelas ao plano principal e seções hiperbólicas nos outros planos."
+            android:textSize="15sp" />
+        <WebView
+            android:id="@+id/img_hiperboloide1"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <WebView
+            android:id="@+id/math_hiperboloide1"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
+        <!-- 3. Hiperboloide de 2 Folhas -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n3. Hiperboloide de duas Folhas"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Composta por duas superfícies separadas. Não existe interseção com o plano central entre as folhas."
+            android:textSize="15sp" />
+        <WebView
+            android:id="@+id/img_hiperboloide2"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <WebView
+            android:id="@+id/math_hiperboloide2"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
+        <!-- 4. Paraboloide Elíptico -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n4. Paraboloide Elíptico"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Superfície em formato de tigela ou cúpula. As seções horizontais são elipses e as verticais são parábolas."
+            android:textSize="15sp" />
+        <WebView
+            android:id="@+id/img_paraboloide_elip"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <WebView
+            android:id="@+id/math_paraboloide_elip"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
+        <!-- 5. Paraboloide Hiperbólico -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n5. Paraboloide Hiperbólico (Sela)"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Conhecida como sela de cavalo. Possui curvaturas em direções opostas."
+            android:textSize="15sp" />
+        <WebView
+            android:id="@+id/img_paraboloide_hiper"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <WebView
+            android:id="@+id/math_paraboloide_hiper"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
+        <!-- 6. Cone de 2ª Ordem -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n6. Cone de Segunda Ordem"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Superfície cônica que converge em um único ponto (vértice)."
+            android:textSize="15sp" />
+        <WebView
+            android:id="@+id/img_cone"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+        <WebView
+            android:id="@+id/math_cone"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
+
+        <View android:layout_width="match_parent" android:layout_height="80dp" />
     </LinearLayout>
 </ScrollView>

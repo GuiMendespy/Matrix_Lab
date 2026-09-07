@@ -6,14 +6,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estudo da Reta"
+            android:text="Estudo da Reta no Espaço"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@android:color/black" />
@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\nEquação Vetorial da Reta"
+            android:text="\nIntrodução"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -30,12 +30,26 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:justificationMode="inter_word"
-            android:text="Considerando um ponto A e um vetor diretor v não nulo, a reta r é o conjunto de pontos P tais que o vetor AP é paralelo a v:" />
+            android:text="Diferente do que ocorre no plano R², no espaço tridimensional R³ uma reta não pode ser definida por uma única equação linear. Ela é determinada por um ponto conhecido e uma direção (vetor diretor) ou pela interseção de dois planos." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n1. Equação Vetorial da Reta"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Considerando um ponto A(x1, y1, z1) pertencente à reta e um vetor diretor v = (a, b, c) não nulo, qualquer ponto P(x, y, z) da reta satisfaz a condição de que o vetor AP é paralelo ao vetor v. Visto na (Figura 5.1)" />
 
         <WebView
             android:id="@+id/math_eq_vetorial_reta"
             android:layout_width="match_parent"
-            android:layout_height="70dp" />
+            android:layout_height="100dp" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -46,32 +60,53 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\nEquações Paramétricas e Simétricas"
+            android:text="\n2. Equações Paramétricas e Simétricas"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <WebView
-            android:id="@+id/math_eq_param_simetrica"
-            android:layout_width="match_parent"
-            android:layout_height="180dp" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/unidade2_5" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\nÂngulo entre duas Retas"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="A partir da equação vetorial, podemos isolar cada componente (x, y, z) em função do parâmetro t. Se as componentes do vetor diretor forem todas não nulas, podemos isolar t e igualar as expressões para obter as equações simétricas." />
+
+        <WebView
+            android:id="@+id/math_eq_param_simetrica"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n3. Ângulo entre duas Retas"
             android:textSize="18sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="O ângulo entre duas retas r1 e r2 é definido como o menor ângulo formado pelos seus respectivos vetores diretores v1 e v2. Utilizamos o produto escalar para este cálculo." />
 
         <WebView
             android:id="@+id/math_angulo_retas"
             android:layout_width="match_parent"
-            android:layout_height="90dp" />
+            android:layout_height="120dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n4. Exemplo Prático Detalhado"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1A73E8" />
+
+        <WebView
+            android:id="@+id/math_exemplo_reta"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
 
         <View android:layout_width="match_parent" android:layout_height="80dp" />
     </LinearLayout>

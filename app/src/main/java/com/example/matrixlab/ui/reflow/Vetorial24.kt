@@ -33,16 +33,28 @@ class Vetorial24 : Fragment() {
             webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
         }
 
-        // Distância entre dois pontos
         loadLatex(view.findViewById(R.id.math_dist_pontos),
             "\\[ d(P_1, P_2) = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2 + (z_2-z_1)^2} \\]")
 
-        // Distância ponto a reta
         loadLatex(view.findViewById(R.id.math_dist_ponto_reta),
             "\\[ d(P, r) = \\frac{|\\vec{v} \\times \\vec{AP}|}{|\\vec{v}|} \\]")
 
-        // Distância ponto a plano
         loadLatex(view.findViewById(R.id.math_dist_ponto_plano),
             "\\[ d(P_0, \\pi) = \\frac{|ax_0 + by_0 + cz_0 + d|}{\\sqrt{a^2 + b^2 + c^2}} \\]")
+
+        loadLatex(view.findViewById(R.id.math_ex_dist_completo), """
+            <div style="text-align:left; font-size:14px;">
+            1. Pontos A(1,0,2) e B(3,-2,3):<br>
+            \[ d = \sqrt{(3-1)^2 + (-2-0)^2 + (3-2)^2} = 3 \]
+            <br>
+            2. Ponto P(1,2,3) à Reta r: x=y=z:<br>
+            Vetor v=(1,1,1), Ponto A=(0,0,0). AP=(1,2,3).<br>
+            \[ v \times AP = (1, -2, 1) \]
+            \[ d = \frac{\sqrt{1+4+1}}{\sqrt{1+1+1}} = \sqrt{2} \]
+            <br>
+            3. Ponto P(1,2,3) ao Plano 2x+3y-z+5=0:<br>
+            \[ d = \frac{|2(1) + 3(2) - (3) + 5|}{\sqrt{4+9+1}} = \frac{10}{\sqrt{14}} \]
+            </div>
+        """.trimIndent())
     }
 }

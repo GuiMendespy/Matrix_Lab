@@ -1,93 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".ui.reflow.Vetorial31">
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="As Seções Cônicas"
+            android:text="Cônicas: Circunferência"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:paddingBottom="12dp" />
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nDefinição Geométrica"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:justificationMode="inter_word"
-            android:text="Sejam duas retas e e g concorrentes em O e não perpendiculares. Ao girar a geratriz g em torno do eixo e, gera-se uma superfície cônica. Chama-se seção cônica o conjunto de pontos que formam a interseção de um plano com essa superfície." />
+            android:text="A circunferência é o conjunto de todos os pontos de um plano que estão a uma mesma distância r (raio) de um ponto fixo C (centro). É o caso particular da elipse onde os focos coincidem." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\nVisualização Geométrica"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1A73E8" />
+
+        <WebView
+            android:id="@+id/math_circ_visualizacao"
+            android:layout_width="match_parent"
+            android:layout_height="280dp" />
+
+        <WebView
+            android:id="@+id/math_eq_circunferencia"
+            android:layout_width="match_parent"
+            android:layout_height="350dp" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
+            android:contentDescription="Diagrama de Circunferência"
             android:src="@drawable/unidade3_1" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:justificationMode="inter_word"
-            android:text="Quando o plano não passa pelo vértice O, a cônica resultante pode ser classificada em três tipos principais:" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingTop="12dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingBottom="8dp"
-                android:text="a) Parábola: O plano é paralelo a uma geratriz da superfície." />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingBottom="8dp"
-                android:text="b) Elipse: O plano intercepta apenas uma das folhas da superfície (circunferência se for perpendicular ao eixo)." />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:paddingBottom="12dp"
-                android:text="c) Hipérbole: O plano intercepta as duas folhas da superfície, gerando dois ramos." />
-
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:src="@drawable/unidade3_2" />
+            android:text="\nExemplos e Exercícios Resolvidos"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <WebView
-            android:id="@+id/math_conicas_intro"
+            android:id="@+id/math_ex_circunferencia"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" />
+            android:layout_height="180dp" />
 
-        <View
+        <WebView
+            android:id="@+id/math_mais_ex_circ"
             android:layout_width="match_parent"
-            android:layout_height="80dp" />
+            android:layout_height="400dp" />
 
+        <View android:layout_width="match_parent" android:layout_height="80dp" />
     </LinearLayout>
 </ScrollView>

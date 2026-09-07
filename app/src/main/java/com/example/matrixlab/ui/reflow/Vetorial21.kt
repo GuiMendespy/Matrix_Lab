@@ -46,5 +46,17 @@ class Vetorial21 : Fragment() {
         // Ângulo entre Retas
         loadLatex(view.findViewById(R.id.math_angulo_retas),
             "\\[ \\cos \\theta = \\frac{|\\vec{v}_1 \\cdot \\vec{v}_2|}{|\\vec{v}_1| |\\vec{v}_2|} \\]")
+
+        // Exemplo Prático
+        loadLatex(view.findViewById(R.id.math_exemplo_reta), """
+            <div style="text-align:left; padding:10px;">
+            <b>Encontre a equação da reta que passa por \(A(1, -2, 4)\) e é paralela a \(\vec{v} = (2, 3, -1)\):</b><br><br>
+            Equação Vetorial:<br>
+            \[ (x, y, z) = (1, -2, 4) + t(2, 3, -1) \]
+            <br>
+            Equações Paramétricas:<br>
+            \[ \begin{cases} x = 1 + 2t \\ y = -2 + 3t \\ z = 4 - t \end{cases} \]
+            </div>
+        """.trimIndent())
     }
 }
