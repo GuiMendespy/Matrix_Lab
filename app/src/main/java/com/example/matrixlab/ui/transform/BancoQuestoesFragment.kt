@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.matrixlab.databinding.FragmentBancoquestoesBinding
+import com.example.matrixlab.utils.NsdHelper
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -28,14 +30,16 @@ class BancoQuestoesFragment : Fragment() {
     private var _binding: FragmentBancoquestoesBinding? = null
     private val binding get() = _binding!!
 
-    // Palavras que indicam intenção de GERAR questão
     private val palavrasGerador = listOf(
         "gerar", "gere", "criar", "crie", "nova questão", "nova questao",
         "adicionar questão", "adicionar questao", "fazer questão", "fazer questao",
         "montar questão", "montar questao", "produzir", "elaborar"
     )
 
-    private val service: LangChainService by lazy {
+    private var service: LangChainService? = null
+    private var nsdHelper: NsdHelper? = null
+
+    private fun buildService(baseUrl: String): LangChainService {
         val logging = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
@@ -47,8 +51,8 @@ class BancoQuestoesFragment : Fragment() {
             .writeTimeout(120, TimeUnit.SECONDS)
             .build()
 
-        Retrofit.Builder()
-            .baseUrl("http://matrix-server.local:8000/")
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -67,6 +71,22 @@ class BancoQuestoesFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        configurarWebView()
+
+        // 1. Conecta ao servidor do Render por padrão
+        val renderUrl = "https://agente-algebra-linear.onrender.com/"
+        service = buildService(renderUrl)
+        Log.d("RENDER", "Conectando ao Render: $renderUrl")
+
+        // 2. Mantém o NSD para o caso de você rodar o servidor localmente (ele substituirá a URL se encontrar algo no Wi-Fi)
+        nsdHelper = NsdHelper(requireContext()) { baseUrl ->
+            activity?.runOnUiThread {
+                Log.d("NSD", "Servidor local encontrado: $baseUrl")
+                service = buildService(baseUrl)
+                Toast.makeText(context, "Conectado ao servidor LOCAL", Toast.LENGTH_SHORT).show()
+            }
+        }
+        nsdHelper?.startDiscovery()
 
         configurarWebView()
 
@@ -101,6 +121,12 @@ class BancoQuestoesFragment : Fragment() {
 
     // ── AGENTE 1: Consulta (/chat) ────────────────────────────────────────
     private fun consultarAgente(pergunta: String) {
+        val s = service
+        if (s == null) {
+            Toast.makeText(context, "Servidor não encontrado. Aguarde a conexão...", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         adicionarMensagemAoChat("Você", pergunta, isUsuario = true)
         binding.QInput.text?.clear()
 
@@ -111,7 +137,7 @@ class BancoQuestoesFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val resposta = service.enviarPergunta(
+                val resposta = s.enviarPergunta(
                     ChatRequest(
                         message = pergunta,
                         sessionId = viewModel.sessionId
@@ -135,6 +161,12 @@ class BancoQuestoesFragment : Fragment() {
 
     // ── AGENTE 2: Gerador (/generate) ─────────────────────────────────────
     private fun gerarNovaQuestao(instrucao: String) {
+        val s = service
+        if (s == null) {
+            Toast.makeText(context, "Servidor não encontrado. Aguarde a conexão...", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         adicionarMensagemAoChat("Você", instrucao, isUsuario = true)
         binding.QInput.text?.clear()
 
@@ -145,13 +177,14 @@ class BancoQuestoesFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val resposta = service.gerarNovaQuestao(
+                val resposta = s.gerarNovaQuestao(
                     GenerateRequest(
                         message = instrucao,
-                        threadId = "generator-${System.currentTimeMillis()}"
+                        sessionId = viewModel.sessionId // Usa o ID da sessão atual
                     )
                 )
 
+                viewModel.salvarSessionId(resposta.sessionId) // Salva o ID retornado
                 removerLoading(loadingId)
 
                 val conteudoComBadge = """
@@ -228,6 +261,7 @@ class BancoQuestoesFragment : Fragment() {
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
           <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
           <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+          <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
           <style>
             body {
               font-family: sans-serif;
@@ -272,6 +306,21 @@ class BancoQuestoesFragment : Fragment() {
             .agente .autor { color: #6200EE; }
             p { margin: 4px 0; }
             .katex-display { overflow-x: auto; padding: 4px 0; margin: 0; }
+            
+            /* Ajustes para Markdown */
+            .conteudo h1, .conteudo h2, .conteudo h3, .conteudo h4, .conteudo h5, .conteudo h6 {
+              margin-top: 10px;
+              margin-bottom: 5px;
+              font-weight: bold;
+              line-height: 1.2;
+            }
+            .conteudo h1 { font-size: 1.4em; }
+            .conteudo h2 { font-size: 1.3em; }
+            .conteudo h3 { font-size: 1.2em; }
+            .conteudo h4 { font-size: 1.1em; }
+            .conteudo p { margin-bottom: 8px; }
+            .conteudo p:last-child { margin-bottom: 0; }
+            .conteudo ul, .conteudo ol { margin-left: 20px; margin-bottom: 8px; }
           </style>
         </head>
         <body>
@@ -279,6 +328,16 @@ class BancoQuestoesFragment : Fragment() {
           <div id="anchor"></div>
           <script>
             function renderizar() {
+              // 1. Processar Markdown nos conteúdos das mensagens
+              document.querySelectorAll('.conteudo').forEach(el => {
+                if (!el.dataset.markdownProcessed) {
+                  // marked.parse converte o texto Markdown em HTML
+                  el.innerHTML = marked.parse(el.innerHTML.trim());
+                  el.dataset.markdownProcessed = "true";
+                }
+              });
+
+              // 2. Processar KaTeX
               renderMathInElement(document.body, {
                 delimiters: [
                   {left: '$$', right: '$$', display: true},
@@ -317,6 +376,7 @@ class BancoQuestoesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        nsdHelper?.stopDiscovery()
         _binding = null
     }
 }

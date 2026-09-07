@@ -17,12 +17,12 @@ data class ChatResponse(
 // ── ADICIONADO: modelos do agente gerador ───────────────────
 data class GenerateRequest(
     val message: String,
-    @SerializedName("thread_id") val threadId: String = "generator-default"
+    @SerializedName("session_id") val sessionId: String? = null
 )
 
 data class GenerateResponse(
     val response: String,
-    val status: String
+    @SerializedName("session_id") val sessionId: String
 )
 
 // ── interface ────────────────────────────────────────────────
@@ -32,7 +32,7 @@ interface LangChainService {
     @POST("chat")
     suspend fun enviarPergunta(@Body request: ChatRequest): ChatResponse
 
-    // ADICIONADO — agente gerador
+    // ADICIONADO — agente gerador (aponta para /chat conforme regra do servidor)
     @POST("generate")
     suspend fun gerarNovaQuestao(@Body request: GenerateRequest): GenerateResponse
 }
