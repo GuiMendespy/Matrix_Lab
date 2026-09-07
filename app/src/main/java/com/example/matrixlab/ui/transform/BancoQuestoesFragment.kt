@@ -76,9 +76,10 @@ class BancoQuestoesFragment : Fragment() {
         // 1. Conecta ao servidor do Render por padrão
         val renderUrl = "https://agente-algebra-linear.onrender.com/"
         service = buildService(renderUrl)
-        Log.d("RENDER", "Conectando ao Render: $renderUrl")
+        Log.d("MATRIXLAB", "Conectando ao Render: $renderUrl")
 
-        // 2. Mantém o NSD para o caso de você rodar o servidor localmente (ele substituirá a URL se encontrar algo no Wi-Fi)
+        // 2. NSD desativado temporariamente para evitar que ele sobrescreva o Render com um IP errado
+        /*
         nsdHelper = NsdHelper(requireContext()) { baseUrl ->
             activity?.runOnUiThread {
                 Log.d("NSD", "Servidor local encontrado: $baseUrl")
@@ -87,6 +88,7 @@ class BancoQuestoesFragment : Fragment() {
             }
         }
         nsdHelper?.startDiscovery()
+        */
 
         configurarWebView()
 
