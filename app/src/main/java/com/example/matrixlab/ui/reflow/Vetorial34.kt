@@ -33,16 +33,60 @@ class Vetorial34 : Fragment() {
             webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null)
         }
 
-        // Condição fundamental: d(P, F) = d(P, d)
-        loadLatex(view.findViewById(R.id.math_condicao_parabola),
-            "\\[ d(P, F) = d(P, d) \\]")
+        // Visualização SVG Parábola
+        val webVisualizacao = view.findViewById<WebView>(R.id.math_parabola_visualizacao)
+        val svgHtml = """
+            <html><body style="display:flex; justify-content:center; align-items:center; background:transparent; margin:0; padding:10px;">
+            <svg width="260" height="200" viewBox="0 0 260 200">
+                <!-- Diretriz -->
+                <line x1="20" y1="170" x2="240" y2="170" stroke="red" stroke-width="3" />
+                <text x="245" y="175" font-size="14" font-weight="bold" fill="red">d</text>
+                
+                <!-- Eixo de simetria -->
+                <line x1="130" y1="20" x2="130" y2="190" stroke="#AAA" stroke-width="1" stroke-dasharray="2" />
+                
+                <!-- Parábola -->
+                <path d="M 30,30 Q 130,280 230,30" stroke="#1A73E8" stroke-width="3" fill="none" />
+                
+                <!-- Foco -->
+                <circle cx="130" cy="80" r="5" fill="black" />
+                <text x="135" y="75" font-size="14" font-weight="bold" fill="black">F</text>
+                
+                <!-- Vértice -->
+                <circle cx="130" cy="125" r="5" fill="black" />
+                <text x="135" y="140" font-size="14" font-weight="bold" fill="black">V</text>
+                
+                <!-- Parâmetro p -->
+                <line x1="140" y1="80" x2="140" y2="170" stroke="green" stroke-width="1" stroke-dasharray="2" />
+                <text x="145" y="130" font-size="12" fill="green">p</text>
+            </svg>
+            </body></html>
+        """.trimIndent()
+        webVisualizacao?.settings?.javaScriptEnabled = true
+        webVisualizacao?.loadDataWithBaseURL(null, svgHtml, "text/html", "UTF-8", null)
 
-        // Equação da parábola com eixo de simetria horizontal (Ox)
-        loadLatex(view.findViewById(R.id.math_parabola_ox),
-            "\\[ y^2 = 2px \\]")
+        // Equação da Parábola
+        loadLatex(view.findViewById(R.id.math_eq_parabola), """
+            <b>Eixo de simetria sobre o eixo y:</b><br>
+            \[ x^2 = 2py \]
+            <b>Eixo de simetria sobre o eixo x:</b><br>
+            \[ y^2 = 2px \]
+            onde \(p\) é a distância do foco à diretriz.
+        """.trimIndent())
 
-        // Equação da parábola com eixo de simetria vertical (Oy)
-        loadLatex(view.findViewById(R.id.math_parabola_oy),
-            "\\[ x^2 = 2py \\]")
+        // Exercícios Resolvidos
+        loadLatex(view.findViewById(R.id.math_ex_resolvidos_34), """
+            <div style="text-align:left; font-size:14px;">
+            <b>Exemplo 1:</b> Determine a equação da parábola de foco \(F(0, 3)\) e diretriz \(y = -3\).<br>
+            O eixo de simetria é o eixo y. A distância do foco à diretriz é \(p = 6\).<br>
+            Equação: \(x^2 = 2(6)y \Rightarrow x^2 = 12y\).
+            <br><br>
+            <b>Exemplo 2:</b> Dada \(y^2 = -8x\), determine o foco e a diretriz.<br>
+            \(2p = -8 \Rightarrow p = -4\).<br>
+            Concavidade voltada para a esquerda (eixo x).<br>
+            <b>Foco:</b> \(F(-2, 0)\).<br>
+            <b>Diretriz:</b> \(x = 2\).
+            </div>
+        """.trimIndent())
     }
 }

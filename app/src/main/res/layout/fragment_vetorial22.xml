@@ -6,14 +6,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estudo do Plano"
+            android:text="Estudo do Plano no Espaço"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@android:color/black" />
@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\nEquação Geral do Plano"
+            android:text="\n1. Equação Geral do Plano"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -30,12 +30,12 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:justificationMode="inter_word"
-            android:text="Um plano é determinado por um ponto A e um vetor normal n. Um ponto P pertence ao plano se o vetor AP é ortogonal a n:" />
+            android:text="Um plano é determinado por um ponto conhecido A(x0, y0, z0) e um vetor perpendicular ao plano, chamado de vetor normal n = (a, b, c). Um ponto P(x, y, z) pertence ao plano se o vetor AP é ortogonal ao vetor n. (Figura 6.1)" />
 
         <WebView
             android:id="@+id/math_eq_geral_plano"
             android:layout_width="match_parent"
-            android:layout_height="120dp" />
+            android:layout_height="140dp" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -46,12 +46,32 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\nEquações Paramétricas do Plano"
+            android:text="\n2. Equações Paramétricas do Plano"
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:justificationMode="inter_word"
+            android:text="Além da forma normal, um plano pode ser definido por um ponto A e dois vetores u e v não paralelos entre si que 'moram' no plano. Qualquer ponto P pode ser alcançado a partir de A usando uma combinação desses dois vetores." />
+
         <WebView
             android:id="@+id/math_param_plano"
+            android:layout_width="match_parent"
+            android:layout_height="250dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n3. Exemplo Prático"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1A73E8" />
+
+        <WebView
+            android:id="@+id/math_exemplo_plano"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
 
