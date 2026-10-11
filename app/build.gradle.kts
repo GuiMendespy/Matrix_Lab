@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.matrixlab"
+    namespace = "com.labmatrix.matrixlab"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.matrixlab"
+        applicationId = "com.labmatrix.matrixlab"
         minSdk = 26////////////
         targetSdk = 35
         versionCode = 1
